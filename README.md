@@ -5,6 +5,9 @@ SBOM:
 * re
 * os
 * sockets
+* serviceping
+* cryptography.fernet
+* requests
 
 
 Required packages:
