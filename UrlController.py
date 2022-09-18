@@ -43,6 +43,7 @@ class UrlController:
         return list(filter(None, url.split('/')))
 
 
+
 # a = UrlController()
 
 
