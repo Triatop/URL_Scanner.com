@@ -1,6 +1,6 @@
 import serviceping
 import cryptography.fernet
-import requests
+import socket
 
 class UrlController:
 
@@ -17,14 +17,21 @@ class UrlController:
         if(splittedUrl[0] == 'http:' or splittedUrl[0] == 'https:'):
             mainDomain = 1
 
-        for port in standardPorts:
-            if(serviceping.scan(splittedUrl[mainDomain], port)['state'] == 'open'):
-                return True
-        
-        #Flag that website is on wierd port.
-        print(f'The url is hosted on a non-standard port')
+        ip : str
+        try:
+            ip = socket.gethostbyname(splittedUrl[mainDomain])
+        except:
+            return
 
-        return requests.request(method='GET', url=url).ok
+        for port in standardPorts:
+            try:
+                if(serviceping.scan(ip, port)['state'] == 'open'):
+                    return True
+            except:
+                pass
+        
+        print("Flag that it is run on a weird port")
+        return True
 
     def encryptUrl(self, url):
         return self.f.encrypt(url.encode())
@@ -36,8 +43,9 @@ class UrlController:
         return list(filter(None, url.split('/')))
 
 
-a = UrlController()
+# a = UrlController()
 
 
-print(a.validateUrl('https://stackabuse.com/python-check-if-string-contains-substring/'))
+
+# print(a.validateUrl('youtube.com'))
 
