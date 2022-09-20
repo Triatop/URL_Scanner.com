@@ -16,3 +16,4 @@ Required packages:
  * pip install request_html
  * pip install sockets
  * pip install flask
+ * pip install psycopg2
