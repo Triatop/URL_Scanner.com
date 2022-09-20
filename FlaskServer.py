@@ -9,18 +9,15 @@ app = Flask(__name__)
 
 @app.route('/backendAPI')
 def members():
+    return main()
 
-    url = urlObject.URL(request.args.get('url'))
+def main():
     ctr = urlCtr.UrlController()
-    urlOb = urlObject.URL_Object()
-    urlOb.setURL(url)
-
-    if not ctr.validateUrl(urlOb.getURL().u_URL):
-        return "Not a valid webiste or is down"
-
-    return "Is a valid website"
-
-
+    valid = ctr.validateUrl(request.args.get('url'))
+    if not valid:
+        return {'valid': valid}
+    #Continue
+    return 'Lesgooo'
 
 
 if __name__ == '__main__':
