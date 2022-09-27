@@ -9,7 +9,7 @@ SBOM:
 * cryptography.fernet
 * requests
 * flask
-
+* datetime
 
 Required packages:
  * pip install pytest (For automated testing only)
