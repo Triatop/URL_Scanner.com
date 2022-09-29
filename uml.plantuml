@@ -1,0 +1,93 @@
+@startuml "UML"
+class URL_Controller{
+    validateURL()
+    encryptURL()
+    decryptURL()
+    splitURL()
+    getIP()
+}
+class URL_Object{
+    setURL()
+    getURL()
+    setURLLength()
+    setURLFavicon()
+    setURLSecureProtocol()
+    setURLSiteAge()
+    setIP()
+    isSafe()
+    url - "string"
+    length - "int {0,1,2}"
+    favicon - "bool"
+    secureProtocol - "bool"
+    siteAge - "bool"
+    isSafe - "bool"
+    ip - "string"
+}
+class WebScraper{
+    getWebpage()
+    getFavicon()
+    exfiltrateFavicon()
+    exfiltrateLinks()
+    exfiltrateProtocol()
+    exfiltrateSiteAge()
+}
+class SiteAge_URL{
+    getData()
+    isInLimit()
+    ageLimit - "int"
+}
+class lengthURL{
+    getData()
+    isURLShort()
+    isURLLong()
+    url - "string"
+}
+class GUI_API{
+    
+}
+class Favicon_URL{
+    getData()
+    hasFavicon()
+}
+class Protocol_URL{
+    getData()
+    isSecure()
+    secureProtocols[] - "string list"
+    currentProtocol - "string"
+}
+
+class Main{
+    URL_Objects
+}
+class SafeEvaluator{
+
+}
+class ReportMaker{
+
+}
+class DB_Controller{
+    storeData()
+    getData(userID)
+    getUserData()
+}
+
+circle GUI_IN
+circle GUI_OUT
+
+GUI_IN -> GUI_API : 1 Send URL
+GUI_API -> Main : 2
+Main <-> URL_Controller : 3
+Main -> GUI_API : 4 if URL not found
+Main --> URL_Object : 5 Create Object
+Main <--> WebScraper : 6 Get site data
+Main <--> SiteAge_URL : 7 Get siteage
+Main <--> lengthURL : 8 Get URL Length
+Main <--> Favicon_URL : 9 Get Favicon
+Main <--> Protocol_URL : 10 Get protocol
+Main <--> SafeEvaluator : 11 Evaluate data
+Main <--> ReportMaker : 12 Create report
+Main <--> DB_Controller : 13 Store scan in DB
+Main -> GUI_API : 14 Return Report
+GUI_OUT <-- GUI_API : 15 Send Report
+
+@enduml
