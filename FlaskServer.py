@@ -1,6 +1,7 @@
 import URL_Object as urlObject
 import UrlController as urlCtr
 from flask import Flask, request
+import webscraper
 
 
 
@@ -9,15 +10,19 @@ app = Flask(__name__)
 
 @app.route('/backendAPI')
 def members():
-    return main()
+    return main(request.args.get('url'))
 
-def main():
+def main(url):
     ctr = urlCtr.UrlController()
-    valid = ctr.validateUrl(request.args.get('url'))
+    valid = ctr.validateUrl(url)
     if not valid:
         return {'valid': valid}
     #Continue
-    return 'Lesgooo'
+    scraper = webscraper.Webscraper(url)
+
+    favIcon = scraper.isExistFavicon()
+
+    return {'valid' : valid, 'favIcon' : favIcon}
 
 
 if __name__ == '__main__':

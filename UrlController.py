@@ -1,4 +1,3 @@
-import serviceping
 import cryptography.fernet
 import socket
 from socket import gethostbyname
@@ -11,34 +10,32 @@ class UrlController:
 
     def validateUrl(self, url):
 
-        standardPorts = [443, 80]
+        # standardPorts = [443, 80]
 
         urlSplit = self.splitUrl(url)
-        mainUrl = 0
 
-        if(urlSplit[0] == 'https:' or urlSplit[0] == 'http:'):
-            mainUrl = 1
+        if('http' not in urlSplit[0]): return False
 
-        ip = self.getIP(urlSplit[mainUrl])
+        return self.getIP(urlSplit[1]) is not None
+        # if not ip: return False
 
-        if not ip:
-            return False
-
-        for port in standardPorts:
-            try:
-                if(serviceping.scan(ip, port)['state'] == 'open'):
-                    return True
-            except:
-                pass
+        # for port in standardPorts:
+        #     try:
+        #         if(serviceping.scan(ip, port)['state'] == 'open'):
+        #             return True
+        #     except:
+        #         pass
         
-        print("Flag that it is run on a weird port")
-        return True
+        # print("Flag that it is run on a weird port")
+        # return requests.get(urlSplit[mainDomain]).ok
 
     def getIP(self, url):
         try:
             return gethostbyname(url)
         except socket.error:
             return None
+
+        
         
 
     def encryptUrl(self, url):
@@ -56,5 +53,5 @@ class UrlController:
 
 
 
-# print(a.validateUrl('youtube.com'))
+# print(a.validateUrl('https://www.youtube.com/watch?v=jezczH06R2g'))
 
