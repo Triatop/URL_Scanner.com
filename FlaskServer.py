@@ -21,9 +21,10 @@ def main(url):
     scraper = webscraper.Webscraper(url)
 
     favIcon = scraper.isExistFavicon()
+    protocol = scraper.exfiltrateProtocol()
 
-    return {'valid' : valid, 'favIcon' : favIcon}
+    return {'valid' : valid, 'favIcon' : favIcon, 'protocol' : protocol}
 
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5000)
+    app.run(debug=True, port=8000)
