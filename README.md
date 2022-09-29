@@ -9,10 +9,12 @@ SBOM:
 * cryptography.fernet
 * requests
 * flask
-
+* datetime
+* psycopg
 
 Required packages:
  * pip install pytest (For automated testing only)
  * pip install request_html
  * pip install sockets
  * pip install flask
+ * pip install psycopg2
