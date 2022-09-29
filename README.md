@@ -10,6 +10,7 @@ SBOM:
 * requests
 * flask
 * datetime
+* psycopg
 
 Required packages:
  * pip install pytest (For automated testing only)
