@@ -18,3 +18,5 @@ Required packages:
  * pip install sockets
  * pip install flask
  * pip install psycopg2
+ * pip install python-whois
+ * pip install bs4
