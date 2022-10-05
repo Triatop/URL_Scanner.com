@@ -3,13 +3,19 @@ import datetime
 class SiteAge_URL():
     s_AgeLimit = 100
 
-    def getData(self):
-        return datetime.datetime(2020, 5, 17) #<-- Replace with actual age of site
-
-    def isInLimit(self):
+    def getData(self, s_age):
+        try:
+            c_dat = s_age['creation_date']
+            return c_dat
+        except:#<-- If creation_date does not exist
+            return False
+    def isInLimit(self,s_age):
         isOk = True
         now = datetime.datetime.now()
-        age = self.getData()
+        if (self.getData(s_age)):
+            age = self.getData(s_age)
+        else:
+            return False
         year = int(now.strftime('%Y')) - int(age.strftime('%Y'))
         month = int(now.strftime('%m')) - int(age.strftime('%m'))
         day = int(now.strftime('%d')) - int(age.strftime('%d'))

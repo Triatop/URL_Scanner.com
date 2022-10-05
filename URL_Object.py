@@ -7,13 +7,14 @@ from socket import gethostbyname
 
 
 class URL_Object:
-    o_URL = ''
-    o_URLLength = 0
-    o_URLFavIcon = False
-    o_URLSecureProtocol = False
-    o_URLSiteAge = False
-    o_isSafe = False
-    o_URLip = ''
+    def __init__(self) :
+        self.o_URL = ''
+        self.o_URLLength = 0
+        self.o_URLFavIcon = False
+        self.o_URLSecureProtocol = False
+        self.o_URLSiteAge = False
+        self.o_isSafe = False
+        self.o_URLip = ''
 
     def setURL(self, i_URL):
         self.o_URL = i_URL
@@ -22,45 +23,36 @@ class URL_Object:
     def getURL(self):
         return self.o_URL
     
-    def setURLLength(self):
-        t_len = LengthURL()
-        t_len.getData(self.o_URL)
-        self.o_URLLength += t_len.isURLShort()
-        self.o_URLLength += t_len.isURLLong()
+    def setURLLength(self, l_url):
+        self.o_URLLength = l_url
         return
 
     def getURLLength(self):
         return self.o_URLLength
 
-    def setURLFavIcon(self):
-        f_Icon = Favicon_URL()
-        if f_Icon.hasFavicon() :# <-- Insert fav icon check here
-            self.o_URLFavIcon = True
+    def setURLFavIcon(self, f_ic):
+        self.o_URLFavIcon = f_ic
         return
 
     def getURLFavIcon(self):
         return self.o_URLFavIcon
 
-    def setURLSecureProtocol(self):
-        pass
+    def setURLSecureProtocol(self,s_prot):
+        o_URLSecureProtocol = s_prot
+        return
 
     def getURLSecureProtocol(self):
         return self.o_URLSecureProtocol
 
-    def setURLSiteAge(self):
-        age = SiteAge_URL()
-        if age.isInLimit():
-            self.o_URLSiteAge = True
+    def setURLSiteAge(self, u_old):
+        self.o_URLSiteAge = u_old
         return
 
     def getURLSiteAge(self):
         return self.o_URLSiteAge
 
-    def setIP(self):                     #Sätt att få ip address
-        try :
-            self.o_URLip = gethostbyname(self.o_URL)
-        except:
-            pass
+    def setIP(self, u_ip):                     #Sätt att få ip address
+        self.o_URLip = u_ip
         return
 
     def getIP(self):
@@ -74,39 +66,40 @@ class URL_Object:
         A4 = 0
         if self.o_URLLength != 0:
             A1 = 1
-        if self.o_URLFavIcon:
+        if (self.o_URLFavIcon == False):
             A2 = 1
-        if self.o_URLSecureProtocol:
+        if (self.o_URLSecureProtocol == False):
             A3 = 1
-        if self.o_URLSiteAge:
+        if (self.o_URLSiteAge == False):
             A4 = 1
 
         if T - (A1 * 20) - (A2 * 15) - (A3 * 25) - (A4 * 20) > 0 :
             self.o_isSafe = True
         
-            return self.o_isSafe
+        return self.o_isSafe
 
 
 #######################################################     SLUT PÅ KLASS    ###################################################################################################################
 #######################################################     BÖRJAN PÅ TEST   ###################################################################################################################
-url1 = 'github.com'
-u_obj = URL_Object()
-u_obj.setURL(url1)
 
-print(u_obj.getURL())
-print(u_obj.o_URL)
+#url1 = 'github.com'
+#u_obj = URL_Object()
+#u_obj.setURL(url1)
 
-u_obj.setURLLength()
-u_obj.setURLFavIcon()
-u_obj.setIP()
-u_obj.setURLSecureProtocol()
-u_obj.setURLSiteAge()
+#print(u_obj.getURL())
+#print(u_obj.o_URL)
 
-print('The sites URL is too short(1), too long(2) or ok(0)? ', u_obj.getURLLength())
-print('The site has a favicon ', u_obj.getURLFavIcon())
-print('The sites IP Address: ', u_obj.getIP())
-print('The site has secure protocols: ',u_obj.getURLSecureProtocol())
-print('The Site is too young: ',u_obj.getURLSiteAge())
-print('The site is safe',u_obj.isSafe()) 
+#u_obj.setURLLength()
+#u_obj.setURLFavIcon()
+#u_obj.setIP()
+#u_obj.setURLSecureProtocol()
+#u_obj.setURLSiteAge()
 
-exit
+#print('The sites URL is too short(1), too long(2) or ok(0)? ', u_obj.getURLLength())
+#print('The site has a favicon ', u_obj.getURLFavIcon())
+#print('The sites IP Address: ', u_obj.getIP())
+#print('The site has secure protocols: ',u_obj.getURLSecureProtocol())
+#print('The Site is too young: ',u_obj.getURLSiteAge())
+#print('The site is safe',u_obj.isSafe()) 
+
+#exit
