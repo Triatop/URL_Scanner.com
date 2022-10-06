@@ -44,7 +44,8 @@ function Searchbar(){
   function StartScanner(){
     /*api call*/
     fetch(`/backendAPI?url=${inputValue}`).then(res => res.json()).then(data => {
-      setReturnDict(JSON.stringify(data, null, 2));
+      // setReturnDict(JSON.stringify(data, null, 2));
+      setReturnDict(data)
     });
   }
 
@@ -65,7 +66,8 @@ function Searchbar(){
       </div>
       <div>
         {/* <p>The current time is {currentTime}.</p> */}
-        <p>Report: {returnDict}</p>
+        <p>Valid: {returnDict.valid}</p>
+        <p>Report: {returnDict.report}</p>
       </div>
     </div>
   );

@@ -16,14 +16,22 @@ def main(url):
     ctr = urlCtr.UrlController()
     valid = ctr.validateUrl(url)
     if not valid:
-        return {'valid': valid}
+        return {'valid': str(valid)}
     #Continue
     scraper = webscraper.Webscraper(url)
 
     favIcon = scraper.isExistFavicon()
     protocol = scraper.exfiltrateProtocol()
 
-    return {'valid' : valid, 'favIcon' : favIcon, 'protocol' : protocol}
+    # return {'valid' : valid, 'favIcon' : favIcon, 'protocol' : protocol}
+
+    #------
+    attributeDict = {"valid": valid, 1: "\n-Website has favicon", 2: "\n-Website uses HTTPS protocol "}
+    report = ""
+    for i in range(1,3):
+        report += attributeDict[i]
+    return {"valid": str(valid), "report": report}
+
 
 
 if __name__ == '__main__':
