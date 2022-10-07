@@ -10,19 +10,6 @@ function Searchbar(){
   const [inputValue, setInputValue] = useState('');
   // const [currentTime, setCurrentTime] = useState(0);
   const [returnDict, setReturnDict] = useState('');
- 
-
-  // useEffect(() => {
-  //   fetch(`/backendAPI?url=${inputValue}`).then(res => res.json()).then(data => {
-  //     set(data);
-  //   });
-  // }, []);
-
-  useEffect(() => {
-    fetch(`/backendAPI?url=${inputValue}`).then(res => res.json()).then(data => {
-      setReturnDict(data);
-    });
-  }, []);
 
   const handleChange = event => {
       if (event.key !== 'Enter')
@@ -44,30 +31,31 @@ function Searchbar(){
   function StartScanner(){
     /*api call*/
     fetch(`/backendAPI?url=${inputValue}`).then(res => res.json()).then(data => {
-      // setReturnDict(JSON.stringify(data, null, 2));
       setReturnDict(data)
     });
   }
 
   return (
     <div className='Searchbar'>
-      <input
-        type="text"
-        id="inputValue"
-        name="inputValue"
-        onChange={handleChange}
-        value={inputValue}
-        autoComplete="off"
-        placeholder='Place/type ULR here...'
-        onKeyDown={keyDwonHandeler}
-      />
+        <input
+          type="text"
+          class="search"
+          name="inputValue"
+          onChange={handleChange}
+          value={inputValue}
+          autoComplete="off"
+          placeholder='Place/type ULR here...'
+          onKeyDown={keyDwonHandeler}
+        />
       <div className='Searchbtn'>
           <button type='button' onClick={handleClick}>Scan</button>
       </div>
       <div>
         {/* <p>The current time is {currentTime}.</p> */}
-        <p>Valid: {returnDict.valid}</p>
-        <p>Report: {returnDict.report}</p>
+        <section id="report">
+          <p>Valid URL: {returnDict.valid}</p>
+          <p>{returnDict.report}</p>
+        </section>
       </div>
     </div>
   );

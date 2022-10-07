@@ -1,1 +1,15 @@
 /* React Website tut 31:25 min */
+button {
+    background-color: #FFAF9B; /* Green */
+    border: none;
+    border-radius: 2px;
+    color: rgb(0, 0, 0);
+    padding: 10px 14px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+
+  }

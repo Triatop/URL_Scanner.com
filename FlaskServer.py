@@ -10,7 +10,18 @@ app = Flask(__name__)
 
 @app.route('/backendAPI')
 def members():
-    return main(request.args.get('url'))
+    attributeDict = main(request.args.get('url'))
+    if attributeDict["valid"] != True:
+        report = "- Invalid URL, website does not exist - check for spelling errors"
+        return {"valid": str(attributeDict["valid"]), "report": report}
+
+    report = ""
+    for i in range(1,3):
+        if i == 1:
+            report += (f"- Website has favicon ({'True' if attributeDict[1] == 1 else 'False'})")
+        if i == 2:
+            report += (f"\n- Website uses ({attributeDict[2]}) protocol")
+    return {"valid": str(attributeDict["valid"]), "report": report}
 
 def main(url):
     ctr = urlCtr.UrlController()
@@ -23,14 +34,7 @@ def main(url):
     favIcon = scraper.isExistFavicon()
     protocol = scraper.exfiltrateProtocol()
 
-    # return {'valid' : valid, 'favIcon' : favIcon, 'protocol' : protocol}
-
-    #------
-    attributeDict = {"valid": valid, 1: "\n-Website has favicon", 2: "\n-Website uses HTTPS protocol "}
-    report = ""
-    for i in range(1,3):
-        report += attributeDict[i]
-    return {"valid": str(valid), "report": report}
+    return {'valid' : valid, 1 : favIcon, 2 : protocol}
 
 
 
