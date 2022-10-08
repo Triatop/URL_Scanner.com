@@ -1,6 +1,6 @@
 /* React Website tut 31:25 min */
 button {
-    background-color: #FFAF9B; /* Green */
+    background-color: #3baefb;
     border: none;
     border-radius: 2px;
     color: rgb(0, 0, 0);
@@ -11,5 +11,13 @@ button {
     font-size: 14px;
     margin-top: 5px;
     margin-bottom: 5px;
+    font-family : inherit;
+  }
 
+  button:hover {
+    background-color: #0096fb;
+  }
+
+  button:active {
+    background-color: #0070ba;
   }

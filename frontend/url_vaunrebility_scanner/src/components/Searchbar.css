@@ -17,16 +17,24 @@
     flex-direction: column;
     white-space: pre-wrap;
     margin: auto;
-    min-width: 400px;
+    min-width: 500px;
     padding: 5px;
     border-radius: 4px;
-    border: 3px solid #FFAF9B;
-    color: #FFAF9B;
+    border: 5px solid #3baefb;
+    color: #3baefb;
     font-size: 18px;
 }
 
 .search {
-    width: 400px;
-    height: 20px;
+    width: 516px;
+    height: 30px;
     font-size: 20px;
+    text-indent: 10px;
+    background-color: #171717;
+    color: rgb(167, 167, 167);
+    border-radius: 5px;
+    border-top-style: hidden;
+    border-right-style: hidden;
+    border-left-style: hidden;
+    border-bottom-style: hidden;
 }
