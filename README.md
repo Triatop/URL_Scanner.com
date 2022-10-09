@@ -20,3 +20,4 @@ Required packages:
  * pip install psycopg2
  * pip install python-whois
  * pip install bs4
+ * pip install python-whois
