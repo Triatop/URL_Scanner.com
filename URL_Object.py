@@ -1,18 +1,10 @@
-import os
-from URLLength import LengthURL
-from SiteAge_URL import SiteAge_URL
-from Favicon_URL import Favicon_URL
-from socket import gethostbyname
-
-
-
 class URL_Object:
     def __init__(self) :
         self.o_URL = ''
         self.o_URLLength = 0
         self.o_URLFavIcon = False
         self.o_URLSecureProtocol = False
-        self.o_URLSiteAge = False
+        self.o_URLSiteAge = None
         self.o_isSafe = False
         self.o_URLip = ''
 
@@ -38,7 +30,7 @@ class URL_Object:
         return self.o_URLFavIcon
 
     def setURLSecureProtocol(self,s_prot):
-        o_URLSecureProtocol = s_prot
+        self.o_URLSecureProtocol = s_prot
         return
 
     def getURLSecureProtocol(self):
@@ -51,31 +43,18 @@ class URL_Object:
     def getURLSiteAge(self):
         return self.o_URLSiteAge
 
-    def setIP(self, u_ip):                     #Sätt att få ip address
+    def setIP(self, u_ip):                     
         self.o_URLip = u_ip
         return
 
     def getIP(self):
         return self.o_URLip
 
-    def isSafe(self):
-        T = 40
-        A1 = 0
-        A2 = 0
-        A3 = 0
-        A4 = 0
-        if self.o_URLLength != 0:
-            A1 = 1
-        if (self.o_URLFavIcon == False):
-            A2 = 1
-        if (self.o_URLSecureProtocol == False):
-            A3 = 1
-        if (self.o_URLSiteAge == False):
-            A4 = 1
+    def isSafe(self, i_safe):
+        self.o_isSafe = i_safe
+        return
 
-        if T - (A1 * 20) - (A2 * 15) - (A3 * 25) - (A4 * 20) > 0 :
-            self.o_isSafe = True
-        
+    def getSafe(self):
         return self.o_isSafe
 
 
