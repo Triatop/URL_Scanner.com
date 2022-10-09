@@ -18,9 +18,9 @@ def members():
     report = ""
     for i in range(1,3):
         if i == 1:
-            report += (f"- Website has favicon ({'True' if attributeDict[1] == 1 else 'False'})")
+            report += (f"- Website has {'a' if attributeDict[1] == 1 else 'no'} favicon ")
         if i == 2:
-            report += (f"\n- Website uses ({attributeDict[2]}) protocol")
+            report += (f"\n- Website uses {attributeDict[2].upper()} protocol")
     return {"valid": str(attributeDict["valid"]), "report": report}
 
 def main(url):

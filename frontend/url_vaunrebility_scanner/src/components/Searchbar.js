@@ -10,10 +10,11 @@ function Searchbar(){
   const [inputValue, setInputValue] = useState('');
   // const [currentTime, setCurrentTime] = useState(0);
   const [returnDict, setReturnDict] = useState('');
+  const [show, setShow] = useState(false);
 
   const handleChange = event => {
       if (event.key !== 'Enter')
-      setInputValue(event.target.value);
+        setInputValue(event.target.value);
   };
 
   const handleClick = event => {
@@ -25,14 +26,16 @@ function Searchbar(){
       if (event.key === 'Enter'){
           event.preventDefault();
           StartScanner();
+          
       }
   }
 
   function StartScanner(){
-    /*api call*/
     fetch(`/backendAPI?url=${inputValue}`).then(res => res.json()).then(data => {
       setReturnDict(data)
     });
+
+    setShow(true)
   }
 
   return (
@@ -48,15 +51,16 @@ function Searchbar(){
           onKeyDown={keyDwonHandeler}
         />
       <div className='Searchbtn'>
-          <button type='button' onClick={handleClick}>Scan</button>
+          <button type='button'onClick={handleClick} >SCAN</button>
       </div>
-      <div>
-        {/* <p>The current time is {currentTime}.</p> */}
+      {
+      show?<div>
         <section id="report">
           <p>Valid URL: {returnDict.valid}</p>
           <p>{returnDict.report}</p>
         </section>
-      </div>
+      </div>:null
+      }
     </div>
   );
 
