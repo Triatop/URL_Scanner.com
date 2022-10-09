@@ -1,4 +1,5 @@
 import webscraper as webs
+import datetime
 import re
 
 #if __name__ == "__main__":
@@ -32,9 +33,16 @@ def test_ExistFavicon():
 
 def test_extractFavicon():
     ws = webs.Webscraper("https://python.org/")
-    assert(re.match(re.compile(".*.ico$"), ws.extractFavicon()[0]))
+    assert(re.match(".*.ico$", ws.extractFavicon()[0]))
+
     ws.setURL("https://stackoverflow.com/questions/61274239/pythons-regex-or-operator")
     assert(re.match(".*.ico$", ws.extractFavicon()[0]))
+
     ws.setURL("https://www.garykessler.net/library/file_sigs.html")
-    assert(re.match("", ws.extractFavicon()[0]))
+    assert(len(ws.extractFavicon()) == 0)
+    return
+
+def test_exfiltrateSiteAge():
+    ws = webs.Webscraper("https://www.python.org/")
+    assert(type(ws.exfiltrateSiteAge()) == datetime.timedelta)
     return
