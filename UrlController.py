@@ -9,25 +9,13 @@ class UrlController:
         self.f = cryptography.fernet.Fernet(self.key)
 
     def validateUrl(self, url):
-
-        # standardPorts = [443, 80]
+        if(len(url) <= 0): return None
 
         urlSplit = self.splitUrl(url)
 
-        if('http' not in urlSplit[0]): return False
+        if('http' not in urlSplit[0]): return None
 
-        return self.getIP(urlSplit[1]) is not None
-        # if not ip: return False
-
-        # for port in standardPorts:
-        #     try:
-        #         if(serviceping.scan(ip, port)['state'] == 'open'):
-        #             return True
-        #     except:
-        #         pass
-        
-        # print("Flag that it is run on a weird port")
-        # return requests.get(urlSplit[mainDomain]).ok
+        return self.getIP(urlSplit[1])
 
     def getIP(self, url):
         try:
@@ -46,12 +34,3 @@ class UrlController:
 
     def splitUrl(self, url):
         return list(filter(None, url.split('/')))
-
-
-
-# a = UrlController()
-
-
-
-# print(a.validateUrl('https://www.youtube.com/watch?v=jezczH06R2g'))
-
