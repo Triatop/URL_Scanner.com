@@ -27,14 +27,14 @@ def main(url):
     ctr = urlCtr.UrlController()
     valid = ctr.validateUrl(url)
     if not valid:
-        return {'valid': str(valid)}
+        return {'valid': False}
     #Continue
     scraper = webscraper.Webscraper(url)
 
     favIcon = scraper.isExistFavicon()
     protocol = scraper.exfiltrateProtocol()
 
-    return {'valid' : valid, 1 : favIcon, 2 : protocol}
+    return {'valid' : True, 1 : favIcon, 2 : protocol}
 
 
 
