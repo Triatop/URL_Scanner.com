@@ -25,7 +25,6 @@ class URL_Object:
     def setURLLength(self):
         t_len = LengthURL()
         t_len.getData(self.o_URL)
-        self.o_URLLength += t_len.isURLShort()
         self.o_URLLength += t_len.isURLLong()
         return
 
