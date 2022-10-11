@@ -10,7 +10,7 @@ function Searchbar(){
   const [inputValue, setInputValue] = useState('');
   // const [currentTime, setCurrentTime] = useState(0);
   const [returnDict, setReturnDict] = useState('');
-  const [show, setShow] = useState(false);
+  const [showReport, setShow] = useState(false);
 
   const handleChange = event => {
       if (event.key !== 'Enter')
@@ -54,7 +54,7 @@ function Searchbar(){
           <button type='button'onClick={handleClick} >SCAN</button>
       </div>
       {
-      show?<div>
+      showReport?<div>
         <section id="report">
           <p>Valid URL: {returnDict.valid}</p>
           <p>{returnDict.report}</p>
