@@ -38,3 +38,7 @@
     border-left-style: hidden;
     border-bottom-style: hidden;
 }
+
+.search:focus {
+    outline: none;
+}
