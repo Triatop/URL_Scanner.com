@@ -1,3 +1,5 @@
+from ast import Index
+from datetime import datetime
 from requests_html import HTMLSession
 import re
 import whois
@@ -20,12 +22,17 @@ class Webscraper:
         self.r = self.session.get(self.url).text
         soup = BeautifulSoup(self.r, "lxml")
         for f in soup.findAll(rel="icon"):
-            favIcons.append(f.get('href'))
+            try:
+                favIcons.append(f.get('href').split(".ico")[0]+".ico")
+            except IndexError:
+                1
         for f in soup.findAll(rel="shortcut icon"):
-            favIcons.append(f.get('href'))
+            try:
+                favIcons.append(f.get('href').split(".ico")[0]+".ico")
+            except IndexError:
+                1
         return favIcons
     def isExistFavicon(self):
-        #Might need to speed this up for when favicon is not found
         self.r = self.session.get(self.url).text
         pattern = re.compile(".*rel=\"(shortcut icon|icon).*ico.*")
         return 1 if re.search(pattern, self.r) else 0
@@ -38,8 +45,11 @@ class Webscraper:
 
         return links
     def exfiltrateSiteAge(self):
-        domain = whois.query(re.search("www\..*", self.url)[0])
-        return {"creation_date": domain.creation_date, "expiration_date" : domain.expiration_date}
+        domain = whois.whois(re.search("www\..*", self.url)[0])
+        try:
+            return datetime.now() - domain.creation_date
+        except TypeError:
+            return datetime.now() - min(domain.creation_date)
     def exfiltrateProtocol(self):
         # Needs to have url set to <protcol>://<url> to fully work
         protocol = self.url.split(':')[0]
@@ -48,9 +58,8 @@ class Webscraper:
             if self.r.history[0].status_code == 301:
                 protocol = self.r.url.split(':')[0]
         except IndexError:
-            1 == 1
+            1
         return protocol
 
 if __name__ == "__main__":
-    ws = Webscraper("http://www.w3schools.com/python/python_datetime.asp")
-    print(ws.exfiltrateProtocol())
+    1
