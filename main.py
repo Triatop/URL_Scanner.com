@@ -9,11 +9,9 @@ from SafeEvaluator import SafeEvaluator
 from htmldate import find_date
 
 
-#url controller check.
 
-#url1 = 'https://www.garykessler.net' #<--- Replace with input
-url1 = 'https://www.garykessler.net/library/file_sigs.html'
-#url1 = 'Victor was here :) \n\t lllllllllllllll' #<--- not a real url for testing purposes
+#url1 = 'https://www.garykessler.net/library/file_sigs.html' #<--- Replace with input
+url1 = 'Victor was here :) \n\t lllllllllllllll' #<--- not a real url for testing purposes
 u_ctrl = UrlController()
 
 print(u_ctrl.splitUrl(url1))
@@ -42,7 +40,6 @@ u_safe = SafeEvaluator()
 u_obj.setURL(url1)
 w_scrap.setURL(url1)
 
-
 #Get Values Testing!
 #print(w_scrap.getURL())
 #f_ic = w_scrap.extractFavicon()
@@ -55,18 +52,21 @@ w_scrap.setURL(url1)
 u_len.getData(url1) #URL Size check
 u_prot.getData(w_scrap.exfiltrateProtocol()) #GETTING PROTOCOLS
 #print(u_prot.secureProtocols, u_prot.currentProtocol) #test
-
 #HERE ARE THE FINAL VALUES
 print(u_obj.getURL())
 u_obj.setURLLength(u_len.isURLLong())                                       #Is it too long
 u_obj.setURLFavIcon(u_fav.hasFavicon(w_scrap.extractFavicon())) #URL Fav Icon check
 u_obj.setURLSecureProtocol(u_prot.isSecure())                   #Security check
 u_obj.setIP(u_ctrl.getIP(url1))                                 #Try Set IP We don't use it for anything though
-#u_obj.setURLSiteAge(u_age.isInLimit(w_scrap.exfiltrateSiteAge())) #Can't seem to get dates for dates  [WinError 2] Det går inte att hitta filen
-u_obj.setURLSiteAge(u_age.isInLimit(find_date(url1)))  #REMAKE TO A DICTIONARY
+u_obj.setURLSiteAge(u_age.isInLimit(w_scrap.exfiltrateSiteAge())) 
 #print(find_date('https://www.garykessler.net/library/file_sigs.html'))
 u_obj.isSafe(u_safe.isSafe(u_obj.getURLLength(),u_obj.getURLFavIcon(),u_obj.getURLSecureProtocol(),u_obj.getURLSiteAge())) #UGLY DIRTY SOLUTION
-print('The sites URL is too short(1), too long(2) or ok(0)? ', u_obj.getURLLength())
+
+
+
+
+#TO BE REPLACED WITH REPORTMANAGER THING!!!!
+print('The sites URL is too long(1) or ok(0)? ', u_obj.getURLLength())
 print('The site has a favicon ', u_obj.getURLFavIcon())
 print('The sites IP Address: ', u_obj.getIP())
 print('The site has secure protocols: ',u_obj.getURLSecureProtocol())
