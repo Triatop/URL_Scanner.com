@@ -10,7 +10,7 @@ class SafeEvaluator:
         A3 = 0 #Security protocol
         A4 = 0 #Site Age
 
-        if i_A1 != 0: #URL_Length
+        if i_A1 == True: #URL_Length
             A1 = 1
         if (i_A2 == False): #FavIcon
             A2 = 1
