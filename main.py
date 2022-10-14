@@ -10,8 +10,8 @@ from htmldate import find_date
 
 
 
-#url1 = 'https://www.garykessler.net/library/file_sigs.html' #<--- Replace with input
-url1 = 'Victor was here :) \n\t lllllllllllllll' #<--- not a real url for testing purposes
+url1 = 'https://www.garykessler.net/library/file_sigs.html' #<--- Replace with input
+#url1 = 'Victor was here :) \n\t lllllllllllllll' #<--- not a real url for testing purposes
 u_ctrl = UrlController()
 
 print(u_ctrl.splitUrl(url1))
