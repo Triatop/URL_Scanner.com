@@ -1,7 +1,7 @@
 class URL_Object:
     def __init__(self) :
         self.o_URL = ''
-        self.o_URLLength = 0
+        self.o_URLLength = True
         self.o_URLFavIcon = False
         self.o_URLSecureProtocol = False
         self.o_URLSiteAge = None
