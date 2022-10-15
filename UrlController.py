@@ -1,5 +1,4 @@
 import cryptography.fernet
-import socket
 from socket import gethostbyname
 
 class UrlController:
@@ -20,7 +19,7 @@ class UrlController:
     def getIP(self, url):
         try:
             return gethostbyname(url)
-        except socket.error:
+        except:
             return None
 
         
