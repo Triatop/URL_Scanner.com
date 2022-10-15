@@ -2,19 +2,15 @@ class LengthURL:
     def __init__(self):
         self.l_URL = ''
 
-    def getData(self, i_URL):
+    def getData(self, i_URL): #Get the URL
         self.l_URL = i_URL
-    def isURLShort(self):   #is it too short? True False
-        short = 0
-        if len(self.l_URL) < 5: #Arbitrary Value
-            short = 1
-        return short
+        return 1
+
     def isURLLong(self):    #is it too long? True False
-        long = 0
-        if len(self.l_URL) > 100: #Arbitrary Value
-            long = 2
+        long = False
+        if self.URLLong() > 53: #Not Arbitrary Value
+            long = True
         return long
 
-
-
-
+    def URLLong(self): #Get URL Length
+        return len(self.l_URL)
