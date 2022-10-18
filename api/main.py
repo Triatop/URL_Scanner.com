@@ -11,7 +11,6 @@ from ReportMaker import ReportMaker
 
 
 url1 = 'https://www.garykessler.net/library/file_sigs.html' #<--- Replace with input
-#url1 = 'Victor was here :) \n\t lllllllllllllll' #<--- not a real url for testing purposes
 u_ctrl = UrlController()
 
 print(u_ctrl.splitUrl(url1))
@@ -49,7 +48,6 @@ r_mkr.getData(u_obj)                                #send URL Object to report m
 o_dic = r_mkr.makeReport()                          #Make the report and catch the output dictionary
 
 
-#TO BE REPLACED WITH REPORTMANAGER THING!!!!
 print('The sites URL is too long? ', o_dic['1'])    #u_obj.getURLLength())
 print('The site has a favicon ', o_dic['2'])        #u_obj.getURLFavIcon())
 print('The sites IP Address: ', u_obj.getIP())      #IP
