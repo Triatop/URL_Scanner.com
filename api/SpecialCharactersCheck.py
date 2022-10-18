@@ -5,7 +5,6 @@ class SCCheck:
         self.l_URL = ''
         self.value = 0                      # Amount of bad special charachters
 
-
     def getData(self, i_URL):               # Get the URL
         self.l_URL = i_URL
         return 1

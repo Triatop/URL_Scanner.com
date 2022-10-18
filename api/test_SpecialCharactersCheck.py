@@ -45,3 +45,13 @@ def test_checkDoubleForwardSlash():                             # Double forward
     assert(sc.checkDoubleForwardSlash() == False)
     assert(sc.value == 0)
     return
+
+def test_All():
+    sc = SCCheck()
+    url = 'https://www.you-tube.com//watch?v=d40qv-2As_@Y&list=PL1wr88ZxFIz_byXyxAkXuHQrJhlRORRKp&index=50&t=214s'
+    sc.getData(url)
+    assert(sc.checkDoubleForwardSlash() == True)
+    assert(sc.checkHyphen() == True)
+    assert(sc.checkAtSign() == True)
+    assert(sc.value == 3)
+    return
