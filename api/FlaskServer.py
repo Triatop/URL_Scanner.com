@@ -3,6 +3,7 @@ import UrlController as urlCtr
 import PortCheck
 from flask import Flask, request
 import webscraper
+import time
 
 
 
@@ -11,6 +12,7 @@ app = Flask(__name__)
 
 @app.route('/backendAPI')
 def members():
+    sTime = time.time()
     attributeDict = main(request.args.get('url'))
     if attributeDict["valid"] != True:
         report = "- Invalid URL, website does not exist - check for spelling errors"
@@ -26,6 +28,7 @@ def members():
             report += (f"\n- Website is running on the {'right' if attributeDict[i] == True else 'wrong'}  port")
         if i == 4:
             report += (f"\n- The age of the webiste is {attributeDict[i]}")
+    report += f'\n- The scan took {(time.time() - sTime):.2f} seconds'
     return {"valid": str(attributeDict["valid"]), "report": report}
 
 
