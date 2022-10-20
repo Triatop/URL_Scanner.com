@@ -72,6 +72,7 @@ function Searchbar() {
           <section id="report">
             <p>Valid URL: {returnDict.valid}</p>
             <p>{returnDict.report}</p>
+            <p>{returnDict.exeTime}</p>
           </section>
         </div> : null
       }

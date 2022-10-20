@@ -28,8 +28,7 @@ def members():
             report += (f"\n- Website is running on the {'right' if attributeDict[i] == True else 'wrong'}  port")
         if i == 4:
             report += (f"\n- The age of the webiste is {attributeDict[i]}")
-    report += f'\n- The scan took {(time.time() - sTime):.2f} seconds'
-    return {"valid": str(attributeDict["valid"]), "report": report}
+    return {"valid": str(attributeDict["valid"]), "report": report, "exeTime": 'The scan took {(time.time() - sTime):.2f} seconds'}
 
 
 def main(url):
