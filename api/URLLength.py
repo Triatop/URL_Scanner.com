@@ -7,9 +7,12 @@ class LengthURL:
         return 1
 
     def isURLLong(self):    #is it too long? True False
-        long = False
-        if self.URLLong() > 53: #Not Arbitrary Value
-            long = True
+        long = 0
+        l_url = self.URLLong()
+        if l_url > 72: #Not Arbitrary Value
+            long = 2
+        elif l_url > 53:
+            long = 1
         return long
 
     def URLLong(self): #Get URL Length
