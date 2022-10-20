@@ -11,10 +11,13 @@ def test_isURLLong():
     lu = LengthURL()
     url1 = 'https://www.youtube.com/watch?v=NB-1zm9z3z0'
     url2 = 'https://www.youtube.com/watch?v=d40qv-2As_Y&list=PL1wr88ZxFIz_byXyxAkXuHQrJhlRORRKp&index=50&t=214s'
+    url3 = 'https://bth.instructure.com/courses/4394/discussion_topics/86081'
     lu.getData(url1)
-    assert(lu.isURLLong() == False)
+    assert(lu.isURLLong() == 0)
     lu.getData(url2)
-    assert(lu.isURLLong() == True)
+    assert(lu.isURLLong() == 2)
+    lu.getData(url3)
+    assert(lu.isURLLong() == 1) 
     return
 
 def test_URLLong():
