@@ -49,7 +49,7 @@ class Webscraper:
         try:
             return datetime.now() - domain.creation_date
         except TypeError:
-            return datetime.now() - min(domain.creation_date)
+            return datetime.now() - domain.creation_date[0]
     def exfiltrateProtocol(self):
         # Needs to have url set to <protcol>://<url> to fully work
         protocol = self.url.split(':')[0]
