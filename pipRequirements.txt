@@ -1,0 +1,10 @@
+cryptography
+pytest
+requests_html
+sockets
+flask
+flask_cors
+psycopg2
+bs4
+python-whois
+flask-cors

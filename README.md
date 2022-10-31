@@ -23,3 +23,6 @@ Required packages:
  * pip install bs4
  * pip install python-whois
  * pip install -U flask-cors
+
+
+Run pip install -r pipRequirements.txt to install all requirements.
