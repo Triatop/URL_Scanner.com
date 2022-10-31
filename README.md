@@ -11,6 +11,7 @@ SBOM:
 * flask
 * datetime
 * psycopg
+* CORS
 
 Required packages:
  * pip install pytest (For automated testing only)
@@ -21,3 +22,4 @@ Required packages:
  * pip install python-whois
  * pip install bs4
  * pip install python-whois
+ * pip install -U flask-cors
