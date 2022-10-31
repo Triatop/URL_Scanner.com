@@ -40,7 +40,7 @@ function Searchbar() {
   function StartScanner() {
     setLoading(true)
     setReturnDict('')
-    fetch(`/backendAPI?url=${inputValue}`).then(res => res.json()).then(data => {
+    fetch(`http://localhost:8000/backendAPI?url=${inputValue}`).then(res => res.json()).then(data => {
       setReturnDict(data)
       setLoading(false)
       setShow(true)
