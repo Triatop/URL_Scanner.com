@@ -57,7 +57,7 @@ function Searchbar() {
           onChange={handleChange}
           value={inputValue}
           autoComplete="off"
-          placeholder='Place/type ULR here...'
+          placeholder='Place/type URL here...'
           onKeyDown={keyDwonHandeler}
         />
         <div className="LoadingSpinner">
