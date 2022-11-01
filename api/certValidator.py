@@ -1,4 +1,3 @@
-import sys
 import ssl
 import socket
 import certifi
