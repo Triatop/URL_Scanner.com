@@ -1,15 +1,27 @@
 import sys
-import urllib.request as urllib2
+import ssl
+import socket
+import certifi
 
 class CertValidator:
     def __init__(self, url = ""):
+        self.certLocation = certifi.where()
         self.url = url
     def validateCert(self, url = ""):
-        req = urllib2.Request(url if url != "" else self.url)
+        url = self.url if url == "" else url
+        url = url.split('://')[1] if len(url.split('://')) > 1 else url
+        context = ssl.create_default_context()
+        context = ssl.SSLContext(ssl.PROTOCOL_TLS)
+        context.verify_mode = ssl.CERT_REQUIRED
+        context.check_hostname = True
+
+        context.load_verify_locations(self.certLocation)
+        conn = context.wrap_socket(socket.socket(socket.AF_INET), server_hostname = url)
         try:
-            urllib2.urlopen(req)
-        except urllib2.URLError as err:
+            conn.connect((url, 443))
+            return 0
+        except ssl.SSLCertVerificationError as err:
             return err
-        return 0
+        
     def processData(self, url = ""):
         return 1 if self.validateCert(url if url != "" else self.url) else 0
