@@ -1,25 +1,10 @@
 class SafeEvaluator:
+
     def __init__(self):
-        pass
-    def isSafe(self,i_A1,i_A2,i_A3,i_A4):
+        self.attributes = (5, 2, 4)
+        self.th = 3
 
-        s_Safe = False
-        T = 40 #Threshold
-        A1 = 0 #URL_Length
-        A2 = 0 #FavIcon
-        A3 = 0 #Security protocol
-        A4 = 0 #Site Age
+    def isSafe(self, dict):
+        zippedLists = list(zip(self.attributes, (dict.values())))
 
-        if i_A1 > 0: #URL_Length
-            A1 = i_A1
-        if (i_A2 == False): #FavIcon
-            A2 = 1
-        if (i_A3 == False): #Security protocol
-            A3 = 1
-        if (i_A4 == False or i_A4 == None): #Site Age + check if no age is available
-            A4 = 1
-
-        if T - (A1 * 20) - (A2 * 15) - (A3 * 25) - (A4 * 20) > 0 :      #CHANGE VALUES
-            s_Safe = True
-        
-        return s_Safe
+        return (sum([val1 * val2 for val1, val2 in zippedLists]) - self.th) > 0
