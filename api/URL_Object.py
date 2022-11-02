@@ -2,10 +2,10 @@ class URL_Object:
     def __init__(self) :
         self.o_URL = ''
         self.o_URLLength = 0
-        self.o_URLFavIcon = False
-        self.o_URLSecureProtocol = False
+        self.o_URLFavIcon = 0
+        self.o_URLSecureProtocol = 0
         self.o_URLSiteAge = None
-        self.o_isSafe = False
+        self.o_isSafe = 0
         self.o_URLip = ''
 
     def setURL(self, i_URL):

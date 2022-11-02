@@ -30,8 +30,8 @@ def test_isSecure():
     Pro2.getData(p_fler)
     Pro3.getData(p_fel)
 
-    assert(Pro.isSecure() == True)
-    assert(Pro2.isSecure() == True)
-    assert(Pro3.isSecure() == False)
+    assert(Pro.isSecure() == 1)
+    assert(Pro2.isSecure() == 1)
+    assert(Pro3.isSecure() == 2)
 
     return

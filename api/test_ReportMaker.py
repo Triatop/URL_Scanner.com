@@ -37,11 +37,11 @@ def test_makeReport():
     assert(r_mkr.makeReport() == r_dic)
 
     r_dic = {
-            '1' : False,
-            '2' : True,
-            '3' : True,
-            '4' : True,
-            '5' : True
+            '1' : 0,
+            '2' : 1,
+            '3' : 1,
+            '4' : 1,
+            '5' : 1
             }
 
     assert(r_mkr.makeReport() == r_dic)

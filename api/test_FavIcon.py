@@ -16,8 +16,8 @@ def test_hasFavicon():
     f_Icon = FIc.Favicon_URL()
     test_Icon = 'f_icon'
     test_Icons =  ['fav', 'Icon']
-    assert(f_Icon.hasFavicon(test_Icon) == True)
-    assert(f_Icon.hasFavicon(test_Icons) == True)
-    assert(f_Icon.hasFavicon('') == False)
-    assert(f_Icon.hasFavicon(None) == False)
+    assert(f_Icon.hasFavicon(test_Icon) == 1)
+    assert(f_Icon.hasFavicon(test_Icons) == 1)
+    assert(f_Icon.hasFavicon('') == 0)
+    assert(f_Icon.hasFavicon(None) == 0)
     return

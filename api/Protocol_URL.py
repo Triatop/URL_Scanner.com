@@ -18,6 +18,6 @@ class Protocol_URL():
 
     def isSecure(self):
         if (self.currentProtocol == "https") :
-            return True
+            return 1
         else :
-            return False
+            return 0
