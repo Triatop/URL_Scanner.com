@@ -2,7 +2,7 @@ import datetime
 
 class SiteAge_URL():
     def __init__(self):
-        self.s_AgeLimit = 100 #REPLACE WITH AN ACTUAL LIMIT
+        self.s_AgeLimit = 180 #6 MONTHS DECLARED AS PHISHING
 
     def getData(self):
         a_limit = datetime.timedelta(days = self.s_AgeLimit)
