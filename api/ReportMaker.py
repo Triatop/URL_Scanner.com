@@ -11,7 +11,7 @@ class ReportMaker:
         a_dict = {
             1 : self.r_URLO.getURLFavIcon(),            #1 = Fav Icon 
             2 : self.r_URLO.getURLSecureProtocol(),     #2 = Security protocol
-            3 : "", #need a getter for the protocol here #3 = Port check
+            3 : 0, #need a getter for the protocol here #3 = Port check
             4 : self.r_URLO.getURLSiteAge(),            #4 = Site Age
             5 : self.r_URLO.getURLLength()              #5 = Length
             }
@@ -21,7 +21,7 @@ class ReportMaker:
         r_str = ""
         for i in range(1,len(a_dict)+1):
             if i == 1:
-                r_str += (f"- Website has {'a' if a_dict[i] == 1 else 'no'} favicon ")
+                r_str += (f"- Website has {'a' if a_dict[i] == 0 else 'no'} favicon ")
             if i == 2:
                 r_str += (f"\n- Website uses {'HTTPS'if a_dict[i] == 0 else 'HTTP'} protocol")
             # if i == 3:

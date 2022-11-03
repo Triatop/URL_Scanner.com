@@ -50,7 +50,7 @@ class URL_Object:
     def getIP(self):
         return self.o_URLip
 
-    def isSafe(self, i_safe):
+    def setSafe(self, i_safe):
         self.o_isSafe = i_safe
         return
 

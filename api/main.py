@@ -32,20 +32,21 @@ def main(url1):
 
     u_len.getData(url1) #URL Size check
     u_prot.getData(w_scrap.exfiltrateProtocol()) #GETTING PROTOCOLS
+
     #HERE ARE THE FINAL VALUES
-    print(u_obj.getURL())                                            #Get the URL
-    u_obj.setURLLength(u_len.isURLLong())                            #Is it too long
-    u_obj.setURLFavIcon(u_fav.hasFavicon(w_scrap.extractFavicon()))  #URL Fav Icon check
-    u_obj.setURLSecureProtocol(u_prot.isSecure())                    #Security check
-    u_obj.setIP(u_ctrl.getIP(url1))                                  #Try Set IP We don't use it for anything though
-    u_obj.setURLSiteAge(u_age.isInLimit(w_scrap.exfiltrateSiteAge()))#How old is site? 
+    print(u_obj.getURL())                                               #Get the URL
+    u_obj.setURLLength(u_len.isURLLong())                               #Is it too long
+    u_obj.setURLFavIcon(u_fav.hasFavicon(w_scrap.extractFavicon()))     #URL Fav Icon check
+    u_obj.setURLSecureProtocol(u_prot.isSecure())                       #Security check
+    u_obj.setIP(u_ctrl.getIP(url1))                                     #Try Set IP We don't use it for anything though
+    u_obj.setURLSiteAge(u_age.isInLimit(w_scrap.exfiltrateSiteAge()))   #How old is site? 
 
     r_mkr.getData(u_obj)                                #send URL Object to report maker and make attribute dictionary
-    o_dic = r_mkr.makeDict()                          #Make the report and catch the output dictionary
+    o_dic = r_mkr.makeDict()                            #Make the report and catch the output dictionary
+    
+    u_obj.setSafe(u_safe.isSafe(o_dic))                 #Safe eveluator check
 
-    # u_obj.isSafe(o_dic) #UGLY DIRTY SOLUTION that works
-
-    return {"valid": "True","report": r_mkr.reportMaker(o_dic)}
+    return {"valid": "True","report": r_mkr.reportMaker(o_dic), "binarySafe": f" Website is {'SAFE' if str(u_obj.getSafe()) else 'NOT SAFE'} to enter"}
 
 
 

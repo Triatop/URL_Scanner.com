@@ -73,6 +73,7 @@ function Searchbar() {
             <p>Valid URL: {returnDict.valid}</p>
             <p>{returnDict.report}</p>
             <p>{returnDict.exeTime}</p>
+            <p>{returnDict.binarySafe}</p>
           </section>
         </div> : null
       }
