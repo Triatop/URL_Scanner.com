@@ -18,7 +18,6 @@ def members():
     retDict = main.main(request.args.get('url'))
     if retDict["valid"] == "True":
         retDict["exeTime"] = f'The scan took {(time.time() - sTime):.2f} seconds'
-    print(retDict)
     return retDict
 
 if __name__ == '__main__':
