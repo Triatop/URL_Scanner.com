@@ -1,8 +1,4 @@
-import URL_Object as urlObject
-import UrlController as urlCtr
-import PortCheck
 from flask import Flask, request
-import webscraper
 import time
 import main as main
 from flask_cors import CORS
