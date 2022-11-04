@@ -2,6 +2,15 @@ import UrlController
 import random
 import string
 
+def testRedirect():
+    ctr = UrlController.UrlController()
+    noRedirUrl = 'https://www.bth.se/canvas/'
+    RedirUrl = 'https://tinyurl.com/2m8bumv7'
+    assert(ctr.checkRedirect(RedirUrl) == noRedirUrl)
+    assert(ctr.short == 1)
+    assert(ctr.checkRedirect(noRedirUrl) == noRedirUrl)
+    assert(ctr.short == 0)
+
 def testValidate():
     ctr = UrlController.UrlController()
     testUrls = {'https://www.youtube.com' : '142.250.74.78',
