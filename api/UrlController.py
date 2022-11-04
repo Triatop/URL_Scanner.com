@@ -1,4 +1,5 @@
 import cryptography.fernet
+import urllib.request
 from socket import gethostbyname
 
 class UrlController:
@@ -7,7 +8,14 @@ class UrlController:
         self.key = b'pz1Z8gLyrtR4lM7kCqMSv5zUwP3AGFoPtQXprqSvDGA='
         self.f = cryptography.fernet.Fernet(self.key)
 
-
+    def checkRedirect(self, url):                       # must contain http
+        self.short = 0
+        resp = urllib.request.urlopen(url)
+        if resp.getcode() == 200:                       # 404 if 404 error
+            if resp.url != url:                         # if not same -> url shortening
+                self.short = 1
+        return resp.url
+            
     def validateUrl(self, url):
         if(len(url) <= 0): return None
 
