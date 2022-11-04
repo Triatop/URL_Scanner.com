@@ -8,7 +8,7 @@ class Favicon_URL(object):
         except:
             return False
     def hasFavicon(self, f_icon):
-        f_Favicon = 1
+        f_Favicon = 0
         if self.getData(f_icon):
-            f_Favicon = 0
+            f_Favicon = 1
         return f_Favicon
