@@ -11,7 +11,7 @@ from ReportMaker import ReportMaker
 
 def main(url1):
     u_ctrl = UrlController()
-
+    
     if not u_ctrl.validateUrl(url1): #<--- if website fails to validate
         return {"valid": "False", "report": "- Invalid URL, website does not exist - check for spelling errors"}
 
