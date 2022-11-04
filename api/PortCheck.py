@@ -8,7 +8,7 @@ class PortCheck:
         port = self.standardPorts[protocol]
         try:
             if(serviceping.scan(ip, port)['state'] == 'open'):
-                return True
+                return 1
         except:
             pass
-        return False
+        return 0

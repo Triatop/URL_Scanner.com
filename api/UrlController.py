@@ -7,6 +7,7 @@ class UrlController:
         self.key = b'pz1Z8gLyrtR4lM7kCqMSv5zUwP3AGFoPtQXprqSvDGA='
         self.f = cryptography.fernet.Fernet(self.key)
 
+
     def validateUrl(self, url):
         if(len(url) <= 0): return None
 
@@ -21,9 +22,6 @@ class UrlController:
             return gethostbyname(url)
         except:
             return None
-
-        
-        
 
     def encryptUrl(self, url):
         return self.f.encrypt(url.encode())
