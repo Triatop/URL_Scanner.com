@@ -46,7 +46,7 @@ def main(url1):
     
     u_obj.setSafe(u_safe.isSafe(o_dic))                 #Safe eveluator check
 
-    return {"valid": "True","report": r_mkr.reportMaker(o_dic), "binarySafe": f" Website is {'SAFE' if u_obj.getSafe() else 'NOT SAFE'} to enter"}
+    return {"valid": "True","report": r_mkr.reportMaker(o_dic, w_scrap.exfiltrateSiteAge().days), "binarySafe": f" Website is {'SAFE' if u_obj.getSafe() else 'NOT SAFE'} to enter"}
 
 
 

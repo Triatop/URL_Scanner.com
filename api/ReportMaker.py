@@ -17,7 +17,7 @@ class ReportMaker:
             }
         return a_dict
 
-    def reportMaker(self, a_dict):
+    def reportMaker(self, a_dict, siteAge):
         r_str = ""
         for i in range(1,len(a_dict)+1):
             #Fav Icon
@@ -34,7 +34,7 @@ class ReportMaker:
             if i == 4:
                 case1 = 'is alarmingly young'
                 case2 = 'has been running for a credible amount of time'
-                r_str += (f"\n- The webiste {case1 if a_dict[i] == 1 else case2}")
+                r_str += (f"\n- The webiste {case1 if a_dict[i] == 1 else case2} ({siteAge} days)")
             #Length
             if i == 5:
                 case1 = 'of an acceptable length'
