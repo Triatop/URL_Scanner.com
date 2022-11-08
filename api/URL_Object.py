@@ -6,11 +6,19 @@ class URL_Object:
         self.o_URLSecureProtocol = 0
         self.o_URLSiteAge = None
         self.o_isSafe = 0
+        self.o_CheckProtocol = 0
         self.o_URLip = ''
 
     def setURL(self, i_URL):
         self.o_URL = i_URL
         return
+
+    def setCheckPort(self, i_CheckPort):
+        self.o_CheckProtocol = i_CheckPort
+        return
+
+    def getCheckPort(self):
+        return self.o_CheckProtocol
 
     def getURL(self):
         return self.o_URL

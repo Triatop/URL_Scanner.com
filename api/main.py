@@ -11,6 +11,7 @@ from ReportMaker import ReportMaker
 
 def main(url1):
     u_ctrl = UrlController()
+    url1 = u_ctrl.addProtocol(url1)
     
     if not u_ctrl.validateUrl(url1): #<--- if website fails to validate
         return {"valid": "False", "report": "- Invalid URL, website does not exist - check for spelling errors"}
@@ -40,6 +41,7 @@ def main(url1):
     u_obj.setURLSecureProtocol(u_prot.isSecure())                       #Security check
     u_obj.setIP(u_ctrl.getIP(url1))                                     #Try Set IP We don't use it for anything though
     u_obj.setURLSiteAge(u_age.isInLimit(w_scrap.exfiltrateSiteAge()))   #How old is site? 
+    u_obj.setCheckPort(w_scrap.exfiltrateProtocol())
 
     r_mkr.getData(u_obj)                                #send URL Object to report maker and make attribute dictionary
     o_dic = r_mkr.makeDict()                            #Make the report and catch the output dictionary

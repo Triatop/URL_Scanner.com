@@ -1,5 +1,6 @@
 import cryptography.fernet
 import urllib.request
+import requests
 from socket import gethostbyname
 
 class UrlController:
@@ -7,6 +8,20 @@ class UrlController:
     def __init__(self):
         self.key = b'pz1Z8gLyrtR4lM7kCqMSv5zUwP3AGFoPtQXprqSvDGA='
         self.f = cryptography.fernet.Fernet(self.key)
+
+    def addProtocol(self, url):
+        urlSplit = self.splitUrl(url)
+        if(len(urlSplit) <= 0): return None 
+
+        if 'http' not in urlSplit[0]:
+            urlSplit.insert(0, 'http:/')
+        else:
+            urlSplit[0] += '/'
+
+        if 'www' not in urlSplit[1][:3]:
+            urlSplit[1] = 'www.' + urlSplit[1]
+
+        return '/'.join(urlSplit)
 
     def checkRedirect(self, url):                       # must contain http
         self.short = 0
@@ -23,6 +38,11 @@ class UrlController:
 
         if('http' not in urlSplit[0]): return None
 
+        try:
+            test = requests.get(url)
+            if not test.ok: return None
+        except:
+            pass
         return self.getIP(urlSplit[1])
 
     def getIP(self, url):

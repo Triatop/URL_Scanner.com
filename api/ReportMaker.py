@@ -6,13 +6,13 @@ class ReportMaker:
     def getData(self, u_Obj):
         self.r_URLO = u_Obj
         return 1
-
+        
     def makeDict(self):
         a_dict = {
-            1 : 0 if self.r_URLO.getURLFavIcon() == 1 else 1,            #1 = Fav Icon 
-            2 : 0 if self.r_URLO.getURLSecureProtocol() == 1 else 1,     #2 = Security protocol
-            3 : 0, #need a getter for the protocol here #3 = Port check
-            4 : 0 if self.r_URLO.getURLSiteAge() == 1 else 1,            #4 = Site Age
+            1 : bool(self.r_URLO.getURLFavIcon()) ^ 1,            #1 = Fav Icon 
+            2 : bool(self.r_URLO.getURLSecureProtocol()) ^ 1,     #2 = Security protocol
+            3 : bool(self.r_URLO.getCheckPort()) ^ 1, #3 = Check Port
+            4 : bool(self.r_URLO.getURLSiteAge()) ^ 1,            #4 = Site Age
             5 : self.r_URLO.getURLLength()              #5 = Length
             }
         return a_dict
@@ -27,8 +27,8 @@ class ReportMaker:
             if i == 2:
                 r_str += (f"\n- Website uses {'HTTPS'if a_dict[i] == 0 else 'HTTP'} protocol")
             #Port
-            # if i == 3:
-            #     r_str += (f"\n- Website is running on the {'right' if a_dict[i] == True else 'wrong'}  port")
+            if i == 3:
+                r_str += (f"\n- Website is running on the {'right' if a_dict[i] == 0 else 'wrong'} port")
             
             #Site Age 
             if i == 4:

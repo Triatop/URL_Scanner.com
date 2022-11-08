@@ -8,3 +8,4 @@ bs4
 python-whois
 flask-cors
 coverage
+requests
