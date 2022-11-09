@@ -19,26 +19,25 @@ class ReportMaker:
 
     def reportMaker(self, a_dict, siteAge):
         r_str = ""
-        for i in range(1,len(a_dict)+1):
-            #Fav Icon
-            if i == 1:
-                r_str += (f"- Website has {'a' if a_dict[i] == 0 else 'no'} favicon ")
-            #Secutiry Protocol
-            if i == 2:
-                r_str += (f"\n- Website uses {'HTTPS'if a_dict[i] == 0 else 'HTTP'} protocol")
-            #Port
-            if i == 3:
-                r_str += (f"\n- Website is running on the {'right' if a_dict[i] == 0 else 'wrong'} port")
+        
+        #Fav Icon
+        r_str += (f"- Website has {'a' if a_dict[1] == 0 else 'no'} favicon ")
             
-            #Site Age 
-            if i == 4:
-                case1 = 'is alarmingly young'
-                case2 = 'has been running for a credible amount of time'
-                r_str += (f"\n- The webiste {case1 if a_dict[i] == 1 else case2} ({siteAge} days)")
-            #Length
-            if i == 5:
-                case1 = 'of an acceptable length'
-                case2 = 'on the border of beeing too long'
-                case3 = 'alarmingly long'
-                r_str += (f"\n- The url-length is {case1 if a_dict[i] == 0 else case2 if a_dict[i] == 1 else case3 }")
+        #Secutiry Protocol
+        r_str += (f"\n- Website uses {'HTTPS'if a_dict[2] == 0 else 'HTTP'} protocol")
+        
+        #Port
+        r_str += (f"\n- Website is running on the {'right' if a_dict[3] == 0 else 'wrong'} port")
+            
+        #Site Age 
+        case1 = 'is alarmingly young'
+        case2 = 'has been running for a credible amount of time'
+        r_str += (f"\n- The webiste {case1 if a_dict[4] == 1 else case2} ({siteAge} days)")
+        
+        #Length
+        case1 = 'of an acceptable length'
+        case2 = 'on the border of beeing too long'
+        case3 = 'alarmingly long'
+        r_str += (f"\n- The url-length is {case1 if a_dict[5] == 0 else case2 if a_dict[5] == 1 else case3 }")
+
         return r_str
