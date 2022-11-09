@@ -6,10 +6,12 @@ def testRedirect():
     ctr = UrlController.UrlController()
     noRedirUrl = 'https://www.bth.se/canvas/'
     RedirUrl = 'https://tinyurl.com/2m8bumv7'
+    badUrl = 'www.siueg'
     assert(ctr.checkRedirect(RedirUrl) == noRedirUrl)
     assert(ctr.short == 1)
     assert(ctr.checkRedirect(noRedirUrl) == noRedirUrl)
     assert(ctr.short == 0)
+    assert(ctr.checkRedirect(badUrl) == badUrl)
 
 def testValidate():
     ctr = UrlController.UrlController()
