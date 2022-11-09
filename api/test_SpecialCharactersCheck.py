@@ -3,7 +3,7 @@ from SpecialCharactersCheck import SCCheck
 def test_getData():
     sc = SCCheck()
     url = 'https://www.youtube.com/watch?v=NB-1zm9z3z0'
-    assert(sc.getData(url))
+    assert(sc.setData(url))
     assert(sc.l_URL == url)
     return
 
@@ -11,11 +11,11 @@ def test_checkAtSign():
     sc = SCCheck()
     url_t = 'https://www.youtube.com/@watch?v=NB-1zm9z3z0'
     url_f = 'https://www.youtube.com/watch?v=NB-1zm9z3z0'
-    sc.getData(url_t)
+    sc.setData(url_t)
     assert(sc.checkAtSign() == True)
     assert(sc.value == 1)
     sc = SCCheck()
-    sc.getData(url_f)
+    sc.setData(url_f)
     assert(sc.checkAtSign() == False)
     assert(sc.value == 0)
     return
@@ -24,11 +24,11 @@ def test_checkHyphen():                                         # Hyphen only in
     sc = SCCheck()
     url_t = 'https://en.wiki-pedia.org/wiki/Hyphen'
     url_f = 'https://en.wikipedia.org/wiki/Hyp-hen'
-    sc.getData(url_t)
+    sc.setData(url_t)
     assert(sc.checkHyphen() == True)
     assert(sc.value == 1)
     sc = SCCheck()
-    sc.getData(url_f)
+    sc.setData(url_f)
     assert(sc.checkHyphen() == False)
     assert(sc.value == 0)
     return
@@ -37,11 +37,11 @@ def test_checkDoubleForwardSlash():                             # Double forward
     sc = SCCheck()
     url_t = 'https://sitebulb.com//folder/page.html'
     url_f = 'https://sitebulb.com/folder/page.html'
-    sc.getData(url_t)
+    sc.setData(url_t)
     assert(sc.checkDoubleForwardSlash() == True)
     assert(sc.value == 1)
     sc = SCCheck()
-    sc.getData(url_f)
+    sc.setData(url_f)
     assert(sc.checkDoubleForwardSlash() == False)
     assert(sc.value == 0)
     return
@@ -49,7 +49,7 @@ def test_checkDoubleForwardSlash():                             # Double forward
 def test_All():
     sc = SCCheck()
     url = 'https://www.you-tube.com//watch?v=d40qv-2As_@Y&list=PL1wr88ZxFIz_byXyxAkXuHQrJhlRORRKp&index=50&t=214s'
-    sc.getData(url)
+    sc.setData(url)
     assert(sc.checkDoubleForwardSlash() == True)
     assert(sc.checkHyphen() == True)
     assert(sc.checkAtSign() == True)
