@@ -23,13 +23,15 @@ class UrlController:
 
         return '/'.join(urlSplit)
 
-    def checkRedirect(self, url):                       # must contain http
+    def checkRedirect(self, url): 
         self.short = 0
-        resp = urllib.request.urlopen(url)
-        if resp.getcode() == 200:                       # 404 if 404 error
-            if resp.url != url:                         # if not same -> url shortening
+        try:
+            resp = urllib.request.urlopen(url)                      
+            if resp.url != url:                         
                 self.short = 1
-        return resp.url
+            return resp.url
+        except:
+            return url
             
     def validateUrl(self, url):
         if(len(url) <= 0): return None
