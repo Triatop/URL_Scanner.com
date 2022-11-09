@@ -23,4 +23,4 @@ class CertValidator:
             return err
         
     def processData(self, url = ""):
-        return 1 if self.validateCert(url if url != "" else self.url) else 0
+        return 0 if self.validateCert(url if url != "" else self.url) else 1
