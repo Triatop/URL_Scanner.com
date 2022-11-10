@@ -69,7 +69,7 @@ function Searchbar() {
       </div>
       {
         show ? <div>
-          <section id="report">
+          <section className="report">
             <p>Valid URL: {returnDict.valid}</p>
             <p>{returnDict.report}</p>
             <p>{returnDict.exeTime}</p>

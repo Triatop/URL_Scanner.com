@@ -14,7 +14,17 @@
     border-radius: 50%;
     animation: spinner 1.5s linear infinite;
   }
+
+  #dark .loading-spinner{
+    border: 5px solid #f3f3f3; /* Light grey */
+    border-top: 5px solid #383636; /* Blue */
+  }
   
+  #light .loading-spinner{
+    border: 5px solid #383636; /* Light grey */
+    border-top: 5px solid #cbcbcb; /* Blue */
+  }
+
   .spinner-container {
     height:0;
     display: block;

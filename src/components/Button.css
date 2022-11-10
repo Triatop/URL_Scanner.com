@@ -1,9 +1,8 @@
 /* React Website tut 31:25 min */
 button {
-    background-color: #3baefb;
+    /* background-color: #3baefb; */
     border: none;
     border-radius: 2px;
-    color: rgb(0, 0, 0);
     padding: 10px 14px;
     text-align: center;
     text-decoration: none;
@@ -15,10 +14,28 @@ button {
     font-weight: 600;
   }
 
-  button:hover {
+  #dark button{
+    background-color: #3baefb;
+    color: rgb(0, 0, 0);
+  }
+
+  #light button{
+    background-color: #3d3d3d;
+    color: #f9f9f9;
+  }
+
+  #dark button:hover {
     background-color: #0096fb;
   }
 
-  button:active {
+  #light button:hover {
+    background-color: #4f4f4f;
+  }
+
+  #dark button:active {
     background-color: #0070ba;
+  }
+
+  #light button:active {
+    background-color: #5b5b5b;
   }
