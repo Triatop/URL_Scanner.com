@@ -12,6 +12,8 @@ SBOM:
 * datetime
 * psycopg
 * CORS
+* urllib
+* json
 
 Required packages:
  * pip install pytest (For automated testing only)
