@@ -28,7 +28,7 @@ class MaliciousLinks:
                 i -= 1                                                      #step back one to not mess up i+1
                 f_iterations -= 1                                           #Adjust iterations to match new list size
             i += 1                                                          #check next link
-        print(self.m_links)
+        #print(self.m_links)
         return 1
 
     def maliciousCheck(self):      #Send an array of links to Virustotal and get the response
@@ -38,9 +38,8 @@ class MaliciousLinks:
         
         for i in range(len(self.m_links)):
             try:
-                #d_head = {"Accept": "application/json", 'api-key': self.m_apiKey}
                 m_response = requests.get(v_url)
-                print(m_response.text)
+                #print(m_response.text)
                 l_response.append(json.loads(m_response.text))
             except ValueError as e:
                 print("Rate Limit detected:", e)
@@ -53,12 +52,12 @@ class MaliciousLinks:
         m_resp = self.maliciousCheck()
         r_score = []
         for i in range(len(self.m_links)):
-            r_score.append(int(m_resp[i]['risk_score']))  #"risk_score":0,
-            m_sum += r_score[i]
+            r_score.append(int(m_resp[i]['risk_score']))    #"risk_score":0,
+            m_sum += r_score[i]                             #keep a sum of how bad the links are
             if r_score[m_lrgi] < r_score[i] :
-                m_lrgi = i
-        print(m_sum, m_lrgi)
-        print(r_score)
+                m_lrgi = i                                  #keep ahold of the worst link
+        #print(m_sum, m_lrgi)
+        #print(r_score)
 
         if m_sum > 100 or r_score[m_lrgi] > 75:             # IPQS USES	Overall threat score from: 0 (clean) to 100 (high risk)
             m_extLinks = 1                                  # Do we want binary or severity?
