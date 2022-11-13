@@ -6,7 +6,7 @@ class MaliciousLinks:
     def __init__(self):
         self.m_links = []
         self.m_url = ''
-        self.m_apiKey = 'K5FSMq7EFoOqwjx1B0ED2P5TMkPp1bcy' #Replace with non-personal ID 
+        self.m_apiKey = '' #Replace with non-personal ID 
 
     def getData(self, i_url, i_links):
         self.m_links = i_links
@@ -56,19 +56,19 @@ class MaliciousLinks:
             try:
                 v_url = 'https://www.ipqualityscore.com/api/json/url/%s/%s' % (self.m_apiKey, urllib.parse.quote_plus(self.m_links[i]))  #IPQS url
                 m_response = requests.get(v_url)
-                print(m_response.text)
+                #print(m_response.text)
                 l_response.append(json.loads(m_response.text))
-            except ValueError as e:
+            except ValueError as e:                                 #when unexpected values are returned
                 print("Rate Limit detected:", e)
         return l_response
 
     def isExternalSafe(self):  #Parse the value from IPQS 
-        m_extLinks = 1
+        m_extLinks = 0
         m_sum = 0
         m_lrgi = 0
         m_resp = self.maliciousCheck()
         r_score = []
-        for i in range(len(self.m_links)):
+        for i in range(len(m_resp)):
             r_score.append(int(m_resp[i]['risk_score']))    #"risk_score":0,
             m_sum += r_score[i]                             #keep a sum of how bad the links are
             if r_score[m_lrgi] < r_score[i] :
@@ -76,6 +76,6 @@ class MaliciousLinks:
         #print(m_sum, m_lrgi)
         #print(r_score)
 
-        if m_sum > 100 or r_score[m_lrgi] > 75:             # IPQS USES	Overall threat score from: 0 (clean) to 100 (high risk)
-            m_extLinks = 0                                  # Do we want binary or severity?
+        if m_sum < 100 or r_score[m_lrgi] < 75:             # IPQS USES	Overall threat score from: 0 (clean) to 100 (high risk)
+            m_extLinks = 1                                  # Do we want binary or severity?
         return m_extLinks
