@@ -15,7 +15,7 @@ def main(url1, report=True):
     
     if not u_ctrl.validateUrl(url1): #<--- if website fails to validate
         return {"valid": "False", "report": "- Invalid URL, website does not exist - check for spelling errors"}
-
+    url1 = u_ctrl.checkRedirect(url1)
     #Classes
     u_obj = URL_Object()
     w_scrap = Webscraper()
@@ -29,6 +29,9 @@ def main(url1, report=True):
     #Set Values
     u_obj.setURL(url1)
     w_scrap.setURL(url1)
+
+    print(w_scrap.url)
+
 
 
     u_len.getData(url1) #URL Size check
