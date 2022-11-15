@@ -9,7 +9,7 @@ from SafeEvaluator import SafeEvaluator
 from ReportMaker import ReportMaker
 
 
-def main(url1):
+def main(url1, report=True):
     u_ctrl = UrlController()
     url1 = u_ctrl.addProtocol(url1)
     
@@ -35,7 +35,6 @@ def main(url1):
     u_prot.getData(w_scrap.exfiltrateProtocol()) #GETTING PROTOCOLS
 
     #HERE ARE THE FINAL VALUES
-    print(u_obj.getURL())                                               #Get the URL
     u_obj.setURLLength(u_len.isURLLong())                               #Is it too long
     u_obj.setURLFavIcon(u_fav.hasFavicon(w_scrap.extractFavicon()))     #URL Fav Icon check
     u_obj.setURLSecureProtocol(u_prot.isSecure())                       #Security check
@@ -48,8 +47,10 @@ def main(url1):
     
     u_obj.setSafe(u_safe.isSafe(o_dic))                 #Safe eveluator check
 
-    return {"valid": "True","report": r_mkr.reportMaker(o_dic, w_scrap.exfiltrateSiteAge().days), "binarySafe": f" Website is {'SAFE' if u_obj.getSafe() else 'NOT SAFE'} to enter"}
-
+    if(report):
+        return {"valid": "True","report": r_mkr.reportMaker(o_dic, w_scrap.exfiltrateSiteAge().days), "binarySafe": f" Website is {'SAFE' if u_obj.getSafe() else 'NOT SAFE'} to enter"}
+    else:
+        return o_dic
 
 
     # print('The sites URL is too long? ', o_dic['1'])    #u_obj.getURLLength())
