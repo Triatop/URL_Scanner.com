@@ -3,35 +3,29 @@ import './App.css';
 import Searchbar from './components/Searchbar';
 import LoginBtn from './components/LoginBtn';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
-import { createContext, useState } from "react";
-import { DarkModeToggle } from '@anatoliygatt/dark-mode-toggle';
+import {useState} from "react";
+import {DarkModeToggle} from '@anatoliygatt/dark-mode-toggle';
 
-export const ThemeContext = createContext(null);
+
 
 function App() {
-  const [theme, setTheme] = useState("dark");
-  const [mode, setMode] = useState("dark")
-
-  const toggleTheme = () => {
-    setTheme((curr) => (curr === "light" ? "dark" : "light"));
-  };
+  
+  const [mode, setMode] = useState("dark");
 
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
-      <div className='App' id={theme}>
+      <div className='App' id={mode}>
       <Router>
       {/*<Navbar />*/}
       <div className='topRow'>
         <LoginBtn/>
         <div className="switch">
               <DarkModeToggle 
-              checked={theme === "dark"} 
+              checked={mode === "dark"} 
               mode={mode}
               onChange={(mode) => {
                 setMode(mode);
-                toggleTheme()
               }}/>
-            </div>
+        </div>
       </div>
       <Searchbar />
         <Routes>
@@ -39,7 +33,6 @@ function App() {
         </Routes>
       </Router>
       </div>
-    </ThemeContext.Provider>
   );
 }
 
