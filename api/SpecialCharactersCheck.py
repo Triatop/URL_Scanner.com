@@ -16,8 +16,8 @@ class SCCheck:
         for c in domain:
             if c == sign:
                 self.sev = 1
-        subdomain = urlparse(self.l_URL).hostname
-        if subdomain.count('.')+1 > 2:
+        domain = urlparse(self.l_URL).hostname
+        if domain.count('.') > 2:
             self.sev = 2
         sign = '@'
         for c in self.l_URL:
