@@ -2,6 +2,8 @@ import main
 import csv
 import json
 
+
+
 data = ["FavIcon", "SecureProtocol", "CheckPort", "SiteAge", "SiteLength", "IsPhishy"]
 
 with open('api/testingData.json', 'r') as f:
