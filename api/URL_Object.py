@@ -1,5 +1,6 @@
 class URL_Object:
     def __init__(self) :
+        self.a_dict = {}
         self.o_URL = ''
         self.o_URLLength = 0
         self.o_URLFavIcon = 0
@@ -8,6 +9,19 @@ class URL_Object:
         self.o_isSafe = 0
         self.o_CheckProtocol = 0
         self.o_URLip = ''
+
+    def makeDict(self):
+        self.a_dict = {
+            1 : bool(self.getURLFavIcon()) ^ 1,            #1 = Fav Icon 
+            2 : bool(self.getURLSecureProtocol()) ^ 1,     #2 = Security protocol
+            3 : bool(self.getCheckPort()) ^ 1,             #3 = Check Port
+            4 : bool(self.getURLSiteAge()) ^ 1,            #4 = Site Age
+            5 : self.getURLLength()                        #5 = Length
+            }
+        return
+    
+    def getDict(self):
+        return self.a_dict
 
     def setURL(self, i_URL):
         self.o_URL = i_URL

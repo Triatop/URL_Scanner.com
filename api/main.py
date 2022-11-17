@@ -45,15 +45,15 @@ def main(url1, report=True):
     u_obj.setURLSiteAge(u_age.isInLimit(w_scrap.exfiltrateSiteAge()))   #How old is site? 
     u_obj.setCheckPort(w_scrap.exfiltrateProtocol())
 
-    r_mkr.getData(u_obj)                                #send URL Object to report maker and make attribute dictionary
-    o_dic = r_mkr.makeDict()                            #Make the report and catch the output dictionary
-    
-    u_obj.setSafe(u_safe.isSafe(o_dic))                 #Safe eveluator check
+    u_obj.makeDict()                                    #Make the attribute dictionary
+    r_mkr.createReport(u_obj.getDict(), w_scrap.exfiltrateSiteAge().days) #Create report from attribute dict and site age 
+
+    u_obj.setSafe(u_safe.isSafe(u_obj.getDict()))                 #Safe eveluator check
 
     if(report):
-        return {"valid": "True","report": r_mkr.reportMaker(o_dic, w_scrap.exfiltrateSiteAge().days), "binarySafe": f" Website is {'SAFE' if u_obj.getSafe() else 'NOT SAFE'} to enter"}
+        return {"valid": "True","report": r_mkr.getReport(), "binarySafe": f" Website is {'SAFE' if u_obj.getSafe() else 'NOT SAFE'} to enter"}
     else:
-        return o_dic
+        return u_obj.getDict()
 
 
     # print('The sites URL is too long? ', o_dic['1'])    #u_obj.getURLLength())
