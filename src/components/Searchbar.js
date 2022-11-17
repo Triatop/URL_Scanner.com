@@ -70,10 +70,8 @@ function Searchbar() {
       {
         show ? <div>
           <section className="report">
-            <p>Valid URL: {returnDict.valid}</p>
-            <p>{returnDict.report}</p>
-            <p>{returnDict.exeTime}</p>
-            <p>{returnDict.binarySafe}</p>
+            <p>Valid URL: {returnDict.valid} {returnDict.reDirect}</p>
+            <p>{returnDict.report} {returnDict.exeTime} {returnDict.binarySafe}</p>
           </section>
         </div> : null
       }

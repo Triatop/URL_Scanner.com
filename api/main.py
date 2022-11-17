@@ -16,9 +16,19 @@ def main(url1, report=True):
     u_ctrl = UrlController()
     url1 = u_ctrl.addProtocol(url1)
     
+    #Redirect check
+    urlRedirect = u_ctrl.checkRedirect(url1)
+    if url1 != urlRedirect:
+        url1 = urlRedirect
+        urlRedirect = True
+    else:
+        urlRedirect = False
+
+    #Check if wevsite is valid (exists)
     if not u_ctrl.validateUrl(url1): #<--- if website fails to validate
         return {"valid": "False", "report": "- Invalid URL, website does not exist - check for spelling errors"}
     url1 = u_ctrl.checkRedirect(url1)
+
     #Classes
     u_obj = URL_Object() 
     u_len = LengthURL()
@@ -61,6 +71,6 @@ def main(url1, report=True):
     print(u_obj.a_dict)
 
     if(report):
-        return {"valid": "True","report": r_mkr.getReport(), "binarySafe": f" Website is {'SAFE' if u_obj.getSafe() else 'NOT SAFE'} to enter"}
+        return {"valid": "True","report": r_mkr.getReport(), "binarySafe": f"\n\nWebsite is {'SAFE' if u_obj.getSafe() else 'NOT SAFE'} to enter", "reDirect": f"\n\nRedirected: {urlRedirect} \nScanning: {url1}"}
     else:
         return u_obj.getDict()

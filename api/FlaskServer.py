@@ -13,7 +13,7 @@ def members():
     sTime = time.time()
     retDict = main.main(request.args.get('url'))
     if retDict["valid"] == "True":
-        retDict["exeTime"] = f'The scan took {(time.time() - sTime):.2f} seconds'
+        retDict["exeTime"] = f'\n\nThe scan took {(time.time() - sTime):.2f} seconds'
     return retDict
 
 if __name__ == '__main__':
