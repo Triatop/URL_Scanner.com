@@ -47,7 +47,7 @@ class MaliciousLinks:
             i += 1
         return 1
 
-    def maliciousCheck(self):      #Send an array of links to Virustotal and get the response
+    def maliciousCheck(self):      #Send an array of links to IP Quality Score and get the response
         self.externalCheck()
         self.removeDup()
         l_response = []
@@ -76,6 +76,6 @@ class MaliciousLinks:
         #print(m_sum, m_lrgi)
         #print(r_score)
 
-        if m_sum < 100 or r_score[m_lrgi] < 75:             # IPQS USES	Overall threat score from: 0 (clean) to 100 (high risk)
-            m_extLinks = 1                                  # Do we want binary or severity?
+        if m_sum > 0:                                       #IPQS USES	Overall threat score from: 0 (clean) to 100 (high risk)
+            m_extLinks = floor(ceil(m_sum/len(m_resp))/10)  #The mean value of all the threat scores rounded up. Divided by 10 and rounded down to give a score between 0 and 10. 
         return m_extLinks

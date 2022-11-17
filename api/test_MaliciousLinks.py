@@ -46,5 +46,5 @@ def test_isExternalSafe():
     m_al1.getData(url1, mal_urls)
     m_al2.getData(url1, saf_urls)
     assert(m_al1.isExternalSafe() == 0)
-    assert(m_al2.isExternalSafe() == 1)
+    assert(m_al2.isExternalSafe() > 0)
     return
