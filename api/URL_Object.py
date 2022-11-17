@@ -6,6 +6,7 @@ class URL_Object:
         self.o_URLFavIcon = 0
         self.o_URLSecureProtocol = 0
         self.o_URLSiteAge = None
+        self.o_URLLinks = 0
         self.o_isSafe = 0
         self.o_CheckProtocol = 0
         self.o_URLip = ''
@@ -16,7 +17,8 @@ class URL_Object:
             2 : bool(self.getURLSecureProtocol()) ^ 1,     #2 = Security protocol
             3 : bool(self.getCheckPort()) ^ 1,             #3 = Check Port
             4 : bool(self.getURLSiteAge()) ^ 1,            #4 = Site Age
-            5 : self.getURLLength()                        #5 = Length
+            5 : self.getURLLength(),                       #5 = Length
+            #6 : self.getURLLinks()                         #6 = Links
             }
         return
     
@@ -64,6 +66,13 @@ class URL_Object:
 
     def getURLSiteAge(self):
         return self.o_URLSiteAge
+
+    def setURLLinks(self, m_link):
+        self.o_URLLinks = m_link
+        return
+
+    def getURLLinks():
+        return self.o_URLLinks
 
     def setIP(self, u_ip):                     
         self.o_URLip = u_ip
