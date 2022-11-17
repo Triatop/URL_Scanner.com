@@ -10,6 +10,7 @@ class URL_Object:
         self.o_isSafe = 0
         self.o_CheckProtocol = 0
         self.o_SpecialChar = 0
+        self.o_CertificateValid = 0
         self.o_URLip = ''
 
     def makeDict(self):
@@ -19,13 +20,21 @@ class URL_Object:
             3 : bool(self.getCheckPort()) ^ 1,             #3 = Check Port
             4 : bool(self.getURLSiteAge()) ^ 1,            #4 = Site Age
             5 : self.getURLLength(),                       #5 = Length
-            6 : self.getSpecialCharater()                  #5 = SpecialChar
-            #7 : self.getURLLinks()                        #6 = Links
+            6 : self.getSpecialCharater(),                 #5 = SpecialChar
+            7 : bool(self.getCertificateValid()) ^ 1       #6 = Certificate Validation
+            #7 : self.getURLLinks()                        #6 = Malicous Links
             }
         return
     
     def getDict(self):
         return self.a_dict
+
+    def setCertificateValid(self, certValid):
+        self.o_CertificateValid = certValid
+        return
+    
+    def getCertificateValid(self):
+        return self.o_CertificateValid
 
     def setSpecialCharater(self, scc):
         self.o_SpecialChar = scc
@@ -33,7 +42,6 @@ class URL_Object:
 
     def getSpecialCharater(self):
         return self.o_SpecialChar
-
 
     def setURL(self, i_URL):
         self.o_URL = i_URL

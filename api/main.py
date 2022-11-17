@@ -9,6 +9,7 @@ from Protocol_URL import Protocol_URL
 from SafeEvaluator import SafeEvaluator
 from ReportMaker import ReportMaker
 from SpecialCharactersCheck import SpecialCharactersCheck
+from certValidator import CertValidator
 
 
 def main(url1, report=True):
@@ -26,6 +27,7 @@ def main(url1, report=True):
     u_prot = Protocol_URL()
     u_mlin = MaliciousLinks()
     u_scc = SpecialCharactersCheck()
+    u_cert = CertValidator()
 
     w_scrap = Webscraper()
     r_mkr = ReportMaker()
@@ -49,6 +51,7 @@ def main(url1, report=True):
     u_obj.setURLSiteAge(u_age.isInLimit(w_scrap.exfiltrateSiteAge()))   #How old is site? 
     u_obj.setCheckPort(w_scrap.exfiltrateProtocol())                    #Is the site runnig on the right port?
     u_obj.setSpecialCharater(u_scc.processData())                       #Looking for special charactes
+    u_obj.setCertificateValid(u_cert.processData(url1))                 #Certificate validation
 
     u_obj.makeDict()                                    #Make the attribute dictionary
     r_mkr.createReport(u_obj.getDict(), w_scrap.exfiltrateSiteAge().days) #Create report from attribute dict and site age 

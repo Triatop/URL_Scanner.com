@@ -1,7 +1,7 @@
 class SafeEvaluator:
 
     def __init__(self):
-        self.weights = (7, 2, 4, 3, 5, 2)
+        self.weights = (7, 2, 4, 3, 5, 2, 4)
         self.th = 6
 
     def isSafe(self, dict):

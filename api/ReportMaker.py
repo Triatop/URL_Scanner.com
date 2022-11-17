@@ -32,6 +32,9 @@ class ReportMaker:
         case2 = 'special characters'
         self.r_str += (f"\n- The url contains {case1 if a_dict[6] == 0 else case2}")
 
+        #Certificate Validation
+        self.r_str += (f"\n- Certificate is {'valid' if a_dict[7] == 0 else 'invalid'}")
+
         return 
 
     def getReport(self):
