@@ -1,7 +1,7 @@
 from urllib.parse import urlparse
 
 
-class SCCheck:
+class SpecialCharactersCheck:
     def __init__(self):
         self.l_URL = ''
         self.sev = 0
@@ -28,3 +28,4 @@ class SCCheck:
             if self.l_URL[i] == self.l_URL[i+1]:
                 if self.l_URL[i] == sign:
                     self.sev = 4
+        return self.sev

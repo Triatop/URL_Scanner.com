@@ -27,6 +27,11 @@ class ReportMaker:
         case3 = 'alarmingly long'
         self.r_str += (f"\n- The url-length is {case1 if a_dict[5] == 0 else case2 if a_dict[5] == 1 else case3 }")
 
+        #Specail Character
+        case1 = 'no special characters'
+        case2 = 'special characters'
+        self.r_str += (f"\n- The url contains {case1 if a_dict[6] == 0 else case2}")
+
         return 
 
     def getReport(self):
