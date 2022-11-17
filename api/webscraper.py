@@ -21,6 +21,7 @@ class Webscraper:
         favIcons = []
         self.r = self.session.get(self.url).text
         soup = BeautifulSoup(self.r, "lxml")
+        print(soup.prettify())
         for f in soup.findAll(rel="icon"):
             try:
                 favIcons.append(f.get('href').split(".ico")[0]+".ico")
@@ -33,9 +34,7 @@ class Webscraper:
                 1
         return favIcons
     def isExistFavicon(self):
-        self.r = self.session.get(self.url).text
-        pattern = re.compile(".*rel=\"(shortcut icon|icon).*ico.*")
-        return 1 if re.search(pattern, self.r) else 0
+        return 1 if self.extractFavicon() else 0
     def findLinks(self):
         links = []
         self.r = self.session.get(self.url).text
@@ -45,7 +44,10 @@ class Webscraper:
 
         return links
     def exfiltrateSiteAge(self):
-        domain = whois.whois(re.search("www\..*", self.url)[0])
+        try:
+            domain = whois.whois(re.search("www\..*", self.url)[0])
+        except TypeError:
+            domain = whois.whois(self.url)
         try:
             return datetime.now() - domain.creation_date
         except TypeError:
