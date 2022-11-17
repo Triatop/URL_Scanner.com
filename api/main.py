@@ -48,8 +48,7 @@ def main(url1, report=True):
     u_obj.setIP(u_ctrl.getIP(url1))                                     #Try Set IP We don't use it for anything though
     u_obj.setURLSiteAge(u_age.isInLimit(w_scrap.exfiltrateSiteAge()))   #How old is site? 
     u_obj.setCheckPort(w_scrap.exfiltrateProtocol())                    #Is the site runnig on the right port?
-    u_obj.setSpecialCharater(url1)
-    u_obj.setSpecialCharater(u_scc.processData())
+    u_obj.setSpecialCharater(u_scc.processData())                       #Looking for special charactes
 
     u_obj.makeDict()                                    #Make the attribute dictionary
     r_mkr.createReport(u_obj.getDict(), w_scrap.exfiltrateSiteAge().days) #Create report from attribute dict and site age 
