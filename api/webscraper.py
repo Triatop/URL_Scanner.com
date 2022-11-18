@@ -21,7 +21,6 @@ class Webscraper:
         favIcons = []
         self.r = self.session.get(self.url).text
         soup = BeautifulSoup(self.r, "lxml")
-        print(soup.prettify())
         for f in soup.findAll(rel="icon"):
             try:
                 favIcons.append(f.get('href').split(".ico")[0]+".ico")

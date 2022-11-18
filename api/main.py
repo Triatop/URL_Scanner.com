@@ -14,7 +14,7 @@ from certValidator import CertValidator
 
 def main(url1, report=True):
     u_ctrl = UrlController()
-    url1 = u_ctrl.addProtocol(url1)
+    # url1 = u_ctrl.addProtocol(url1)
     
     #Redirect check
     urlRedirect = u_ctrl.checkRedirect(url1)
@@ -23,11 +23,13 @@ def main(url1, report=True):
         urlRedirect = True
     else:
         urlRedirect = False
+    url1 = u_ctrl.addProtocol(url1)
+    
+    print(url1)
 
     #Check if wevsite is valid (exists)
     if not u_ctrl.validateUrl(url1): #<--- if website fails to validate
         return {"valid": "False", "report": "- Invalid URL, website does not exist - check for spelling errors"}
-    url1 = u_ctrl.checkRedirect(url1)
 
     #Classes
     u_obj = URL_Object() 
@@ -35,7 +37,7 @@ def main(url1, report=True):
     u_fav = Favicon_URL()
     u_age = SiteAge_URL()
     u_prot = Protocol_URL()
-    u_mlin = MaliciousLinks()
+    # u_mlin = MaliciousLinks()
     u_scc = SpecialCharactersCheck()
     u_cert = CertValidator()
 
@@ -47,14 +49,14 @@ def main(url1, report=True):
     u_obj.setURL(url1)
     u_scc.setData(url1)
     w_scrap.setURL(url1)
-    u_mlin.getData(url1, w_scrap.findLinks())
+    # u_mlin.getData(url1, w_scrap.findLinks())
 
     u_len.getData(url1) #URL Size check
     u_prot.getData(w_scrap.exfiltrateProtocol()) #GETTING PROTOCOLS
 
     #HERE ARE THE FINAL VALUES
     u_obj.setURLLength(u_len.isURLLong())                               #Is it too long
-    u_obj.setURLLinks(u_mlin.maliciousCheck())                          #Are the external links malicious/How malicious are they?
+    # u_obj.setURLLinks(u_mlin.maliciousCheck())                          #Are the external links malicious/How malicious are they?
     u_obj.setURLFavIcon(u_fav.hasFavicon(w_scrap.extractFavicon()))     #URL Fav Icon check
     u_obj.setURLSecureProtocol(u_prot.isSecure())                       #Security check
     u_obj.setIP(u_ctrl.getIP(url1))                                     #Try Set IP We don't use it for anything though
