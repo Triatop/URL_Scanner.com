@@ -1,6 +1,7 @@
 import ssl
 import socket
 import certifi
+import re
 
 class CertValidator:
     def __init__(self, url = ""):
