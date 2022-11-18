@@ -14,7 +14,7 @@ from certValidator import CertValidator
 
 def main(url1, report=True):
     u_ctrl = UrlController()
-    # url1 = u_ctrl.addProtocol(url1)
+    url1 = u_ctrl.addProtocol(url1)
     
     #Redirect check
     urlRedirect = u_ctrl.checkRedirect(url1)
@@ -23,7 +23,6 @@ def main(url1, report=True):
         urlRedirect = True
     else:
         urlRedirect = False
-    url1 = u_ctrl.addProtocol(url1)
     
     print(url1)
 
