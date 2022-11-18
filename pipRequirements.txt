@@ -9,3 +9,5 @@ python-whois
 flask-cors
 coverage
 requests
+tensorflow
+json

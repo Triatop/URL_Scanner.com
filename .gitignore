@@ -2,3 +2,11 @@
 /node_modules/.cache
 api/__pycache__
 .DS_Store
+
+api/bad.csv
+api/example.csv
+api/bad2.csv
+api/badData.json
+api/good.csv
+api/tfTest.py
+api/yes.py

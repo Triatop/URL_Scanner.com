@@ -18,9 +18,6 @@ class UrlController:
         else:
             urlSplit[0] += '/'
 
-        # if 'www' not in urlSplit[1][:3]:
-        #     urlSplit[1] = 'www.' + urlSplit[1]
-
         return '/'.join(urlSplit)
 
     def checkRedirect(self, url): 
