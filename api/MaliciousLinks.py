@@ -1,6 +1,7 @@
 import requests
 import urllib
 import json
+import math
 
 class MaliciousLinks:
     def __init__(self):
@@ -77,5 +78,5 @@ class MaliciousLinks:
         #print(r_score)
 
         if m_sum > 0:                                       #IPQS USES	Overall threat score from: 0 (clean) to 100 (high risk)
-            m_extLinks = floor(ceil(m_sum/len(m_resp))/10)  #The mean value of all the threat scores rounded up. Divided by 10 and rounded down to give a score between 0 and 10. 
+            m_extLinks = math.floor(math.ceil(m_sum/len(m_resp))/10)  #The mean value of all the threat scores rounded up. Divided by 10 and rounded down to give a score between 0 and 10. 
         return m_extLinks
