@@ -17,6 +17,7 @@ class SpecialCharactersCheck:
             if c == sign:
                 self.sev = 1
         domain = urlparse(self.l_URL).hostname
+        domain = domain.replace('www.', '')
         if domain.count('.') > 2:
             self.sev = 2
         sign = '@'
