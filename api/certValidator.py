@@ -7,8 +7,9 @@ class CertValidator:
         self.certLocation = certifi.where()
         self.url = url
     def validateCert(self, url = ""):
-        url = self.url if url == "" else url
-        url = url.split('://')[1] if len(url.split('://')) > 1 else url
+        #url = self.url if url == "" else url
+        #url = url.split('://')[1] if len(url.split('://')) > 1 else url
+        url = re.split("/+", url)[1]
         context = ssl.create_default_context()
         context = ssl.SSLContext(ssl.PROTOCOL_TLS)
         context.verify_mode = ssl.CERT_REQUIRED
