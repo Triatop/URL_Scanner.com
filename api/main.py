@@ -72,6 +72,6 @@ def main(url1, report=True):
     print(u_obj.a_dict)
 
     if(report):
-        return {"valid": "True","report": r_mkr.getReport(), "binarySafe": f"\n\nWebsite is {'SAFE' if u_obj.getSafe() else 'NOT SAFE'} to enter", "reDirect": f"\n\nRedirected: {urlRedirect} \nScanning: {url1}"}
+        return {"valid": "True","report": r_mkr.getReport(), "binarySafe": u_obj.getSafe(), "reDirect": f"\n\nRedirected: {urlRedirect} \nScanning: {url1}"}
     else:
         return u_obj.getDict()
