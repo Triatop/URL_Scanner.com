@@ -14,6 +14,7 @@ SBOM:
 * CORS
 * urllib
 * json
+* math
 
 Required packages:
  * pip install pytest (For automated testing only)
