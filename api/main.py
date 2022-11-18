@@ -55,7 +55,7 @@ def main(url1, report=True):
 
     #HERE ARE THE FINAL VALUES
     u_obj.setURLLength(u_len.isURLLong())                               #Is it too long
-    # u_obj.setURLLinks(u_mlin.maliciousCheck())                          #Are the external links malicious/How malicious are they?
+    # u_obj.setURLLinks(u_mlin.isExternalSafe())                          #Are the external links malicious/How malicious are they?
     u_obj.setURLFavIcon(u_fav.hasFavicon(w_scrap.extractFavicon()))     #URL Fav Icon check
     u_obj.setURLSecureProtocol(u_prot.isSecure())                       #Security check
     u_obj.setIP(u_ctrl.getIP(url1))                                     #Try Set IP We don't use it for anything though
