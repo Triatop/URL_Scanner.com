@@ -67,7 +67,7 @@ def main(url1, report=True):
     u_obj.makeDict()                                    #Make the attribute dictionary
     r_mkr.createReport(u_obj.getDict(), w_scrap.exfiltrateSiteAge().days) #Create report from attribute dict and site age 
 
-    u_obj.setSafe(u_safe.isSafe(u_obj.getDict()))                 #Safe eveluator check
+    #u_obj.setSafe(u_safe.isSafe(u_obj.getDict()))                 #Safe eveluator check
 
     print(u_obj.a_dict)
 
