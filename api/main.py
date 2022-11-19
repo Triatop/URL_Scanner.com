@@ -23,23 +23,22 @@ def main(url1, report=True):
         urlRedirect = True
     else:
         urlRedirect = False
-    
-    print(url1)
 
-    #Check if wevsite is valid (exists)
+    #Check if wevsite is valid (exists) - else early return
     if not u_ctrl.validateUrl(url1): #<--- if website fails to validate
         return {"valid": "False", "report": "- Invalid URL, website does not exist - check for spelling errors"}
 
-    #Classes
+    #Attribute Classes
     u_obj = URL_Object() 
-    u_len = LengthURL()
     u_fav = Favicon_URL()
-    u_age = SiteAge_URL()
     u_prot = Protocol_URL()
-    # u_mlin = MaliciousLinks()
+    u_age = SiteAge_URL()
+    u_len = LengthURL()
     u_scc = SpecialCharactersCheck()
     u_cert = CertValidator()
+    # u_mlin = MaliciousLinks()
 
+    #Funciton Classes
     w_scrap = Webscraper()
     r_mkr = ReportMaker()
     u_safe = SafeEvaluator()
@@ -54,21 +53,25 @@ def main(url1, report=True):
     u_prot.getData(w_scrap.exfiltrateProtocol()) #GETTING PROTOCOLS
 
     #HERE ARE THE FINAL VALUES
-    u_obj.setURLLength(u_len.isURLLong())                               #Is it too long
-    # u_obj.setURLLinks(u_mlin.isExternalSafe())                          #Are the external links malicious/How malicious are they?
     u_obj.setURLFavIcon(u_fav.hasFavicon(w_scrap.extractFavicon()))     #URL Fav Icon check
     u_obj.setURLSecureProtocol(u_prot.isSecure())                       #Security check
+    u_obj.setCheckPort(w_scrap.exfiltrateProtocol())                    #Is the site runnig on the right port?
+    u_obj.setURLLength(u_len.isURLLong())                               #Is it too long
     u_obj.setIP(u_ctrl.getIP(url1))                                     #Try Set IP We don't use it for anything though
     u_obj.setURLSiteAge(u_age.isInLimit(w_scrap.exfiltrateSiteAge()))   #How old is site? 
-    u_obj.setCheckPort(w_scrap.exfiltrateProtocol())                    #Is the site runnig on the right port?
     u_obj.setSpecialCharater(u_scc.processData())                       #Looking for special charactes
     u_obj.setCertificateValid(u_cert.processData(url1))                 #Certificate validation
+    # u_obj.setURLLinks(u_mlin.isExternalSafe())                          #Are the external links malicious/How malicious are they?
 
-    u_obj.makeDict()                                    #Make the attribute dictionary
-    r_mkr.createReport(u_obj.getDict(), w_scrap.exfiltrateSiteAge().days) #Create report from attribute dict and site age 
+    #Make the attribute dictionary and create report
+    u_obj.makeDict()                                    
+    r_mkr.createReport(u_obj.getDict(), w_scrap.exfiltrateSiteAge().days)
 
-    #u_obj.setSafe(u_safe.isSafe(u_obj.getDict()))                 #Safe eveluator check
+    #Safe eveluator check
+    u_obj.setSafe(u_safe.isSafe(u_obj.getDict()))
 
+    #Print outs for the console
+    print(url1)
     print(u_obj.a_dict)
 
     if(report):

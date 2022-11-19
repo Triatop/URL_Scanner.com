@@ -2,16 +2,18 @@ class URL_Object:
     def __init__(self) :
         self.a_dict = {}
         self.o_URL = ''
-        self.o_URLLength = 0
+        self.o_URLip = ''
+        self.o_isSafe = None
+
+        #Attributes
         self.o_URLFavIcon = 0
         self.o_URLSecureProtocol = 0
-        self.o_URLSiteAge = None
-        self.o_URLLinks = 0
-        self.o_isSafe = 0
         self.o_CheckProtocol = 0
+        self.o_URLSiteAge = 0
+        self.o_URLLength = 0
         self.o_SpecialChar = 0
         self.o_CertificateValid = 0
-        self.o_URLip = ''
+        self.o_URLLinks = 0
 
     def makeDict(self):
         self.a_dict = {
@@ -28,41 +30,27 @@ class URL_Object:
     
     def getDict(self):
         return self.a_dict
-
-    def setCertificateValid(self, certValid):
-        self.o_CertificateValid = certValid
-        return
     
-    def getCertificateValid(self):
-        return self.o_CertificateValid
-
-    def setSpecialCharater(self, scc):
-        self.o_SpecialChar = scc
-        return
-
-    def getSpecialCharater(self):
-        return self.o_SpecialChar
-
     def setURL(self, i_URL):
         self.o_URL = i_URL
         return
 
-    def setCheckPort(self, i_CheckPort):
-        self.o_CheckProtocol = i_CheckPort
-        return
-
-    def getCheckPort(self):
-        return self.o_CheckProtocol
-
     def getURL(self):
         return self.o_URL
-    
-    def setURLLength(self, l_url):
-        self.o_URLLength = l_url
+
+    def setIP(self, u_ip):                     
+        self.o_URLip = u_ip
         return
 
-    def getURLLength(self):
-        return self.o_URLLength
+    def getIP(self):
+        return self.o_URLip
+
+    def setSafe(self, i_safe):
+        self.o_isSafe = i_safe
+        return
+
+    def getSafe(self):
+        return self.o_isSafe
 
     def setURLFavIcon(self, f_ic):
         self.o_URLFavIcon = f_ic
@@ -78,12 +66,40 @@ class URL_Object:
     def getURLSecureProtocol(self):
         return self.o_URLSecureProtocol
 
+    def setCheckPort(self, i_CheckPort):
+        self.o_CheckProtocol = i_CheckPort
+        return
+
+    def getCheckPort(self):
+        return self.o_CheckProtocol
+
     def setURLSiteAge(self, u_old):
         self.o_URLSiteAge = u_old
         return
 
     def getURLSiteAge(self):
         return self.o_URLSiteAge
+
+    def setURLLength(self, l_url):
+        self.o_URLLength = l_url
+        return
+
+    def getURLLength(self):
+        return self.o_URLLength
+
+    def setSpecialCharater(self, scc):
+        self.o_SpecialChar = scc
+        return
+
+    def getSpecialCharater(self):
+        return self.o_SpecialChar
+
+    def setCertificateValid(self, certValid):
+        self.o_CertificateValid = certValid
+        return
+    
+    def getCertificateValid(self):
+        return self.o_CertificateValid
 
     def setURLLinks(self, m_link):
         self.o_URLLinks = m_link
@@ -92,19 +108,6 @@ class URL_Object:
     def getURLLinks(self):
         return self.o_URLLinks
 
-    def setIP(self, u_ip):                     
-        self.o_URLip = u_ip
-        return
-
-    def getIP(self):
-        return self.o_URLip
-
-    def setSafe(self, i_safe):
-        self.o_isSafe = i_safe
-        return
-
-    def getSafe(self):
-        return self.o_isSafe
 
 
 #######################################################     SLUT PÅ KLASS    ###################################################################################################################
