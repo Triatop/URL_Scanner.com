@@ -23,6 +23,7 @@ def main(url1, report=True):
         urlRedirect = True
     else:
         urlRedirect = False
+    
 
     #Check if wevsite is valid (exists) - else early return
     if not u_ctrl.validateUrl(url1): #<--- if website fails to validate
@@ -32,8 +33,7 @@ def main(url1, report=True):
     u_obj = URL_Object() 
     u_fav = Favicon_URL()
     u_prot = Protocol_URL()
-    u_age = SiteAge_URL()
-    u_len = LengthURL()
+    u_mlin = MaliciousLinks()
     u_scc = SpecialCharactersCheck()
     u_cert = CertValidator()
     # u_mlin = MaliciousLinks()
@@ -47,12 +47,14 @@ def main(url1, report=True):
     u_obj.setURL(url1)
     u_scc.setData(url1)
     w_scrap.setURL(url1)
-    # u_mlin.getData(url1, w_scrap.findLinks())
+    u_mlin.getData(url1, w_scrap.findLinks())
 
     u_len.getData(url1) #URL Size check
     u_prot.getData(w_scrap.exfiltrateProtocol()) #GETTING PROTOCOLS
 
     #HERE ARE THE FINAL VALUES
+    u_obj.setURLLength(u_len.isURLLong())                               #Is it too long
+    u_obj.setURLLinks(u_mlin.isExternalSafe())                          #Are the external links malicious/How malicious are they?
     u_obj.setURLFavIcon(u_fav.hasFavicon(w_scrap.extractFavicon()))     #URL Fav Icon check
     u_obj.setURLSecureProtocol(u_prot.isSecure())                       #Security check
     u_obj.setCheckPort(w_scrap.exfiltrateProtocol())                    #Is the site runnig on the right port?
@@ -67,12 +69,8 @@ def main(url1, report=True):
     u_obj.makeDict()                                    
     r_mkr.createReport(u_obj.getDict(), w_scrap.exfiltrateSiteAge().days)
 
-    #Safe eveluator check
-    u_obj.setSafe(u_safe.isSafe(u_obj.getDict()))
+    u_obj.setSafe(u_safe.isSafe(u_obj.getDict()))                 #Safe eveluator check
 
-    #Print outs for the console
-    print(url1)
-    print(u_obj.a_dict)
 
     if(report):
         return {"valid": "True","report": r_mkr.getReport(), "binarySafe": u_obj.getSafe(), "reDirect": f"\n\nRedirected: {urlRedirect} \nScanning: {url1}"}

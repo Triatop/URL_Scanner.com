@@ -3,44 +3,63 @@ from keras.models import Sequential, load_model
 from keras.layers import Dense
 import pandas as pd
 import sklearn.model_selection as sk
-from sklearn.metrics import accuracy_score
-import main
+from sklearn.metrics import accuracy_score, f1_score, precision_score, recall_score
 
 
-df = pd.read_csv('api/example.csv')
+class ML:
+    def __init__(self, theData):
+        df = pd.read_csv(theData)
+        self.x = pd.get_dummies(df.drop(['IsSafe', 'Site'], axis=1))
+        self.y = df['IsSafe'].apply(lambda x : 1 if x==1 else 0)
+        self.model = ''
+        self.xTrain = ''
+        self.xTest = ''
+        self.yTrain = ''
+        self.yTest = ''
 
-x = pd.get_dummies(df.drop(['IsPhishy'], axis=1))
+    def splitData(self):
+        self.xTrain, self.xTest, self.yTrain, self.yTest = sk.train_test_split(self.x, self.y, test_size=0.2)
 
-y = df['IsPhishy'].apply(lambda x : 1 if x==1 else 0)
+        print(self.xTrain)
 
-xTrain, xTest, yTrain, yTest = sk.train_test_split(x, y, test_size=0.2)
-
-#yes = pd.DataFrame.from_dict(main.main('youtube.com', report=False), orient='index').transpose() Hur datan ska se ut när man skickar in den
-
-model = ''
-
-try:
-    model = load_model('tfModel')
-except:
-    pass
-
-
-if not model:
-    model = Sequential()
-    model.add(Dense(units=10, activation='relu', input_dim=len(xTrain.columns)))
-    model.add(Dense(units=5, activation='relu'))
-
-    model.add(Dense(units=1, activation='sigmoid'))
-
-    model.compile(loss='binary_crossentropy', optimizer='sgd', metrics='accuracy')
-
-#while(1):
-model.fit(xTrain, yTrain, epochs=1000)
-model.save('tfModel')
-
-yHat = model.predict(xTest)
-
-yHat = [0 if val < 0.5 else 1 for val in yHat]
+    def loadModel(self):
+        try:
+            self.model = load_model('tfModel')
+        except:
+            pass
 
 
-print(accuracy_score(yTest, yHat))
+        if not self.model:
+            self.model = Sequential()
+            self.model.add(Dense(units=10, activation='relu', input_dim=len(self.xTrain.columns)))
+            self.model.add(Dense(units=7, activation='relu'))
+            self.model.add(Dense(units=5, activation='relu'))
+
+
+            self.model.add(Dense(units=1, activation='sigmoid'))
+
+            self.model.compile(loss='binary_crossentropy', optimizer='sgd', metrics='accuracy')
+            
+    def trainML(self, theEpochs):
+        self.model.fit(self.xTrain, self.yTrain, epochs=theEpochs)
+        self.model.save('tfModel')
+
+    def predictML(self):
+        yHat = self.model.predict(self.xTest)
+        yHat = [0 if val < 0.5 else 1 for val in yHat]
+        return yHat
+
+    def prettyPrintML(self, data):
+        print('Accuracy :', accuracy_score(self.yTest, data))
+        print('F1_score :', f1_score(self.yTest, data))
+        print('Precision :', precision_score(self.yTest, data))
+        print('Recall :', recall_score(self.yTest, data))
+
+
+ml =  ML('api/example.csv')
+
+ml.splitData()
+ml.loadModel()
+ml.trainML(10000)
+yHat = ml.predictML()
+ml.prettyPrintML(yHat)

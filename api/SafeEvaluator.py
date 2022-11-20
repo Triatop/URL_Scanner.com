@@ -5,8 +5,6 @@ class SafeEvaluator:
 
     def __init__(self):
         self.model = load_model('../tfModel')
-        self.weights = (7, 2, 4, 3, 5)
-        self.th = 6
 
     def isSafe(self, dict):
         # zippedLists = list(zip(self.weights, (dict.values())))
@@ -15,4 +13,5 @@ class SafeEvaluator:
 
 
         dictToPd = pd.DataFrame.from_dict(dict, orient='index').transpose()
+        print(dictToPd)
         return (self.model.predict(dictToPd))

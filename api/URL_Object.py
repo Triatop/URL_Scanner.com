@@ -22,9 +22,9 @@ class URL_Object:
             3 : bool(self.getCheckPort()) ^ 1,             #3 = Check Port
             4 : bool(self.getURLSiteAge()) ^ 1,            #4 = Site Age
             5 : self.getURLLength(),                       #5 = Length
-            6 : self.getSpecialCharater(),                 #6 = SpecialChar
-            7 : bool(self.getCertificateValid()) ^ 1       #7 = Certificate Validation
-            #8 : self.getURLLinks()                        #8 = Malicous Links
+            6 : self.getSpecialCharater(),                 #5 = SpecialChar
+            7 : bool(self.getCertificateValid()) ^ 1,       #6 = Certificate Validation
+            8 : self.getURLLinks()                        #6 = Malicous Links
             }
         return
     
