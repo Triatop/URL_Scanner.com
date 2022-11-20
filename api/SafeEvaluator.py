@@ -1,5 +1,6 @@
 from keras.models import load_model
 import pandas as pd
+import math
 
 class SafeEvaluator:
 
@@ -13,5 +14,4 @@ class SafeEvaluator:
 
 
         dictToPd = pd.DataFrame.from_dict(dict, orient='index').transpose()
-        print(dictToPd)
-        return (self.model.predict(dictToPd))
+        return round((self.model.predict(dictToPd))[0][0])

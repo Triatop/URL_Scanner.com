@@ -36,7 +36,8 @@ def main(url1, report=True):
     u_mlin = MaliciousLinks()
     u_scc = SpecialCharactersCheck()
     u_cert = CertValidator()
-    # u_mlin = MaliciousLinks()
+    u_len = LengthURL()
+    u_age = SiteAge_URL() 
 
     #Funciton Classes
     w_scrap = Webscraper()
@@ -68,9 +69,7 @@ def main(url1, report=True):
     #Make the attribute dictionary and create report
     u_obj.makeDict()                                    
     r_mkr.createReport(u_obj.getDict(), w_scrap.exfiltrateSiteAge().days)
-
     u_obj.setSafe(u_safe.isSafe(u_obj.getDict()))                 #Safe eveluator check
-
 
     if(report):
         return {"valid": "True","report": r_mkr.getReport(), "binarySafe": u_obj.getSafe(), "reDirect": f"\n\nRedirected: {urlRedirect} \nScanning: {url1}"}
