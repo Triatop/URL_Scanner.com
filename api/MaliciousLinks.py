@@ -29,8 +29,8 @@ class MaliciousLinks:
                     f_iterations -= 1  
                 else:
                     if self.m_links[i][0] == '/' and self.m_links[i][1] == '/': #// is URL with a relative (unspecified) protocol
-                        self.m_links[i][0].pop()                                #Drrop the // and check duplicate
-                        self.m_links[i][1].pop()
+                        self.m_links[i].pop(1)                                  #Drop the // and check duplicate
+                        self.m_links[i].pop(0)
                     compare = list(filter(None, self.m_links[i].split('/')))[1] #Divide and take TLD Example "www.google.com"
                     if self.m_url == compare:                                   #If it is the same level domain as the website our tool is checking.
                         self.m_links.pop(i)
