@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react'
 //import { Link } from 'react-router-dom'
-import './Searchbar.css';
+import './SearchbarContainer.css';
 import LoadingSpinner from './LoadingSpinner'
 import CheckMark from './CheckMark';
 import CrossMark from './CrossMark'
 
 //Arvid was here.
 
-function Searchbar() {
+function SearchbarContainer() {
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setLoading] = useState(false);
   const [returnDict, setReturnDict] = useState('');
@@ -95,4 +95,4 @@ function Searchbar() {
 
 }
 
-export default Searchbar;
+export default SearchbarContainer;

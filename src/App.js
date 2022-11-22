@@ -1,6 +1,6 @@
 import './App.css';
 // import Navbar from './components/Navbar';
-import Searchbar from './components/Searchbar';
+import SearchbarContainer from './components/SearchbarContainer';
 import LoginBtn from './components/LoginBtn';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import {useState} from "react";
@@ -27,7 +27,7 @@ function App() {
               }}/>
         </div>
       </div>
-      <Searchbar />
+      <SearchbarContainer/>
         <Routes>
           <Route path='/' exact />
         </Routes>
