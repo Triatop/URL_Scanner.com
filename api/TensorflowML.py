@@ -20,8 +20,6 @@ class ML:
     def splitData(self):
         self.xTrain, self.xTest, self.yTrain, self.yTest = sk.train_test_split(self.x, self.y, test_size=0.2)
 
-        print(self.xTrain)
-
     def loadModel(self):
         try:
             self.model = load_model('tfModel')
@@ -34,10 +32,7 @@ class ML:
             self.model.add(Dense(units=10, activation='relu', input_dim=len(self.xTrain.columns)))
             self.model.add(Dense(units=7, activation='relu'))
             self.model.add(Dense(units=5, activation='relu'))
-
-
             self.model.add(Dense(units=1, activation='sigmoid'))
-
             self.model.compile(loss='binary_crossentropy', optimizer='sgd', metrics='accuracy')
             
     def trainML(self, theEpochs):
@@ -60,6 +55,6 @@ ml =  ML('api/example.csv')
 
 ml.splitData()
 ml.loadModel()
-ml.trainML(10000)
+ml.trainML(1000)
 yHat = ml.predictML()
 ml.prettyPrintML(yHat)
