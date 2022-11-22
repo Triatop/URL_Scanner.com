@@ -61,7 +61,6 @@ def main(url1, report=True):
 
     #HERE ARE THE FINAL VALUES
     u_obj.setURLLength(u_len.isURLLong())                               #Is it too long
-    u_obj.setURLLinks(u_mlin.isExternalSafe())                          #Are the external links malicious/How malicious are they?
     u_obj.setURLFavIcon(u_fav.hasFavicon(w_scrap.extractFavicon()))     #URL Fav Icon check
     u_obj.setURLSecureProtocol(u_prot.isSecure())                       #Security check
     u_obj.setCheckPort(u_port.checkPorts(u_obj.getIP(), w_scrap.exfiltrateProtocol()))                    #Is the site runnig on the right port?
@@ -69,11 +68,11 @@ def main(url1, report=True):
     u_obj.setURLSiteAge(u_age.isInLimit(w_scrap.exfiltrateSiteAge()))   #How old is site? 
     u_obj.setSpecialCharater(u_scc.processData())                       #Looking for special charactes
     u_obj.setCertificateValid(u_cert.processData(url1))                 #Certificate validation
-    # u_obj.setURLLinks(u_mlin.isExternalSafe())                          #Are the external links malicious/How malicious are they?
+    u_obj.setURLLinks(u_mlin.isExternalSafe())                          #Are the external links malicious/How malicious are they?
 
     #Make the attribute dictionary and create report
     u_obj.makeDict()                                    
-    r_mkr.createReport(u_obj.getDict(), w_scrap.exfiltrateSiteAge().days)
+    r_mkr.createReport(u_obj.getDict(), w_scrap.exfiltrateSiteAge().days, u_mlin.getNrOfMalLinks())
     u_obj.setSafe(u_safe.isSafe(u_obj.getDict()))                 #Safe eveluator check
 
     print(u_obj.getDict())
