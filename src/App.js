@@ -27,6 +27,7 @@ function App() {
               }}/>
         </div>
       </div>
+      {/* <Navbar /> */}
       <SearchbarContainer/>
         <Routes>
           <Route path='/' exact />

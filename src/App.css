@@ -2,10 +2,9 @@
     height: fit-content;
     justify-content: center;
     font-family: 'Bookman Old Style', sans-serif;
-    padding: 10px;
-    width: 100vw;
+    /* padding: 10px; */
+    width: 100%;
     min-height: 100vh;
-    
                                                 
 }
    
@@ -28,7 +27,6 @@ body {
 }
 
 .switch {
+    margin: 10px;
     margin-left: auto; 
-    margin-right: 0;
-    padding-right: 20px;
     }

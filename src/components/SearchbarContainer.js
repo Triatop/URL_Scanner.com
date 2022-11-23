@@ -79,14 +79,13 @@ function SearchbarContainer() {
           {isLoading ? <LoadingSpinner></LoadingSpinner> : null}
         </div>
       </div>
-      <div className='Searchbtn'>
+      <div className='ScanBtn'>
         <button type='button' onClick={handleClick} >SCAN</button>
       </div>
       {
         show ? <div>
           <section className="report">
-            <p>Valid URL: {returnDict.valid} {returnDict.reDirect}</p>
-            <p>{returnDict.report} {returnDict.exeTime}</p>
+            <p>{returnDict.reDirect} {returnDict.report} {returnDict.exeTime}</p>
           </section>
         </div> : null
       }

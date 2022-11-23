@@ -30,7 +30,7 @@ def main(url1, report=True):
 
     #Check if wevsite is valid (exists) - else early return
     if not ip: #<--- if website fails to validate
-        return {"valid": "False", "report": "- Invalid URL, website does not exist - check for spelling errors"}
+        return {"valid": "False", "report": "- Invalid URL, website does not exist, check for spelling errors"}
 
     #Attribute Classes
     u_obj = URL_Object() 
@@ -78,6 +78,6 @@ def main(url1, report=True):
     print(u_obj.getDict())
 
     if(report):
-        return {"valid": "True","report": r_mkr.getReport(), "binarySafe": u_obj.getSafe(), "reDirect": f"\n\nRedirected: {urlRedirect} \nScanning: {url1}"}
+        return {"valid": "True","report": (f"\n\n{r_mkr.getReport()}"), "binarySafe": u_obj.getSafe(), "reDirect": f"Redirected: {urlRedirect} \nScanning: {url1}"}
     else:
         return u_obj.getDict()
