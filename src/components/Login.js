@@ -6,19 +6,21 @@ export default function Login({setLoginStatus}){
     const navigate = useNavigate();
     const [uname, setUname] = useState('');
     const [pass, setPass] = useState('');
-    const [isAdmin, setIsAdmin] = useState(false)
+    // const [isAdmin, setIsAdmin] = useState(false)
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        setLoginStatus('Hugin',true)
-        navigate('/');
+        ApiLogin();
     }
 
-    //Do api call
-
-    //Create functions here that tells the user if the loggin was success full or not
-
-    //If the login is successfull - redirect the user to the home page
+    function ApiLogin(){
+        fetch(`http://localhost:8000/login?username=${uname}&password=${pass}`).then(res => res.json()).then(data => {
+            if(data.login){
+                setLoginStatus(uname, data.isAdmin);
+                navigate('/');
+            }
+        });
+    }
 
     return (
         <div className="auth-form-container">

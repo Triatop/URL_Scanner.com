@@ -86,7 +86,7 @@ function App() {
           <Route path='/login' element={<Login setLoginStatus={setLoginStatus}/>} />
           <Route path='/logout' element={<Logout setLoginStatus={setLoginStatus}/>} />
           <Route path='/createuser' element={<ProtectedRouteAdmin admin={admin}> <CreateUser/> </ProtectedRouteAdmin> } /> 
-          <Route path='/history' element={<ProtectedRouteUser user={user}> <History/> </ProtectedRouteUser> } />
+          <Route path='/history' element={<ProtectedRouteUser user={user}> <History user={user}/> </ProtectedRouteUser> } />
           <Route path='/userhistory' element={<ProtectedRouteAdmin admin={admin}> <UserHistory/> </ProtectedRouteAdmin>} />
           <Route path='*' element={<Navigate to='/' replace/>} />
         </Routes>

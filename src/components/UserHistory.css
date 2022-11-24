@@ -1,0 +1,23 @@
+
+
+hr{
+    width: 60%;
+    height: 1px;
+    border: none;
+}
+
+.keys {
+    justify-content: left;
+}
+
+#dark hr{
+    background-color: #3baefb;
+}
+
+#light hr{
+    background-color: #262626;
+}
+
+/* .keys {
+    align-items: left;
+} */

@@ -42,7 +42,7 @@ function SearchbarContainer() {
     setShow(false)
     setLoading(true)
     setReturnDict('')
-    fetch(`http://localhost:8000/backendAPI?url=${inputValue}`).then(res => res.json()).then(data => {
+    fetch(`http://localhost:8000/scanner?url=${inputValue}`).then(res => res.json()).then(data => {
       setReturnDict(data)
       setLoading(false)
       setShow(true)
