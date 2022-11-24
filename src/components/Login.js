@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import {useNavigate} from 'react-router-dom';
+import bcrypt from 'bcryptjs'
 import './AuthForm.css';
 
 export default function Login({setLoginStatus}){
     const navigate = useNavigate();
     const [uname, setUname] = useState('');
     const [pass, setPass] = useState('');
-    // const [isAdmin, setIsAdmin] = useState(false)
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -14,7 +14,8 @@ export default function Login({setLoginStatus}){
     }
 
     function ApiLogin(){
-        fetch(`http://localhost:8000/login?username=${uname}&password=${pass}`).then(res => res.json()).then(data => {
+        const hashedPass = bcrypt.hashSync(pass, '$2a$10$ovfJgA/SxVxsd3NeD3dMne') //If u change the salt also change it in CreateUser.js
+        fetch(`http://localhost:8000/login?username=${uname}&password=${hashedPass}`).then(res => res.json()).then(data => {
             if(data.login){
                 setLoginStatus(uname, data.isAdmin);
                 navigate('/');
