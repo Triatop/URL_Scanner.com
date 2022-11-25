@@ -2,6 +2,10 @@
     margin: 1rem;
     text-align: center;
     }
+.toprowchild {
+    display: flex;
+    width: 95%;
+}
     
 .nav {
     display: flex;
@@ -54,6 +58,7 @@
     color: #777;
     }
 
-/* .welcome{
-    margin-left: 35rem;
-} */
+.welcome{
+    margin-left: auto;
+    float: right;
+}
