@@ -36,10 +36,9 @@ class UrlController:
         urlSplit = self.splitUrl(url)
         if('http' not in urlSplit[0]): return None
 
-
         try:
             headers = {"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.5195.102 Safari/537.36"}
-            test = requests.head(url, headers=headers)
+            test = requests.get(url, headers=headers)
             if not test.ok: return None
         except:
             pass
