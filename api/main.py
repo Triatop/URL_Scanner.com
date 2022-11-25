@@ -24,12 +24,9 @@ def main(url1, report=True):
         urlRedirect = True
     else:
         urlRedirect = False
-
-    ip = u_ctrl.validateUrl(url1)
     
-
     #Check if wevsite is valid (exists) - else early return
-    if not ip: #<--- if website fails to validate
+    if not u_ctrl.validateUrl(url1): #<--- if website fails to validate
         return {"valid": "False", "report": "- Invalid URL, website does not exist, check for spelling errors"}
 
     #Attribute Classes
@@ -53,8 +50,7 @@ def main(url1, report=True):
     u_scc.setData(url1)
     w_scrap.setURL(url1)
     u_mlin.getData(url1, w_scrap.findLinks())
-    u_obj.setIP(ip)                                     #Try Set IP We don't use it for anything though
-
+    u_obj.setIP(u_ctrl.getIP(url1))                                     #Try Set IP We don't use it for anything though
 
     u_len.getData(url1) #URL Size check
     u_prot.getData(w_scrap.exfiltrateProtocol()) #GETTING PROTOCOLS
