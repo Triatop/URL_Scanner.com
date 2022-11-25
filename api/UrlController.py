@@ -19,16 +19,19 @@ class UrlController:
             urlSplit[0] += '/'
 
         return '/'.join(urlSplit)
-
     def checkRedirect(self, url): 
         self.short = 0
         try:
-            resp = urllib.request.urlopen(url)                      
-            if resp.url != url:                         
-                self.short = 1
-            return resp.url
+            headers = {"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.5195.102 Safari/537.36"}
+            resp = requests.get(url, headers=headers)
+            url = resp.url[:resp.url.rindex('/')+1]
+            for h in resp.history:
+                if h.status_code >= 300:
+                    self.short = 1
+                    break
         except:
-            return url
+            pass
+        return url
             
     def validateUrl(self, url):
         if(len(url) <= 0): return None
