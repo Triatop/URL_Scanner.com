@@ -17,7 +17,7 @@ export default function Navbar({user, admin}) {
       setShowAdmin(true)
     }else{
       setShowAdmin(false)}
-  })
+  }, [user,admin]);
   
   return (
     <div className="toprowchild">

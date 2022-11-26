@@ -13,7 +13,7 @@ export default function History({user, userToken}) {
                 setHistoryDict(data.history);
             }
         });
-      }, []);
+      }, [user,userToken]);
 
     return(
         <div className='history'>

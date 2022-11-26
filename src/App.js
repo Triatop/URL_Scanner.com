@@ -62,14 +62,14 @@ function App() {
     window.localStorage.setItem('darkmode', JSON.stringify(mode)) //store mode when window is refreshed
   },[mode]);
 
-  const ProtectedRouteUser = ({ user, children }) => { //protect routes from unregisterd users
-    if (user == '') {
+  const ProtectedRouteUser = ({ children }) => { //protect routes from unregisterd users
+    if (user === '') {
       return <Navigate to="/" replace />;
     }
     return children;
   };
 
-  const ProtectedRouteAdmin = ({ admin, children }) => { //protect routes from non admin users
+  const ProtectedRouteAdmin = ({ children }) => { //protect routes from non admin users
     if (!admin) {
       return <Navigate to="/" replace />;
     }
@@ -95,9 +95,9 @@ function App() {
           <Route path='/' element={<SearchbarContainer/>} />
           <Route path='/login' element={<Login setLoginStatus={setLoginStatus}/>} />
           <Route path='/logout' element={<Logout setLoginStatus={setLoginStatus}/>} />
-          <Route path='/createuser' element={<ProtectedRouteAdmin admin={admin}> <CreateUser user={user} userToken={userToken}/> </ProtectedRouteAdmin> } /> 
-          <Route path='/history' element={<ProtectedRouteUser user={user}> <History user={user} userToken={userToken}/> </ProtectedRouteUser> } />
-          <Route path='/userhistory' element={<ProtectedRouteAdmin admin={admin}> <UserHistory user={user} userToken={userToken}/> </ProtectedRouteAdmin>} />
+          <Route path='/createuser' element={<ProtectedRouteAdmin > <CreateUser user={user} userToken={userToken}/> </ProtectedRouteAdmin> } /> 
+          <Route path='/history' element={<ProtectedRouteUser > <History user={user} userToken={userToken}/> </ProtectedRouteUser> } />
+          <Route path='/userhistory' element={<ProtectedRouteAdmin > <UserHistory user={user} userToken={userToken}/> </ProtectedRouteAdmin>} />
           <Route path='*' element={<Navigate to='/' replace/>} />
         </Routes>
       </div>
