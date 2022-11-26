@@ -4,7 +4,6 @@ import './History.css'
 export default function UserHistory({user, userToken}) {
     const [historyDict, setHistoryDict] = useState('');
     const [error, setError] = useState('')
-    // const [showHistory, setShowHistory] = useState(false);
 
     useEffect(() => {
         fetch(`http://localhost:8000/userhistory?username=${user}&user_token=${userToken}`).then(res => res.json()).then(data => {
@@ -14,7 +13,7 @@ export default function UserHistory({user, userToken}) {
                 setHistoryDict(data.history);
             }
         });
-      }, []);
+      }, [user, userToken]);
 
     return(
         <div className='history'>
@@ -30,6 +29,7 @@ export default function UserHistory({user, userToken}) {
                     );
                 })}   
             </div>
+            <p>{error}</p>
         </div>
     )
 }
