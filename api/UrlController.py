@@ -3,6 +3,10 @@ import urllib.request
 import requests
 from socket import gethostbyname
 
+import requests
+from bs4 import BeautifulSoup
+import re
+
 class UrlController:
 
     def __init__(self):
@@ -19,6 +23,7 @@ class UrlController:
             urlSplit[0] += '://'
 
         return ''.join(urlSplit)
+    
     def checkRedirect(self, url): 
         try:
             headers = {"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.5195.102 Safari/537.36"}
@@ -30,17 +35,13 @@ class UrlController:
             
     def validateUrl(self, url):
         if(len(url) == 0): return None
-
-        urlSplit = self.splitUrl(url)
-        if('http' not in url): return None
-
         try:
             headers = {"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.5195.102 Safari/537.36"}
             test = requests.get(url, headers=headers)
             if not test.ok: return None
         except:
             pass
-        return 1
+        return self.getIP(url)
 
     def getIP(self, url):
         try:
@@ -51,7 +52,7 @@ class UrlController:
     def encryptUrl(self, url):
         return self.f.encrypt(url.encode())
     
-    def decrytUrl(self, encryptedMessage):
+    def decryptUrl(self, encryptedMessage):
         return str(self.f.decrypt(encryptedMessage))[2:-1]
 
     def splitUrl(self, url):
