@@ -1,18 +1,24 @@
 import {useState, useEffect} from 'react'
+import './History.css'
 
-export default function UserHistory({user}) {
+export default function UserHistory({user, userToken}) {
     const [historyDict, setHistoryDict] = useState('');
-    const [showHistory, setShowHistory] = useState(false);
+    const [error, setError] = useState('')
+    // const [showHistory, setShowHistory] = useState(false);
 
-    function ApiUserHistory(){
-        fetch(`http://localhost:8000/userhistory?username=${user}`).then(res => res.json()).then(data => {
-            setHistoryDict(data)
+    useEffect(() => {
+        fetch(`http://localhost:8000/userhistory?username=${user}&user_token=${userToken}`).then(res => res.json()).then(data => {
+            if(!data.auth){
+                setError('ERROR: Authentication Invalid!')
+            }else{
+                setHistoryDict(data.history);
+            }
         });
-    }
+      }, []);
+
     return(
         <div className='history'>
             <h1>HISTORY</h1>
-            <button onClick={ApiUserHistory}>Show</button>
             <div>
                 {Object.keys(historyDict).map((key, index) => {
                     return (

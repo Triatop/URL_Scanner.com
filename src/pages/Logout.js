@@ -6,7 +6,7 @@ export default function Logout({setLoginStatus}) {
 
     const handleClick1 = event =>{
         event.preventDefault()
-        setLoginStatus('',false)
+        setLoginStatus('',false,'')
         navigate('/');
     }
 

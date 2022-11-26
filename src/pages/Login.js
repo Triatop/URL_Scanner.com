@@ -17,7 +17,7 @@ export default function Login({setLoginStatus}){
         const hashedPass = bcrypt.hashSync(pass, '$2a$10$ovfJgA/SxVxsd3NeD3dMne') //If u change the salt also change it in CreateUser.js
         fetch(`http://localhost:8000/login?username=${uname}&password=${hashedPass}`).then(res => res.json()).then(data => {
             if(data.login){
-                setLoginStatus(uname, data.isAdmin);
+                setLoginStatus(uname, data.isAdmin, data.userToken);
                 navigate('/');
             }
         });
