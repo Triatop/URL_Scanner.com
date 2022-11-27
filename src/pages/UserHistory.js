@@ -28,8 +28,8 @@ export default function UserHistory({user, userToken}) {
             <div>
                 {Object.keys(historyDict).map((key, index) => {
                     return (
-                    <div key={index} className='keys'>
-                        <h2>{key}: </h2>
+                    <div key={index}>
+                        <h2 className='keys'>{key} </h2>
                         <p>{historyDict[key]}</p>
                         <hr/>
                     </div>

@@ -1,12 +1,3 @@
-.container {
-    margin: 1rem;
-    text-align: center;
-    }
-.toprowchild {
-    display: flex;
-    width: 95%;
-}
-    
 .nav {
     display: flex;
     flex: center;
@@ -27,10 +18,6 @@
     
 .site-title {
     font-size: 2rem;
-    justify-self: center;
-    border-radius: 10px;
-    border: 1px #3baefb;
-
     }
     
 .nav ul {
@@ -39,6 +26,8 @@
     list-style: none;
     display: flex;
     gap: 1rem;
+    margin-left: auto;
+    float: center;
     }
     
 .nav a {
@@ -60,5 +49,6 @@
 
 .welcome{
     margin-left: auto;
+    margin-right: 10px;
     float: right;
 }

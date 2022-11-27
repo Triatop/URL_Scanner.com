@@ -1,9 +1,30 @@
 .App{
     height: fit-content;
     justify-content: center;
+    align-items: center;
     font-family: 'Bookman Old Style', sans-serif;
     width: 100%;
     min-height: 100vh;                                            
+}
+
+.container {
+    margin: auto;
+    margin-top: 1rem;
+    text-align: center;
+    align-items: center;
+    width: 50%;
+    min-height: 100vh; 
+
+    }
+
+.history{
+    text-align: center;
+}
+
+
+.toprowchild {
+    display: flex;
+    width: 95%;
 }
    
 #light{
