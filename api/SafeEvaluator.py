@@ -1,6 +1,5 @@
 from keras.models import load_model
 import pandas as pd
-import math
 
 class SafeEvaluator:
 

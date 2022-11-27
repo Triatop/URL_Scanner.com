@@ -11,3 +11,5 @@ coverage
 requests
 tensorflow
 json
+pandas
+scikit-learn
