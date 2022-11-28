@@ -29,14 +29,14 @@ class UrlController:
         return url
             
     def validateUrl(self, url):
-        if(len(url) == 0): return None
+        if(len(url) == 0): return False
         try:
             headers = {"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.5195.102 Safari/537.36"}
             test = requests.get(url, headers=headers)
-            if not test.ok: return None
+            if not test.ok: return False
         except:
             pass
-        return self.getIP(url)
+        return True
 
     def getIP(self, url):
         try:
