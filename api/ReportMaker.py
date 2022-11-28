@@ -4,7 +4,7 @@ class ReportMaker:
     def __init__(self):
         self.r_str = ""
 
-    def createReport(self, a_dict, siteAge):
+    def createReport(self, a_dict, siteAge, nrOfMalLinks):
         self.r_str = ""
         
         #Fav Icon
@@ -34,6 +34,9 @@ class ReportMaker:
 
         #Certificate Validation
         self.r_str += (f"\n- Certificate is {'valid' if a_dict[7] == 0 else 'invalid'}")
+
+        #Malisouls links
+        self.r_str += (f"\n- Number of malicouls external links: {nrOfMalLinks}")
 
         return 
 

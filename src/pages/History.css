@@ -1,0 +1,25 @@
+
+
+hr{
+    width: 100%;
+    height: 1px;
+    border: none;
+}
+
+.keys {
+    text-align: left;
+    padding-left: 1rem;
+    text-decoration: underline;
+}
+
+#dark hr{
+    background-color: #3baefb;
+}
+
+#light hr{
+    background-color: #262626;
+}
+
+/* .keys {
+    align-items: left;
+} */

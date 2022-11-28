@@ -6,6 +6,7 @@ import math
 class MaliciousLinks:
     def __init__(self):
         self.m_links = []
+        self.m_DupCount = []
         self.m_url = ''
         self.m_apiKey = '' #Replace with non-personal ID 
         self.m_NrOfMalLinks = 0
@@ -29,13 +30,19 @@ class MaliciousLinks:
                     f_iterations -= 1  
                 else:
                     if self.m_links[i][0] == '/' and self.m_links[i][1] == '/': #// is URL with a relative (unspecified) protocol
-                        self.m_links[i][0].pop()                                #Drrop the // and check duplicate
-                        self.m_links[i][1].pop()
+                        self.m_links[i] = self.m_links[i].replace('//', 'https://', 1)  #specify the protocol
+                        
+                    comProt = list(filter(None, self.m_links[i].split('/')))[0]
                     compare = list(filter(None, self.m_links[i].split('/')))[1] #Divide and take TLD Example "www.google.com"
                     if self.m_url == compare:                                   #If it is the same level domain as the website our tool is checking.
                         self.m_links.pop(i)
                         i -= 1
-                        f_iterations -= 1                                       
+                        f_iterations -= 1      
+                    elif comProt != 'http:' and comProt != 'https:':        #Not an external link
+                        self.m_links.pop(i)                                 #Remove the offending non-link
+                        i -= 1                                              #step back one to not mess up i+1
+                        f_iterations -= 1                                   #Adjust iterations to match new list size
+
             except:                                                         #Has no "/" or is not a link Example "garykessler@gmail.com"
                 self.m_links.pop(i)                                         #Remove the offending non-link
                 i -= 1                                                      #step back one to not mess up i+1
@@ -45,15 +52,17 @@ class MaliciousLinks:
         return 1
 
     def removeDup(self):
-        f_it = len(self.m_links)-1                                          #The last link will always be unique
+        f_it = len(self.m_links)                                          #The last link will always be unique
         i = 0
         while i < f_it:
             j = i + 1
+            self.m_DupCount.append(1)
             icompare = list(filter(None, self.m_links[i].split('/')))[1]        #The tld you compare to the rest of them
             while j < f_it:                                                     #Nestled while loop :O
                 jcompare = list(filter(None, self.m_links[j].split('/')))[1]
                 if icompare == jcompare:
                     self.m_links.pop(j)
+                    self.m_DupCount[i] += 1
                     f_it -= 1                                                   #1 less iteration
                     j -= 1                                                      #Set back pointer to not skip anything in the next row
                 j += 1                                                          #set forward pointer
@@ -69,7 +78,9 @@ class MaliciousLinks:
         if f_iterations > 50:
             f_iterations = 50
             s_throttle = True
+            temp = []
         for i in range(f_iterations):
+            if s_throttle: temp.append(self.m_DupCount[i])
             try:
                 v_url = 'https://www.ipqualityscore.com/api/json/url/%s/%s' % (self.m_apiKey, urllib.parse.quote_plus(self.m_links[i]))  #IPQS url
                 m_response = requests.get(v_url)
@@ -77,7 +88,10 @@ class MaliciousLinks:
                 l_response.append(json.loads(m_response.text))
             except ValueError as e:                                 #when unexpected values are returned
                 print("Rate Limit detected:", e)
-        if s_throttle: print('Too many external links. Checking 50 of them')
+                print(self.m_links[i])
+        if s_throttle:
+           print('Too many external links. Checking ' ,f_iterations ,' of them')
+           self.m_DupCount = temp
         return l_response
 
     def isExternalSafe(self):  #Parse the value from IPQS 
@@ -87,16 +101,17 @@ class MaliciousLinks:
         m_resp = self.maliciousCheck()                      #The response from malicious check
         r_score = []                                        #An array of the threat scores provided by IPQS
         for i in range(len(m_resp)):
-            r_score.append(int(m_resp[i]['risk_score']))    #"risk_score":0,
-            m_sum += r_score[i]                             #keep a sum of how bad the links are
-            if r_score[i] > 54:                             #55 is considered suspicious
-                self.m_NrOfMalLinks += 1
+            r_score.append(int(m_resp[i]['risk_score']) * self.m_DupCount[i])    #"risk_score":0, * ammount of duplicates of a link with the same TLD
+            m_sum += r_score[i] * self.m_DupCount[i]                             #keep a sum of how bad the links are
+            if r_score[i] > 54:                                                  #55 is considered suspicious
+                self.m_NrOfMalLinks += self.m_DupCount[i]
             if r_score[m_lrgi] < r_score[i] :
                 m_lrgi = i                                  #keep ahold of the worst link
         #print(m_sum, m_lrgi)
         #print(self.m_links[m_lrgi])
+        #print(self.m_DupCount)
         #print(r_score)
 
         if m_sum > 0:                                       #IPQS USES	Overall threat score from: 0 (clean) to 100 (high risk)
-            m_extLinks = math.floor(math.ceil(m_sum/len(m_resp))/10)  #The mean value of all the threat scores rounded up. Divided by 10 and rounded down to give a score between 0 and 10. 
+            m_extLinks = math.floor(math.ceil(m_sum/sum(self.m_DupCount))/10)  #The mean value of all the threat scores rounded up. Divided by 10 and rounded down to give a score between 0 and 10. 
         return m_extLinks

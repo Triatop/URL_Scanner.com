@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from 'react'
-//import { Link } from 'react-router-dom'
-import './Searchbar.css';
+import React, { useState } from 'react'
+import './SearchbarContainer.css';
+import './Button.css';
 import LoadingSpinner from './LoadingSpinner'
 import CheckMark from './CheckMark';
 import CrossMark from './CrossMark'
 
 //Arvid was here.
 
-function Searchbar() {
+function SearchbarContainer() {
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setLoading] = useState(false);
   const [returnDict, setReturnDict] = useState('');
@@ -41,7 +41,7 @@ function Searchbar() {
     setShow(false)
     setLoading(true)
     setReturnDict('')
-    fetch(`http://localhost:8000/backendAPI?url=${inputValue}`).then(res => res.json()).then(data => {
+    fetch(`http://localhost:8000/scanner?url=${inputValue}`).then(res => res.json()).then(data => {
       setReturnDict(data)
       setLoading(false)
       setShow(true)
@@ -79,14 +79,13 @@ function Searchbar() {
           {isLoading ? <LoadingSpinner></LoadingSpinner> : null}
         </div>
       </div>
-      <div className='Searchbtn'>
+      <div className='ScanBtn'>
         <button type='button' onClick={handleClick} >SCAN</button>
       </div>
       {
         show ? <div>
           <section className="report">
-            <p>Valid URL: {returnDict.valid} {returnDict.reDirect}</p>
-            <p>{returnDict.report} {returnDict.exeTime}</p>
+            <p>{returnDict.reDirect} {returnDict.report} {returnDict.exeTime}</p>
           </section>
         </div> : null
       }
@@ -95,4 +94,4 @@ function Searchbar() {
 
 }
 
-export default Searchbar;
+export default SearchbarContainer;

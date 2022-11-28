@@ -1,50 +1,55 @@
-import React, {useState} from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useMatch, useResolvedPath } from "react-router-dom"
+import {useState, useEffect} from "react";
+import "./Navbar.css"
 
+export default function Navbar({user, admin}) {
+  const [showUser, setShowUser] = useState(true)
+  const [showAdmin, setShowAdmin] = useState(false)
 
-function Navbar() {
-  const [click, setClick] = useState(false);
+  useEffect(() => {
+    if(user.length !== 0){
+      setShowUser(true)
+    }else{
+      setShowUser(false)
+    }
 
-  const handleClick = () => setClick(!click);
-
-  const closeMobileMenue = () => setClick(false);
-
+    if(admin){
+      setShowAdmin(true)
+    }else{
+      setShowAdmin(false)}
+  }, [user,admin]);
+  
   return (
-    <>
-        <nav className='navbar'>
-            <div className='navbar-container'>
-                <Link to='/' className='navbar-logo'> 
-                  insert icon here <i className='fab fa-typo3' />
-                </Link>
-                <div className='menue-icon' onClick={handleClick}>
-                  <i className={click ? 'fas fa-times' : 'fas fa-bars'} />
-                </div>
-                <ul className={click ? 'nav-menu active' : 'nav-menu'}>
-                  <li className='nav-item'>
-                    <Link to='/' className='nav-links' onClick={closeMobileMenue}>
-                      Home
-                    </Link>
-                  </li>
-                  <li className='nav-item'>
-                    <Link to='/services' className='nav-links' onClick={closeMobileMenue}>
-                      Services
-                    </Link>
-                  </li>
-                  <li className='nav-item'>
-                    <Link to='/products' className='nav-links' onClick={closeMobileMenue}>
-                      Products
-                    </Link>
-                  </li>
-                  <li className='nav-item'>
-                    <Link to='/signup' className='nav-links' onClick={closeMobileMenue}>
-                      Signup
-                    </Link>
-                  </li>
-                </ul>
-            </div>
-        </nav>
-    </>
+    <div className="toprowchild">
+      <nav className="nav">
+        <Link to="/" className="site-title">
+          URL SCANNER
+        </Link>
+        <ul>
+          <CustomLink to="/">Home</CustomLink>
+          { !showUser ? <CustomLink to="/login">Login</CustomLink>: null}
+          { showAdmin ? <CustomLink to="/createuser">Create User</CustomLink>: null}
+          { showUser ? <CustomLink to="/history">History</CustomLink>: null}
+          { showAdmin ? <CustomLink to="/userhistory">User History</CustomLink>: null}
+          { showUser ? <CustomLink to="/logout">Logout</CustomLink>: null}
+        </ul>
+      </nav>
+      <div className="welcome">
+        { showUser ? <p> Welcome: {user}</p>: null}
+      </div>
+    </div>
   )
 }
 
-export default Navbar
+function CustomLink({ to, children, ...props }) {
+  const resolvedPath = useResolvedPath(to)
+  const isActive = useMatch({ path: resolvedPath.pathname, end: true })
+
+  return (
+    <li className={isActive ? "active" : ""}>
+      <Link to={to} {...props}>
+        {children}
+      </Link>
+    </li>
+  )
+}

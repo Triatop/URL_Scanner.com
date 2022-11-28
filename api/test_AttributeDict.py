@@ -9,6 +9,7 @@ def test_attributeDict():
     u_obj1.o_URLLength = 0
     u_obj1.o_SpecialChar = 0
     u_obj1.o_CertificateValid = 1
+    u_obj1.o_URLLinks = 0
     u_obj1.makeDict()
 
     a_dict1 = {
@@ -19,6 +20,7 @@ def test_attributeDict():
                 5:  0,
                 6:  0,
                 7:  0,
+                8:  0
             }
     
     print("obj1:", u_obj1.getDict())
@@ -26,17 +28,17 @@ def test_attributeDict():
     
     assert(u_obj1.getDict() == a_dict1)
 
-    u_obj2 = URL_Object() 
-    u_obj2.o_URLFavIcon = 0
-    u_obj2.o_URLSecureProtocol = 0
-    u_obj2.o_CheckProtocol = 0
-    u_obj2.o_URLSiteAge = 0
-    u_obj2.o_URLLength = 2
-    u_obj2.o_SpecialChar = 4
-    u_obj2.o_CertificateValid = 0
-    u_obj2.makeDict()
+    u_obj1.setURLFavIcon(0)
+    u_obj1.setURLSecureProtocol(0)
+    u_obj1.setCheckPort(0)
+    u_obj1.setURLSiteAge(0)
+    u_obj1.setURLLength(2)
+    u_obj1.setSpecialCharater(4)
+    u_obj1.setCertificateValid(0)
+    u_obj1.setURLLinks(9)
+    u_obj1.makeDict()
     
-    a_dict2 = {
+    a_dict1 = {
                 1:  1,
                 2:  1,
                 3:  1,
@@ -44,12 +46,10 @@ def test_attributeDict():
                 5:  2,
                 6:  4,
                 7:  1,
+                8:  9
             }
     
-    print("obj2:", u_obj2.getDict())
-    print("dict2:", a_dict2)
-    
-    assert(u_obj2.getDict() == a_dict2)
+    assert(u_obj1.getDict() == a_dict1)
 
     return
 

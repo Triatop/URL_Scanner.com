@@ -6,6 +6,7 @@ class PortCheck:
 
     def checkPorts(self, ip, protocol):
         port = self.standardPorts[protocol]
+        print(ip, protocol)
         try:
             if(serviceping.scan(ip, port)['state'] == 'open'):
                 return 1
