@@ -42,15 +42,19 @@ class Webscraper:
             links.append(link.get('href'))
 
         return links
-    def exfiltrateSiteAge(self):
+    def exfiltrateSiteAge(self, url = ""):
         try:
             domain = whois.whois(re.search("www\..*", self.url)[0])
         except TypeError:
             domain = whois.whois(self.url)
         try:
-            return datetime.now() - domain.creation_date
+            if len(domain.creation_date) > 1:
+                return datetime.now() - domain.createion_date[0]
+            elif len(domain.creation_date) == 1:
+                return datetime.now() - domain.creation_date
         except TypeError:
-            return datetime.now() - domain.creation_date[0]
+            return datetime.now()
+
     def exfiltrateProtocol(self):
         # Needs to have url set to <protcol>://<url> to fully work
         protocol = self.url.split(':')[0]
