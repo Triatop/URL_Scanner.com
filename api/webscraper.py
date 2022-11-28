@@ -1,4 +1,3 @@
-from ast import Index
 from datetime import datetime
 from requests_html import HTMLSession
 import re
@@ -42,18 +41,18 @@ class Webscraper:
             links.append(link.get('href'))
 
         return links
-    def exfiltrateSiteAge(self, url = ""):
+
+    def exfiltrateSiteAge(self):
         try:
             domain = whois.whois(re.search("www\..*", self.url)[0])
         except TypeError:
             domain = whois.whois(self.url)
+        if (domain.creation_date == None):
+            return timedelta(days = 0)
         try:
-            if len(domain.creation_date) > 1:
-                return datetime.now() - domain.createion_date[0]
-            elif len(domain.creation_date) == 1:
-                return datetime.now() - domain.creation_date
+            return datetime.now() - domain.creation_date[0]
         except TypeError:
-            return datetime.now()
+            return datetime.now() - domain.creation_date
 
     def exfiltrateProtocol(self):
         # Needs to have url set to <protcol>://<url> to fully work
