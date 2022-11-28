@@ -16,7 +16,9 @@ export default function CreateUser({user,userToken}){
 
     function ApiCreateUser(){
         const hashedPass = bcrypt.hashSync(pass, '$2a$10$ovfJgA/SxVxsd3NeD3dMne'); //If u change the salt also change it in Login.js
-        const newToken = bcrypt.genSaltSync();
+        const genSalt = bcrypt.genSaltSync()
+        const newToken = bcrypt.hashSync(genSalt);
+        console.log(newToken)
         setShowResp(false);
         fetch(`http://localhost:8000/createuser?username=${uname}&password=${hashedPass}&fullname=${name}&newToken=${newToken}&user=${user}&user_token=${userToken}`).then(res => res.json()).then(data => {
             if(!data.auth){

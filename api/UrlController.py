@@ -1,11 +1,6 @@
 import cryptography.fernet
-import urllib.request
 import requests
 from socket import gethostbyname
-
-import requests
-from bs4 import BeautifulSoup
-import re
 
 class UrlController:
 
