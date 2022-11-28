@@ -2,6 +2,7 @@ from datetime import date
 import psycopg2
 import re
 
+
 class DBController:
     def __init__(self):
         try:
@@ -13,6 +14,7 @@ class DBController:
                 port = 5432
             )
             self.cur = self.conn.cursor()
+            self.user_value = 2011
         except (Exception, psycopg2.Error) as error:
             print("Error occured while connecting to database", error)
 
@@ -24,18 +26,25 @@ class DBController:
 
     def authenticateAdmin(self, username):  
         query = '''select rights_name from users inner join rights on users.rights_id = rights.rights_id and users.username = '{}' '''.format(username)
-        query_values = (username)
-        self.cur.execute(query, query_values)
+        self.cur.execute(query)
         self.conn.commit()
-        return 'admin' == self.format(self.cur.fetchone())
+        return self.format(self.cur.fetchone()) == 'admin'
 
     def checkUsernameExists(self, username):
         query = '''select username from users where username='{}' '''.format(username)
-        query_values = (username)
-        self.cur.execute(query, query_values)
+        self.cur.execute(query)
         self.conn.commit()
         return self.format(self.cur.fetchone()) == username
     
+    def createUser(self, username, en_pw, salt, fname, lname):
+        rg_date = date.today()
+        try:
+            query = '''insert into users(rights_id, username, en_pw, salt, fname, lname, rg_date) values('{}', '{}', '{}', '{}', '{}', '{}', '{}')'''.format(self.user_value, username, en_pw, salt, fname, lname, rg_date)
+            self.cur.execute(query)
+            self.conn.commit()      
+        except (Exception, psycopg2.Error) as error:
+            print("Error occured while creating user", error)
+            
     def __del__(self):
         if self.cur is not None:
             self.cur.close()
@@ -43,5 +52,5 @@ class DBController:
             self.conn.close()
     
 o = DBController()
-print(o.checkUsernameExists('testusername'))
+print(o.createUser())
 del o
