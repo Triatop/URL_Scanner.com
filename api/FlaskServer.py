@@ -24,7 +24,9 @@ def login():
 
     #1. call function that authenticates the user (username, password)
 
-    #2. call function that checks if that user is an admin
+    #2. call function to get the userToken
+
+    #3. call function that checks if that user is an admin
 
     dict = {'login': True, 'isAdmin': True, 'userToken': 'random hash value'}
     return dict
