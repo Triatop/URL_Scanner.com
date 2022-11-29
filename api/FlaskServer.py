@@ -24,7 +24,9 @@ def login():
 
     #1. call function that authenticates the user (username, password)
 
-    #2. call function that checks if that user is an admin
+    #2. call function to get the userToken
+
+    #3. call function that checks if that user is an admin
 
     dict = {'login': True, 'isAdmin': True, 'userToken': 'random hash value'}
     return dict
@@ -35,12 +37,13 @@ def createuser():
     new_fullname = request.args.get('fullname')
     new_password = request.args.get('password')
     new_token = request.args.get('newToken')
+    new_adminPriv = request.args.get('adminPriv')
 
     #to authenticate the user that is trying to create the user
     username = request.args.get('user')
     user_token = request.args.get('user_token')
 
-    print('VALS:',new_username, new_fullname, new_password, new_token,'\nUser,token combo:', username, user_token)
+    print('username:',new_username, '\nfullname:',new_fullname, '\nadminPriv:',new_adminPriv, '\npassword:',new_password, 'token:',new_token,'\nUser,token combo:', username, user_token)
 
     #1. call function that authenticates the user (username, user_token)
 

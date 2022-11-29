@@ -43,7 +43,7 @@ def test_maliciousCheck():
     url1 = 'https://twitter.com/'
     urls = ['https://www.youtube.com/', 'https://www.google.com/']
     m_al.getData(url1, urls)
-    assert(m_al.maliciousCheck()) #very hard to test, returns a list of very large dictionaries... impossible to simulate due to one of the objects returned being current time.
+    assert(m_al.maliciousCheck()) #Does not test against a hard coded value. Impossible to hard code due to one of the objects returned being current time.
     return
 
 def test_isExternalSafe():
