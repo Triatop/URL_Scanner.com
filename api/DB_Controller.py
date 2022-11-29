@@ -2,7 +2,6 @@ from datetime import date
 import psycopg2
 import re
 
-
 class DBController:
     def __init__(self):
         try:
@@ -20,6 +19,10 @@ class DBController:
 
     def format(self, string): 
         return re.sub('[^A-Za-z0-9]+', '', str(string))
+
+    def loginUser(self, username, password):
+        pass
+
     
     def authenticateUser(self, username, user_token):
         pass
@@ -31,10 +34,13 @@ class DBController:
         pass
 
     def authenticateAdmin(self, username):  
-        query = '''select rights_name from users inner join rights on users.rights_id = rights.rights_id and users.username = '{}' '''.format(username)
-        self.cur.execute(query)
-        self.conn.commit()
-        return self.format(self.cur.fetchone()) == 'admin'
+        try:
+            query = '''select rights_name from users inner join rights on users.rights_id = rights.rights_id and users.username = '{}' '''.format(username)
+            self.cur.execute(query)
+            self.conn.commit()
+            return self.format(self.cur.fetchone()) == 'admin'
+        except (Exception, psycopg2.Error) as error:
+            print("Error occured while authenticating admin", error)
 
     def checkUsernameExists(self, username):
         try:        
