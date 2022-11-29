@@ -58,3 +58,23 @@
 .auth-form-container input:focus {
   outline: none;
 }
+
+.checkbox-wrapper{
+  flex-direction: row;
+  justify-content: left;
+  align-items: left;
+
+}
+
+.checkbox-wrapper input[type="checkbox"] {
+  /* removing default appearance */
+  /* creating a custom design */
+  /* position: relative; */
+  float: left;
+  /* margin-right: auto;
+  margin-left: 0; */
+  width: 1.2rem;
+  height: 1.2em;
+  outline: none;
+  cursor: pointer;
+}

@@ -43,7 +43,7 @@ def createuser():
     username = request.args.get('user')
     user_token = request.args.get('user_token')
 
-    print('VALS:',new_username, new_fullname, new_password, new_token,'\nUser,token combo:', username, user_token)
+    print('username:',new_username, '\nfullname:',new_fullname, '\nadminPriv:',new_adminPriv, '\npassword:',new_password, 'token:',new_token,'\nUser,token combo:', username, user_token)
 
     #1. call function that authenticates the user (username, user_token)
 
@@ -80,7 +80,7 @@ def userHistory():
     #2. call function that checks if that user is an admin
 
     #3. call function to get the history for ALL the users - Except the user that is making the call
-    hist_dict = {'Agda': {'date': '12.23.2022', 'binSafe': True, 'report': 'history report'}, 'Greta': 'history report', 'Janne': 'history report'}
+    hist_dict = {'Agda': 'history report', 'Greta': 'history report', 'Janne': 'history report'}
     dict = {'auth': True, 'history': hist_dict}
     return dict
 

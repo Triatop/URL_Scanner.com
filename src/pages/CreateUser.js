@@ -6,6 +6,7 @@ export default function CreateUser({user,userToken}){
     const [uname, setUname] = useState('');
     const [pass, setPass] = useState('');
     const [name, setName] = useState('');
+    const [isChecked, setIsChecked] = useState(false);
     const [response, setResponse] = useState('')
     const [showResp, setShowResp] = useState(false)
 
@@ -20,7 +21,7 @@ export default function CreateUser({user,userToken}){
         const newToken = bcrypt.hashSync(genSalt);
         console.log(newToken)
         setShowResp(false);
-        fetch(`http://localhost:8000/createuser?username=${uname}&password=${hashedPass}&fullname=${name}&newToken=${newToken}&user=${user}&user_token=${userToken}`).then(res => res.json()).then(data => {
+        fetch(`http://localhost:8000/createuser?username=${uname}&password=${hashedPass}&fullname=${name}&newToken=${newToken}&adminPriv=${isChecked}&user=${user}&user_token=${userToken}`).then(res => res.json()).then(data => {
             if(!data.auth){
                 setResponse('ERROR: Authentication Invalid!');
             }else if(!data.creation){
@@ -43,6 +44,10 @@ export default function CreateUser({user,userToken}){
                 <input value={uname} onChange={(e) => setUname(e.target.value)} type="username" placeholder="username" id="uname" name="uname" />
                 <label htmlFor="password">Password</label>
                 <input value={pass} onChange={(e) => setPass(e.target.value)} type="password" placeholder="********" id="password" name="password" />
+                <div className="checkbox-wrapper">
+                <input type="checkbox" checked={isChecked} onChange={() => setIsChecked((prev) => !prev)} />
+                <p>Admin Privileges</p> 
+                </div>
                 <button type="submit">Create</button>
             </form>
             </div>
