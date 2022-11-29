@@ -15,6 +15,8 @@ SBOM:
 * urllib
 * json
 * math
+* unidecode
+* csv
 
 Required packages:
  * pip install pytest (For automated testing only)
@@ -26,6 +28,7 @@ Required packages:
  * pip install bs4
  * pip install python-whois
  * pip install -U flask-cors
+ * pip install unidecode
 
 
 Setup Instructions:
