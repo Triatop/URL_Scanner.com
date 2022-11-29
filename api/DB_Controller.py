@@ -66,6 +66,67 @@ class DBController:
         if self.conn is not None:
             self.conn.close()
     
-o = DBController()
-print(o.createUser())
-del o
+    def validateUser(self, uname, token): #username and token
+        values = (uname, token)
+        query = '''select count(*) from users where username = %s and access_token = %s'''
+        self.cur.execute(query, values)
+        self.conn.commit()
+        return self.cur.fetchone()[0] == 1
+
+    def setupDB(self):
+
+        query = '''drop table rights, scans, users'''
+        self.cur.execute(query)
+        self.conn.commit()
+
+        query1 = '''CREATE TABLE rights (rights_id int primary key,
+                    rights_name varchar(10) not null
+                    )'''
+        self.cur.execute(query1)
+        self.conn.commit()
+
+        query2 = '''CREATE TABLE users (
+                    user_id serial primary key,
+                    rights_id int not null,
+                    username VARCHAR ( 50 ) UNIQUE NOT NULL,
+                    en_pw VARCHAR ( 255 ) NOT NULL,
+                    salt VARCHAR (255) NOT NULL,
+                    fname VARCHAR (50) NOT NULL,
+                    lname VARCHAR (50) NULL,
+                    rg_date date NOT NULL,
+                    access_token VARCHAR (255) NOT null,
+                    foreign key (rights_id) references rights(rights_id)
+                    )'''
+        self.cur.execute(query2)
+        self.conn.commit()
+
+        query3 = '''CREATE TABLE scans (
+                scan_id serial primary key,
+                user_id int NULL,
+                en_url VARCHAR ( 255 ) NOT NULL,
+                date DATE NOT NULL,
+                s_value bit NOT NULL,
+                attributes jsonb NOT NULL,
+                foreign key (user_id) references users(user_id)
+                )'''
+        self.cur.execute(query3)
+        self.conn.commit()
+
+        query4 = '''INSERT INTO rights
+                (rights_id, rights_name)
+                VALUES ( 1, 'admin' )'''
+        self.cur.execute(query4)
+        self.conn.commit()
+
+        query5 = '''INSERT INTO rights
+                (rights_id, rights_name)
+                VALUES ( 2, 'regUser' )'''
+        self.cur.execute(query5)
+        self.conn.commit()
+
+        values = ('$2a$10$ovfJgA/SxVxsd3NeD3dMneuwYdimPJRdG.77eypo1KTlsgd7YmIYi', '$2a$10$YLXY3KPH3Kr0utTzmo6Eke4rAp8oZW0AQPuhaMkgqvi9GTcuo7Sc6')
+        query6 = '''INSERT INTO users
+                    ( rights_id, username, en_pw, salt, fname, lname, rg_date, access_token)
+                    VALUES ( 1, 'admin', %s, 'salt', 'admin', '', CURRENT_DATE, %s)'''
+        self.cur.execute(query6, values)
+        self.conn.commit()
