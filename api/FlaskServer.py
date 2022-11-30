@@ -3,6 +3,7 @@ import time
 import main as main
 from flask_cors import CORS
 from DB_Controller import DBController
+from UrlController import UrlController
 from datetime import date
 
 
@@ -68,6 +69,8 @@ def history():
     user_token = request.args.get('user_token')
 
     db_obj = DBController()
+    u_ctrl = UrlController()
+
     #1. call function that authenticates the user (username, user_token)
     if(not db_obj.validateUser(username, user_token)):
         return {'auth': False}
@@ -76,7 +79,7 @@ def history():
     history = db_obj.getHistory(username)
     histDict = ''
     for index, value in enumerate(history):
-        histDict += str(index + 1)+ ': \tURL: ' + value[0]+ ' \t\tDATE: ' + str(value[1]) + ' \t\tSAFE: ' + str(value[2]) + '\n'
+        histDict += str(index + 1)+ ': \tURL: ' + u_ctrl.decryptUrl(value[0]) + ' \t\tDATE: ' + str(value[1]) + ' \t\tSAFE: ' + str(value[2]) + '\n'
 
     dict = {"history": histDict, "auth": True}
     return dict
