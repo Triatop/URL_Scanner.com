@@ -50,8 +50,17 @@ class DBController:
             self.conn.rollback()
             print("Error occured while fetching User Token:", error)
 
-    def getHistory(self):
-        pass
+    def getHistory(self, username):
+        try:
+            u_id = self.getUserId(username)
+            query = '''select en_url , "date", s_value  from scans where user_id = %s;'''
+            self.cur.execute(query, str(u_id))
+            self.conn.commit()
+            return self.cur.fetchall()
+        except (Exception, psycopg2.Error) as error:
+            self.conn.rollback()
+            print("Error occured while fetching history:", error)
+        
 
     def authenticateAdmin(self, username):  
         try:
@@ -117,7 +126,6 @@ class DBController:
 
     def insertScan(self, username, url, s_value, a_dict):
         user_id = self.getUserId(username)
-        print(user_id)
         try:        
             query = ''' insert into scans(user_id, en_url, date, s_value, attributes) values(%s, %s, CURRENT_DATE, %s, %s)  '''
             self.cur.execute(query, (user_id, url, s_value, json.dumps(a_dict)))

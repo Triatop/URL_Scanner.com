@@ -3,6 +3,7 @@ import time
 import main as main
 from flask_cors import CORS
 from DB_Controller import DBController
+from datetime import date
 
 
 app = Flask(__name__)
@@ -72,8 +73,12 @@ def history():
         return {'auth': False}
 
     #2. call function that returns the history dict
+    history = db_obj.getHistory(username)
+    histDict = ''
+    for index, value in enumerate(history):
+        histDict += str(index + 1)+ ': \tURL: ' + value[0]+ ' \t\tDATE: ' + str(value[1]) + ' \t\tSAFE: ' + str(value[2]) + '\n'
 
-    dict = {"history": f"{username}:s history report", "auth": True}
+    dict = {"history": histDict, "auth": True}
     return dict
 
 @app.route('/userhistory') #only for admin

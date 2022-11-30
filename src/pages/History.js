@@ -22,10 +22,13 @@ export default function History({user, userToken}) {
     return(
         <div className='history'>
             <h1>HISTORY</h1>
+            <p>{error}</p>
             <div className="LoadingSpinner">
                 {isLoading ? <LoadingSpinner></LoadingSpinner> : null}
             </div>
-            <p>{historyDict}{error}</p>
+            <div className='histDict'>
+                <p>{historyDict} </p>
+            </div>
         </div>
     )
 }
