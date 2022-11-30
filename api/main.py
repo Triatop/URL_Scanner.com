@@ -11,9 +11,11 @@ from ReportMaker import ReportMaker
 from SpecialCharactersCheck import SpecialCharactersCheck
 from certValidator import CertValidator
 from PortCheck import PortCheck
+from DB_Controller import DBController
 
 
-def main(url1, report=True):
+
+def main(url1, username, report=True):
     u_ctrl = UrlController()
     url1 = u_ctrl.addProtocol(url1)
     
@@ -72,8 +74,11 @@ def main(url1, report=True):
     u_obj.setSafe(u_safe.isSafe(u_obj.getDict()))                 #Safe eveluator check
 
     print(u_obj.getDict())
+    print('uname:',username)
 
     if(report):
+        db_obj = DBController()
+        db_obj.insertScan(username,url1, u_obj.getSafe(), u_obj.getDict())
         return {"valid": "True","report": (f"\n\n{r_mkr.getReport()}"), "binarySafe": u_obj.getSafe(), "reDirect": f"Redirected: {urlRedirect} \nScanning: {url1}"}
     else:
         return u_obj.getDict()
