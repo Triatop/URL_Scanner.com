@@ -10,3 +10,5 @@ api/badData.json
 api/good.csv
 api/tfTest.py
 api/yes.py
+
+/tfModel

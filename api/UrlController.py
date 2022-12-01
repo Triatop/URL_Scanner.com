@@ -44,11 +44,11 @@ class UrlController:
         except:
             return None
 
-    def encryptUrl(self, url):
-        return self.f.encrypt(url.encode())
+    def encryptUrl(self, url): #encryption for the database
+        return str(self.f.encrypt(url.encode()), encoding='utf-8')
     
-    def decryptUrl(self, encryptedMessage):
-        return str(self.f.decrypt(encryptedMessage))[2:-1]
+    def decryptUrl(self, encryptedMessage): #encryption for the database
+        return str(self.f.decrypt(bytes(encryptedMessage, encoding='utf-8')))[2:-1]
 
     def splitUrl(self, url):
         return url.split('://')

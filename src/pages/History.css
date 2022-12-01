@@ -5,7 +5,14 @@ hr{
     height: 1px;
     border: none;
 }
-
+.histDict{
+    display: flex;
+    flex-direction: column;
+    white-space: pre-wrap;
+    text-align: left;
+    margin: auto;
+    font-size: 18px;
+}
 .keys {
     text-align: left;
     padding-left: 1rem;
