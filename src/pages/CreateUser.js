@@ -39,15 +39,14 @@ export default function CreateUser({user,userToken}){
                 <h2>Create User</h2>
             <form className="create-user-form" onSubmit={handleSubmit}>
                 <label htmlFor="name">Full Name</label>
-                <input value={name} onChange={(e) => setName(e.target.value)} type="name" placeholder="name" id="name" name="name"  />
+                <input value={name} onChange={(e) => setName(e.target.value)} type="name" placeholder="first and last name" id="name" name="name"  />
                 <label htmlFor="uname">Username </label>
                 <input value={uname} onChange={(e) => setUname(e.target.value)} type="username" placeholder="username" id="uname" name="uname" />
                 <label htmlFor="password">Password</label>
                 <input value={pass} onChange={(e) => setPass(e.target.value)} type="password" placeholder="********" id="password" name="password" />
-                <div className="checkbox-wrapper">
-                <input type="checkbox" checked={isChecked} onChange={() => setIsChecked((prev) => !prev)} />
-                <p>Admin Privileges</p> 
-                </div>
+                <lable className="checkbox-wrapper">Admin Privileges
+                    <input className="cbChild" type="checkbox" checked={isChecked} onChange={() => setIsChecked((prev) => !prev)} />
+                </lable>
                 <button type="submit">Create</button>
             </form>
             </div>
