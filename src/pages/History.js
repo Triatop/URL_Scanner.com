@@ -15,19 +15,29 @@ export default function History({user, userToken}) {
                 setError('ERROR: Authentication Invalid!')
             }else{
                 setHistoryDict(data.history);
+                console.log(data.history)
             }
         });
       }, [user,userToken]);
 
     return(
         <div className='history'>
-            <h1>HISTORY</h1>
+            <h2>HISTORY</h2>
             <p>{error}</p>
             <div className="LoadingSpinner">
                 {isLoading ? <LoadingSpinner></LoadingSpinner> : null}
             </div>
             <div className='histDict'>
-                <p>{historyDict} </p>
+                {Object.keys(historyDict).map((key, index) => {
+                    return (
+                    <div key={index}>
+                        <p>URL: {historyDict[key].url}</p>
+                        <p>DATE: {historyDict[key].date}</p>     
+                        <p>SAFE: {historyDict[key].safe.toString()}</p>
+                        <hr></hr>
+                    </div>
+                    );
+                })}
             </div>
         </div>
     )

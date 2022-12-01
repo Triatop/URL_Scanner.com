@@ -9,6 +9,7 @@ hr{
     display: flex;
     flex-direction: column;
     white-space: pre-wrap;
+    text-align: left;
     margin: auto;
     font-size: 18px;
 }

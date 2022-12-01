@@ -77,11 +77,14 @@ def history():
 
     #2. call function that returns the history dict
     history = db_obj.getHistory(username)
-    histDict = ''
-    for index, value in enumerate(history):
-        histDict += str(index + 1)+ ': \tURL: ' + u_ctrl.decryptUrl(value[0]) + ' \t\tDATE: ' + str(value[1]) + ' \t\tSAFE: ' + str(value[2]) + '\n'
 
-    dict = {"history": histDict, "auth": True}
+    #3. Format history dict
+    histDict = {}
+    for index, value in enumerate(history):
+        histDict[index] = {'url': u_ctrl.decryptUrl(value[0]), 'date': str(value[1]), 'safe': value[2]}
+
+    dict = {"auth": True, "history": histDict}
+    print('\n', dict, '\n')
     return dict
 
 @app.route('/userhistory') #only for admin
