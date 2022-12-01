@@ -4,7 +4,7 @@
     align-items: center;
     font-family: 'Bookman Old Style', sans-serif;
     width: 100%;
-    min-height: 100vh;                                            
+    min-height: 100vh;   
 }
 
 .container {
@@ -14,6 +14,7 @@
     align-items: center;
     width: 50%;
     min-height: 100vh; 
+    margin-bottom: 15rem;
     }
 
 .history{
@@ -29,12 +30,16 @@
 #light{
     background-color: #f9f9f9;
     color: #262626;
+    overflow: hidden;
     }
         
 #dark{
     background-color: #212121;
     color: #3baefb;
+    overflow: hidden;
     }
+
+
 
 
 body {

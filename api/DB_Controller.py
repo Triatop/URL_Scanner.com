@@ -18,14 +18,20 @@ class DBController:
             self.user_value = 2011
         except (Exception, psycopg2.Error) as error:
             print("Error occured while connecting to database", error)
+        
+    def getAllUsernames(self):
+        query = '''select users.username  from scans left join users on scans.user_id = users.user_id group by scans.user_id, users.username'''
+        self.cur.execute(query)
+        self.conn.commit()
+        return list([r[0] for r in self.cur.fetchall()])
     
     def check_password(self, password, salt, en_pw):
         return hashlib.sha512(password.encode('utf-8') + salt.encode('utf-8')).hexdigest() == en_pw
     
     def hash_password(self, password):
-            salt = uuid.uuid4().hex
-            hashed_password = hashlib.sha512(password.encode('utf-8') + salt.encode('utf-8')).hexdigest()
-            return salt, hashed_password
+        salt = uuid.uuid4().hex
+        hashed_password = hashlib.sha512(password.encode('utf-8') + salt.encode('utf-8')).hexdigest()
+        return salt, hashed_password
 
     def loginUser(self, username, password):
         try:
