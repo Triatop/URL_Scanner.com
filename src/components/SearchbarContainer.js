@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import './SearchbarContainer.css';
 import './Button.css';
-import LoadingSpinner from './LoadingSpinner'
+import LoadingSpinner from './LoadingSpinner';
 import CheckMark from './CheckMark';
-import CrossMark from './CrossMark'
+import CrossMark from './CrossMark';
 
 //Arvid was here.
 
