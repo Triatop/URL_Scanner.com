@@ -18,7 +18,7 @@ class DBController:
             self.cur = self.conn.cursor()
             self.user_value = 2011
         except (Exception, psycopg2.Error) as error:
-            print("Error occured while connecting to database", error)
+            print("Error occured while connecting to database:", error)
     
     def getAttributes(self):
         try:
