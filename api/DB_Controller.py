@@ -17,7 +17,7 @@ class DBController:
             self.cur = self.conn.cursor()
             self.user_value = 2011
         except (Exception, psycopg2.Error) as error:
-            print("Error occured while connecting to database", error)
+            print("Error occured while connecting to database:", error)
         
     def getAllUsernames(self):
         query = '''select users.username  from scans left join users on scans.user_id = users.user_id group by scans.user_id, users.username'''
@@ -44,7 +44,7 @@ class DBController:
             return self.check_password(password, salt, en_pw)
         except (Exception, psycopg2.Error) as error:
             self.conn.rollback()
-            print("Error occured while logging in user", error)
+            print("Error occured while logging in user:", error)
 
     def getUserToken(self, username):
         try:
@@ -76,7 +76,7 @@ class DBController:
             return self.cur.fetchone()[0] == 'admin'
         except (Exception, psycopg2.Error) as error:
             self.conn.rollback()
-            print("Error occured while authenticating admin", error)
+            print("Error occured while authenticating admin:", error)
 
     def checkUsernameExists(self, username):
         try:        
@@ -86,7 +86,7 @@ class DBController:
             return self.cur.fetchone()[0] == username
         except (Exception, psycopg2.Error) as error:
             self.conn.rollback()
-            print("Error occured while checking existing usernames", error)
+            print("Error occured while checking existing usernames:", error)
 
     def createUser(self, username, password, fullname, a_token, admin_priv):
         name_split = fullname.split(' ')
@@ -107,7 +107,7 @@ class DBController:
             self.conn.commit()      
         except (Exception, psycopg2.Error) as error:
             self.conn.rollback()
-            print("Error occured while creating user", error)
+            print("Error occured while creating user:", error)
     
     def validateUser(self, uname, token): #username and token
         try:
