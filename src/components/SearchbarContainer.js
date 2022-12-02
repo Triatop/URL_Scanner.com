@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import './SearchbarContainer.css';
 import './Button.css';
-import LoadingSpinner from './LoadingSpinner'
+import LoadingSpinner from './LoadingSpinner';
 import CheckMark from './CheckMark';
-import CrossMark from './CrossMark'
+import CrossMark from './CrossMark';
 
 //Arvid was here.
 
@@ -80,7 +80,7 @@ function SearchbarContainer({user}) {
         </div>
       </div>
       <div className='ScanBtn'>
-        <button type='button' onClick={handleClick} >SCAN</button>
+        <button type='button' onClick={handleClick}>SCAN</button>
       </div>
       {
         show ? <div>

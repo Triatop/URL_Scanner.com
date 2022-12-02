@@ -16,7 +16,7 @@ def scanner():
     sTime = time.time()
     retDict = main.main(request.args.get('url'),request.args.get('username'))
     if retDict["valid"] == "True":
-        retDict["exeTime"] = f'\n\nThe scan took {(time.time() - sTime):.2f} seconds'
+        retDict["exeTime"] = f'\n\nScan time: {(time.time() - sTime):.2f} s'
     return retDict
 
 @app.route('/login')
@@ -84,23 +84,32 @@ def history():
         histDict[index] = {'url': u_ctrl.decryptUrl(value[0]), 'date': str(value[1]), 'safe': value[2]}
 
     dict = {"auth": True, "history": histDict}
-    print('\n', dict, '\n')
     return dict
 
 @app.route('/userhistory') #only for admin
 def userHistory():
     username = request.args.get('username')
     user_token = request.args.get('user_token')
-    print(username, user_token)
+
+    db_obj = DBController()
+    u_ctrl = UrlController()
 
     #1. call function that authenticates the user (user, user_token)
-
+    if(not db_obj.validateUser(username, user_token)):
+        return {'auth': False}
     #2. call function that checks if that user is an admin
+    if(not db_obj.authenticateAdmin(username)):
+        return {'auth': False}
 
     #3. call function to get the history for ALL the users - Except the user that is making the call
-    hist_dict = {'Agda': 'history report', 'Greta': 'history report', 'Janne': 'history report'}
-    dict = {'auth': True, 'history': hist_dict}
-    return dict
+    allUserHistDict = {}
+    for name in db_obj.getAllUsernames():
+        histDict = {}
+        for index, value in enumerate(db_obj.getHistory(name)):
+            histDict[index] = {'url': u_ctrl.decryptUrl(value[0]), 'date': str(value[1]), 'safe': value[2]}
+        allUserHistDict[name] = histDict
+
+    return {'auth': True, 'userhistory': allUserHistDict}
 
 if __name__ == '__main__':
     app.run(debug=True, port=8000)

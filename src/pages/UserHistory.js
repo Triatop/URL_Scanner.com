@@ -1,10 +1,12 @@
 import {useState, useEffect} from 'react'
 import LoadingSpinner from '../components/LoadingSpinner'
 import './History.css'
+import CheckMark from '../components/CheckMark';
+import CrossMark from '../components/CrossMark';
 
 export default function UserHistory({user, userToken}) {
     const [isLoading, setLoading] = useState(false);
-    const [historyDict, setHistoryDict] = useState('');
+    const [userHistoryDict, setUserHistoryDict] = useState('');
     const [error, setError] = useState('')
 
     useEffect(() => {
@@ -14,7 +16,7 @@ export default function UserHistory({user, userToken}) {
             if(!data.auth){
                 setError('ERROR: Authentication Invalid!')
             }else{
-                setHistoryDict(data.history);
+                setUserHistoryDict(data.userhistory);
             }
         });
       }, [user, userToken]);
@@ -26,11 +28,26 @@ export default function UserHistory({user, userToken}) {
                 {isLoading ? <LoadingSpinner></LoadingSpinner> : null}
             </div>
             <div>
-                {Object.keys(historyDict).map((key, index) => {
+                {Object.keys(userHistoryDict).map((key1, index1) => {
                     return (
-                    <div key={index}>
-                        <h2 className='keys'>{key} </h2>
-                        <p>{historyDict[key]}</p>
+                    <div key1={index1}>
+                        <h2 className='keys'>{key1} </h2>
+                        <ul className='columnNameContainer'>
+                            <li className='li1'>URL</li>
+                            <li className='li2'>DATE</li>
+                            <li className='li3'>SAFE</li>
+                        </ul>
+                        {Object.keys(userHistoryDict[key1]).map((key2, index2) => {
+                            return (
+                            <div key2={index2}>
+                                <ul className='histRow' id='history'>
+                                    <li className='li1'>{userHistoryDict[key1][key2].url}</li>
+                                    <li className='li2'>{userHistoryDict[key1][key2].date}</li>     
+                                    <li className='li3'>{userHistoryDict[key1][key2].safe ? <CheckMark showText={false}/>: <CrossMark showText={false}/>}</li>
+                                </ul>
+                            </div>
+                            );
+                        })}
                         <hr/>
                     </div>
                     );
