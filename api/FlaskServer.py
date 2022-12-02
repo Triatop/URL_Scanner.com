@@ -104,19 +104,12 @@ def userHistory():
     #3. call function to get the history for ALL the users - Except the user that is making the call
     allUserHistDict = {}
     for name in db_obj.getAllUsernames():
-        # if (name == username): continue
-        print('\n:  ',name)
         histDict = {}
         for index, value in enumerate(db_obj.getHistory(name)):
             histDict[index] = {'url': u_ctrl.decryptUrl(value[0]), 'date': str(value[1]), 'safe': value[2]}
-        print(f'scan:    ',histDict)
         allUserHistDict[name] = histDict
 
-    print('\n\nDICT:',allUserHistDict)
-
-    hist_dict = {'Agda': 'history report', 'Greta': 'history report', 'Janne': 'history report'}
-    dict = {'auth': True, 'userhistory': allUserHistDict}
-    return dict
+    return {'auth': True, 'userhistory': allUserHistDict}
 
 if __name__ == '__main__':
     app.run(debug=True, port=8000)

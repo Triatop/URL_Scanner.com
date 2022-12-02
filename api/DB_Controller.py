@@ -3,6 +3,7 @@ import psycopg2
 import re
 import hashlib, uuid
 import json
+from UrlController import UrlController
 
 class DBController:
     def __init__(self):
@@ -17,10 +18,24 @@ class DBController:
             self.cur = self.conn.cursor()
             self.user_value = 2011
         except (Exception, psycopg2.Error) as error:
-            print("Error occured while connecting to database:", error)
+            print("Error occured while connecting to database", error)
+    
+    def getAttributes(self):
+        try:
+            url_ctrl = UrlController()
+            query = '''select en_url, attributes  from scans'''
+            self.cur.execute(query)
+            self.conn.commit()
+            url_attr_lst = list([[r[0], r[1]] for r in self.cur.fetchall()])
+            for index, val in enumerate(url_attr_lst):
+                url_attr_lst[index][0] = url_ctrl.decryptUrl(val[0])
+            return url_attr_lst
+        except (Exception, psycopg2.Error) as error:
+            self.conn.rollback()
+            print("Error occured while fetching attributedicts:", error)
         
     def getAllUsernames(self):
-        query = '''select users.username  from scans left join users on scans.user_id = users.user_id group by scans.user_id, users.username'''
+        query = '''select users.username  from scans left join users on scans.user_id = users.user_id where scans.user_id is not null group by scans.user_id, users.username'''
         self.cur.execute(query)
         self.conn.commit()
         return list([r[0] for r in self.cur.fetchall()])
@@ -59,7 +74,8 @@ class DBController:
     def getHistory(self, username):
         try:
             u_id = self.getUserId(username)
-            query = '''select en_url , "date", s_value  from scans where user_id = %s;'''
+            print(u_id)
+            query = '''select en_url , "date", s_value  from scans where user_id = %s order by date DESC;'''
             self.cur.execute(query, str(u_id))
             self.conn.commit()
             return self.cur.fetchall()

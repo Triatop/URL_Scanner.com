@@ -11,4 +11,4 @@ class SafeEvaluator:
         # return (sum([val1 * val2 for val1, val2 in zippedLists]) - self.th) < 0
 
         dictToPd = pd.DataFrame.from_dict(dict, orient='index').transpose()
-        return round((self.model.predict(dictToPd))[0][0])
+        return bool(round((self.model.predict(dictToPd))[0][0]))

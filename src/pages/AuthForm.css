@@ -60,11 +60,12 @@
   outline: none;
 }
 
-.checkbox-wrapper ul{
+.checkbox-wrapper{
   padding: 0;
-  margin: 0;
+  margin: auto;
   list-style: none;
   display: grid;
+  flex-direction: row;
   margin-left: auto;
   float: left;
 }
@@ -74,14 +75,18 @@
   height: 1.2em;
   outline: none;
   cursor: pointer;
-  margin: 0;
+  margin: auto;
 }
 
-.checkbox-wrapper .cbChild{
+/* .cbChild {
+  width: 10%;
+} */
+
+/* .checkbox-wrapper .cbChild{
   color: inherit;
   text-decoration: none;
   height: 100%;
   display: flex;
   align-items: center;
   padding: .25rem;
-}
+} */

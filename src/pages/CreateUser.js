@@ -44,7 +44,8 @@ export default function CreateUser({user,userToken}){
                 <input value={uname} onChange={(e) => setUname(e.target.value)} type="username" placeholder="username" id="uname" name="uname" />
                 <label htmlFor="password">Password</label>
                 <input value={pass} onChange={(e) => setPass(e.target.value)} type="password" placeholder="********" id="password" name="password" />
-                <lable className="checkbox-wrapper">Admin Privileges
+                <lable className="checkbox-wrapper">
+                    <li>Admin Privileges</li>
                     <input className="cbChild" type="checkbox" checked={isChecked} onChange={() => setIsChecked((prev) => !prev)} />
                 </lable>
                 <button type="submit">Create</button>
