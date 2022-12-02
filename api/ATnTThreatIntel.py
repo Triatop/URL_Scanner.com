@@ -14,7 +14,7 @@ class ATnTThreatIntel:
             Returns Dictionary with {IP:<files count>}
         """
         url = self.url if url == "" else url
-        if self.checkValidInput(url, method = ".maliciousFiles()") == 0:
+        if self.checkValidInput(url, method = ".maliciousFiles()"):
             return None
         passive_dns = requests.get(f"https://otx.alienvault.com/api/v1/indicators/hostname/{url}/passive_dns").json()["passive_dns"]
         addresses = []
@@ -31,6 +31,30 @@ class ATnTThreatIntel:
             except KeyError:
                 continue
         return filesCount
+    def getMaliciousFilesCount(self, url = "", limit = 100):
+        """
+        """
+        url = self.url if url == "" else url
+        if self.checkValidInput(url, method = ".getMaliciousFilesCount()"):
+            return None
+        passive_dns = requests.get(f"https://otx.alienvault.com/api/v1/indicators/hostname/{url}/passive_dns").json()["passive_dns"]
+        addresses = []
+        filesCount = requests.get("https://otx.alienvault.com/api/v1/indicators/hostname/{}/malware".format(url)).json()["count"]
+        for add in passive_dns:
+            addresses.append(add["address"])
+        for add in addresses:
+            try:
+                if re.match("[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}", add):
+                    filesCount += requests.get("https://otx.alienvault.com/api/v1/indicators/IPv4/{}/malware".format(add)).json()["count"]
+                else:
+                    filesCount += requests.get("https://otx.alienvault.com/api/v1/indicators/hostname/{}/malware".format(add)).json()["count"]
+                if(filesCount > limit-1):
+                    filesCount = limit
+                    break
+            except KeyError:
+                continue
+        return filesCount
+
 
     def getGeoLocation(self, url = ""):
         """
@@ -38,7 +62,7 @@ class ATnTThreatIntel:
             Returns Geolocation
         """
         url = self.url if url == "" else url
-        if self.checkValidInput(url, method = ".getGeoLocation()") == 0:
+        if self.checkValidInput(url, method = ".getGeoLocation()"):
             return None
         return requests.get(f"https://otx.alienvault.com/api/v1/indicators/domain/{url}/geo").json()["flag_title"]
 
@@ -48,7 +72,7 @@ class ATnTThreatIntel:
             Returns amount of pulses the domain/url is included in.
         """
         url = self.url if url == "" else url
-        if self.checkValidInput(url, method=".pulseCount()") == 0:
+        if self.checkValidInput(url, method=".pulseCount()"):
             return None
         return requests.get(f"https://otx.alienvault.com/api/v1/indicators/domain/{url}/general").json()["pulse_info"]["count"]
 
@@ -58,4 +82,5 @@ class ATnTThreatIntel:
         """
         if not len(url):
             logging.warning(f"Invalid URL \"{url}\" was given to ATnTTheatIntel{method}")
+            return 1
         return 0
