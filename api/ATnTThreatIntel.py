@@ -1,5 +1,3 @@
-import dns.resolver
-import dns.reversename
 import requests
 import re
 import logging

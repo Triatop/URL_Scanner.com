@@ -1,9 +1,9 @@
-import tensorflow as tf
 from keras.models import Sequential, load_model
 from keras.layers import Dense
 import pandas as pd
 import sklearn.model_selection as sk
 from sklearn.metrics import accuracy_score, f1_score, precision_score, recall_score
+import platform
 
 
 class ML:
@@ -16,13 +16,17 @@ class ML:
         self.xTest = ''
         self.yTrain = ''
         self.yTest = ''
+        self.arm = 'arm' in platform.platform()
 
     def splitData(self):
         self.xTrain, self.xTest, self.yTrain, self.yTest = sk.train_test_split(self.x, self.y, test_size=0.2)
 
     def loadModel(self):
         try:
-            self.model = load_model('tfModel')
+            if(self.arm):
+                self.model = load_model('tfModel-arm')
+            else:
+                self.model = load_model('tfModel')
         except:
             pass
 
@@ -37,7 +41,10 @@ class ML:
             
     def trainML(self, theEpochs):
         self.model.fit(self.xTrain, self.yTrain, epochs=theEpochs)
-        self.model.save('tfModel')
+        if(self.arm):
+            self.model.save('tfModel-arm')
+        else:
+            self.model.save('tfModel')
 
     def predictML(self):
         yHat = self.model.predict(self.xTest)
