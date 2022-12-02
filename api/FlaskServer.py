@@ -16,7 +16,7 @@ def scanner():
     sTime = time.time()
     retDict = main.main(request.args.get('url'),request.args.get('username'))
     if retDict["valid"] == "True":
-        retDict["exeTime"] = f'\n\nThe scan took {(time.time() - sTime):.2f} seconds'
+        retDict["exeTime"] = f'\n\nScan time: {(time.time() - sTime):.2f} s'
     return retDict
 
 @app.route('/login')

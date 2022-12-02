@@ -80,7 +80,7 @@ function SearchbarContainer({user}) {
         </div>
       </div>
       <div className='ScanBtn'>
-        <button type='button' onClick={handleClick} >SCAN</button>
+        <button type='button' onClick={handleClick}>SCAN</button>
       </div>
       {
         show ? <div>

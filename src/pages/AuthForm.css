@@ -20,11 +20,13 @@
 #dark .auth-form-container{
     border: 1px solid #3baefb;
     color: #3baefb;
+    box-shadow: 0px 0px 12px 2px #4b6388;
 }
 
 #light .auth-form-container{
     border: 1px solid #2b2b2b;
     color: #262626;
+    box-shadow: 0px 0px 12px 2px;
 }
 
 .login-form, .create-user-form {
