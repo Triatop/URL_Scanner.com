@@ -142,13 +142,12 @@ class DBController:
     
     def setupDB(self):
         try:
-            query = '''drop table rights, scans, users'''
+            query = '''drop table if exists rights, scans, users'''
             self.cur.execute(query)
             self.conn.commit()
         except (Exception, psycopg2.Error) as error:
             self.conn.rollback()
             print("Error occured while dropping tables:", error)
-            print("If this is the first time you are setting up the database, ignore the above Error.\n")
 
         try:
             query1 = '''CREATE TABLE rights (rights_id int primary key,
