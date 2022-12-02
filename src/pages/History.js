@@ -7,12 +7,14 @@ import CrossMark from '../components/CrossMark';
 export default function History({user, userToken}) {
     const [isLoading, setLoading] = useState(false);
     const [historyDict, setHistoryDict] = useState('');
-    const [error, setError] = useState('')
-    const [showError, setShowError] = useState(false)
+    const [error, setError] = useState('');
+    const [showError, setShowError] = useState(false);
+    const [showTop, setShowTop] = useState(false);
 
     useEffect(() => {
         setLoading(true)
         setShowError(false)
+        setShowTop(false)
         fetch(`http://localhost:8000/history?username=${user}&user_token=${userToken}`).then(res => res.json()).then(data => {
             setLoading(false)
             if(!data.auth){
@@ -20,19 +22,21 @@ export default function History({user, userToken}) {
                 setError('ERROR: Authentication Invalid!')
             }else{
                 setHistoryDict(data.history);
-                console.log(data.history)
+                setShowTop(true)
             }
         });
       }, [user,userToken]);
 
     return(
         <div className='history'>
-            <h2>HISTORY</h2>
+            <h1>HISTORY</h1>
+            { showTop ? 
             <ul className='columnNameContainer'>
                 <li className='li1'>URL</li>
                 <li className='li2'>DATE</li>
                 <li className='li3'>SAFE</li>
             </ul>
+            : null}
             {showError ? <p>{error}</p>: null}
             <div className="LoadingSpinner">
                 {isLoading ? <LoadingSpinner></LoadingSpinner> : null}
