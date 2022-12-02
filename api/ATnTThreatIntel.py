@@ -1,5 +1,3 @@
-import dns.resolver
-import dns.reversename
 import requests
 import re
 import logging
@@ -81,6 +79,6 @@ class ATnTThreatIntel:
             Internal method, do not use outside of this class
         """
         if not len(url):
-            logging.warning(f"Invalid URL \"{url}\" was given to ATnTTheatIntel{method}")
+            logging.warning(f"Invalid URL \"{url}\" was given to ATnTThreatIntel{method}")
             return 1
         return 0
