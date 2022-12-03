@@ -46,12 +46,14 @@ class CharSwap:
             return 1
 
     def isTop500(self):
-        reader = csv.reader(open('top500Domains.csv'))
+        goodCodingPractice = open('top500Domains.csv')  #So we can close
+        reader = csv.reader(goodCodingPractice)
         found = 0
         for line in reader:
             if self.sus_url == line[0]:
                 found = 1
                 break
+        goodCodingPractice.close()                      #No memory leaks please
         return found
 
     def isCharSwap(self):
