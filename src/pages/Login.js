@@ -35,10 +35,12 @@ export default function Login({setLoginStatus}){
                 <h2>Login</h2>
                 <form className="login-form" onSubmit={handleSubmit}>
                     <label htmlFor="uname">Username</label>
-                    <input value={uname} onChange={(e) => setUname(e.target.value)}type="username" placeholder="username" id="uname" name="uname" />
+                    <input className="inputFields" value={uname} onChange={(e) => setUname(e.target.value)}type="username" placeholder="username" id="uname" name="uname" />
                     <label htmlFor="password">Password</label>
-                    <input value={pass} onChange={(e) => setPass(e.target.value)} type="password" placeholder="********" id="password" name="password" />
-                    <button type="submit">Log In</button>
+                    <input className="inputFields" value={pass} onChange={(e) => setPass(e.target.value)} type="password" placeholder="********" id="password" name="password" />
+                    <div className="AuthBtnContainer">
+                        <button className="loginBtn" type="submit">Log In</button>
+                    </div>
                 </form>
             </div>
             <div>
