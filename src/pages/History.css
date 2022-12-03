@@ -57,8 +57,15 @@ hr{
     }
 
 .li1 {
-    width: 75%;
+    width: 75%;   
+    overflow: scroll hidden;
 }
+
+.li1::-webkit-scrollbar {
+    display: none;
+  }
+  
+
 
 .li2{
     width: 15%;
