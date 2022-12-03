@@ -5,10 +5,10 @@ import func_timeout
 import threading
 import os
 import pandas as pd
-theVals = []
+# theVals = []
 
 
-data = ["Site","FavIcon", "SecureProtocol", "CheckPort", "SiteAge", "SiteLength", "SpecialCharacters", "Certificate", "Malicious Links", "IsSafe"]
+# data = ["Site","FavIcon", "SecureProtocol", "CheckPort", "SiteAge", "SiteLength", "SpecialCharacters", "Certificate", "Malicious Links", "IsSafe"]
 
 
 def extention(file):
@@ -21,7 +21,7 @@ def loadData(file, ext):
     if ext == '.json':
         with open(file, 'r') as f:
             return json.load(f)
-theFile = 'test2.csv'
+theFile = 'example.csv'
 ext = extention(theFile)
 jsonData = loadData(theFile, ext) 
 if ext == '.json':
@@ -32,20 +32,21 @@ if ext == '.csv':
     valueList = list(jsonData['IsSafe'])
 
 
-print(keysList, valueList)
+# print(keysList, valueList)
 def processData(start, steps):
 
         for i in range(start, start+steps):
             try:
-                val = {'Site' : keysList[i]}
-                val.update(func_timeout.func_timeout(30, main.main, (keysList[i], False)))
-                val['IsSafe'] = (0 if valueList[i] == False else 1)
-                print(val)
-                if('valid' not in val):
+                # val = {'Site' : keysList[i]}
+                # val.update(func_timeout.func_timeout(30, main.main, (keysList[i], False)))
+                func_timeout.func_timeout(30, main.main, (keysList[i], 'admin', True, True, valueList[i]))
+                # val['IsSafe'] = (0 if valueList[i] == False else 1)
+                # print(val)
+                # if('valid' not in val):
                     #a += val.values()
                     #writer.writerow(val.values())
-                    print(val)
-                    theVals.append(val.values())
+                    # print(val)
+                    # theVals.append(val.values())
             except:
                 pass
 
@@ -53,7 +54,7 @@ def processData(start, steps):
 
 def makeWorkers():
     workers = 50
-    while len(data)%workers != 0:
+    while len(jsonData)%workers != 0:
         workers -= 1
     return workers
 
@@ -70,8 +71,8 @@ def startThreads():
 
 startThreads()
 
-with open('reTestedData.csv', 'w') as file:
-    writer = csv.writer(file)
-    writer.writerow(data)
-    writer.writerows(theVals)
+# with open('reTestedData.csv', 'w') as file:
+#     writer = csv.writer(file)
+#     writer.writerow(data)
+#     writer.writerows(theVals)
 
