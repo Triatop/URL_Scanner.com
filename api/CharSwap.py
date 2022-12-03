@@ -12,19 +12,19 @@ class CharSwap:
         self.c_url = list(filter(None, i_url.split('/')))[1]
         return 1
 
-    def stripWWW(self):
-        if list(filter(None, self.c_url.split('.')))[0] == 'www':
-            s_list = list(filter(None, self.c_url.split('.')))
-            temp = ''
+    def stripWWW(self):     #this is so comparison with the websites is possible later
+        if list(filter(None, self.c_url.split('.')))[0] == 'www':   #split URL by the dots and check if the first part of the url is 'www'
+            s_list = list(filter(None, self.c_url.split('.')))      #save the list
+            temp = ''                                               #to be the new URL
             for i in range(len(s_list)-1):
                 if temp != '': temp += '.'
-                temp += s_list[i+1]
+                temp += s_list[i+1]                                 #add all the domains and subdomains except www to new URL
 
-            self.c_url = temp
+            self.c_url = temp                                       #set both OG URL and soon to be modified url
             self.sus_url = self.c_url
             return 1
-        else:
-            self.sus_url = self.c_url
+        else:                                                       #if the first part is not 'www' nothing has to be done
+            self.sus_url = self.c_url                               #this has to be done regardless
             return 0
 
     def checkSC(self):     #Special cases wont get caught in stripAccents or will be mistranslated 
@@ -41,27 +41,27 @@ class CharSwap:
 
         else: return 0
 
-    def stripAccents(self):
+    def stripAccents(self): #take a character "ö" that has accents (the dots) and transform it "o" to its lookalike character
             self.sus_url = unidecode(self.sus_url)
             return 1
 
     def isTop500(self):
-        goodCodingPractice = open('top500Domains.csv')  #So we can close
-        reader = csv.reader(goodCodingPractice)
+        goodCodingPractice = open('top500Domains.csv')  #Separate line so we can close later
+        reader = csv.reader(goodCodingPractice)         #Read File
         found = 0
         for line in reader:
-            if self.sus_url == line[0]:
-                found = 1
-                break
+            if self.sus_url == line[0]:                 #if it exists in list
+                found = 1                               #the website tried to trick us
+                break                                   #no need to check the others
         goodCodingPractice.close()                      #No memory leaks please
         return found
 
-    def isCharSwap(self):
+    def isCharSwap(self):               #main function
         bamboozle = 0
         self.stripWWW()
         self.checkSC()
         self.stripAccents()
-        if(self.c_url != self.sus_url):
-            if(self.isTop500() == 1):
+        if(self.c_url != self.sus_url): #does it have any special chars,
+            if(self.isTop500() == 1):   #and if so is it trying to mimic a real website by using them
                 bamboozle = 1
         return bamboozle
