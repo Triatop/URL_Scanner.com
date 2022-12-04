@@ -12,6 +12,7 @@ api/tfTest.py
 api/yes.py
 
 /tfModel
+/tfModel-arm
 /.vs/VSWorkspaceState.json
 /.vs/slnx.sqlite
 /.vs/PythonSettings.json
