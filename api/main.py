@@ -17,7 +17,7 @@ from ATnTThreatIntel import ATnTThreatIntel
 
 
 
-def main(url1, username, report=True, makeFixedData=False, val=False):
+def main(url1, username, report=True):
     u_ctrl = UrlController()
     url1 = u_ctrl.addProtocol(url1)
     
@@ -81,8 +81,8 @@ def main(url1, username, report=True, makeFixedData=False, val=False):
     u_obj.makeDict()                                    
     r_mkr.createReport(u_obj.getDict(), w_scrap.exfiltrateSiteAge().days, u_mlin.getNrOfMalLinks())
     u_obj.setSafe(u_safe.isSafe(u_obj.getDict()))                 #Safe eveluator check
-    if(makeFixedData):
-        u_obj.setSafe(bool(val))
+
+
     if(report):
         db_obj = DBController()
         db_obj.insertScan(username, u_ctrl.encryptUrl(url1), u_obj.getSafe(), u_obj.getDict(), w_scrap.exfiltrateSiteAge().days, u_mlin.getNrOfMalLinks())
