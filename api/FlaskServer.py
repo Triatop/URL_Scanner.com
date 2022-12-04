@@ -5,6 +5,7 @@ from flask_cors import CORS
 from DB_Controller import DBController
 from UrlController import UrlController
 from datetime import date
+from ReportMaker import ReportMaker
 
 
 app = Flask(__name__)
@@ -70,6 +71,7 @@ def history():
 
     db_obj = DBController()
     u_ctrl = UrlController()
+    rmaker = ReportMaker()
 
     #1. call function that authenticates the user (username, user_token)
     if(not db_obj.validateUser(username, user_token)):
@@ -81,7 +83,9 @@ def history():
     #3. Format history dict
     histDict = {}
     for index, value in enumerate(history):
-        histDict[index] = {'url': u_ctrl.decryptUrl(value[0]), 'date': str(value[1]), 'safe': value[2]}
+        a_dict = {int(k):v for k,v in value[3].items()} # convert keys to integers as to jsaonb converts keys to strings.
+        rmaker.createReport(a_dict, value[4], value[5])
+        histDict[index] = {'url': u_ctrl.decryptUrl(value[0]), 'date': str(value[1]), 'safe': value[2], 'report': rmaker.getReport()}
 
     dict = {"auth": True, "history": histDict}
     return dict
@@ -93,6 +97,7 @@ def userHistory():
 
     db_obj = DBController()
     u_ctrl = UrlController()
+    rmaker = ReportMaker()
 
     #1. call function that authenticates the user (user, user_token)
     if(not db_obj.validateUser(username, user_token)):
@@ -106,7 +111,9 @@ def userHistory():
     for name in db_obj.getAllUsernames():
         histDict = {}
         for index, value in enumerate(db_obj.getHistory(name)):
-            histDict[index] = {'url': u_ctrl.decryptUrl(value[0]), 'date': str(value[1]), 'safe': value[2]}
+            a_dict = {int(k):v for k,v in value[3].items()} # convert keys to integers as to jsaonb converts keys to strings.
+            rmaker.createReport(a_dict, value[4], value[5])
+            histDict[index] = {'url': u_ctrl.decryptUrl(value[0]), 'date': str(value[1]), 'safe': value[2], 'report': rmaker.getReport()}
         allUserHistDict[name] = histDict
 
     return {'auth': True, 'userhistory': allUserHistDict}

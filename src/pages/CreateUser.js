@@ -44,10 +44,10 @@ export default function CreateUser({user,userToken}){
                 <input className="inputFields" value={uname} onChange={(e) => setUname(e.target.value)} type="username" placeholder="username" id="uname" name="uname" />
                 <label htmlFor="password">Password</label>
                 <input className="inputFields" value={pass} onChange={(e) => setPass(e.target.value)} type="password" placeholder="********" id="password" name="password" />
-                <lable className="checkbox-wrapper">
+                <label className="checkbox-wrapper">
                     <input type="checkbox" checked={isChecked} onChange={() => setIsChecked((prev) => !prev)} />
                     <span >Admin Privileges</span>
-                </lable>
+                </label>
                 <div className="AuthBtnContainer">
                     <button className="createBtn" type="submit">Create</button>
                 </div>

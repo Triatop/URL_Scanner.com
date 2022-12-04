@@ -1,8 +1,9 @@
-import {useState, useEffect} from 'react'
-import LoadingSpinner from '../components/LoadingSpinner'
-import './History.css'
-import CheckMark from '../components/CheckMark';
-import CrossMark from '../components/CrossMark';
+import {useState, useEffect} from 'react';
+import LoadingSpinner from '../components/LoadingSpinner';
+import './History.css';
+import HistoryReport from '../components/HistoryReport';
+
+
 
 export default function History({user, userToken}) {
     const [isLoading, setLoading] = useState(false);
@@ -10,6 +11,7 @@ export default function History({user, userToken}) {
     const [error, setError] = useState('');
     const [showError, setShowError] = useState(false);
     const [showTop, setShowTop] = useState(false);
+
 
     useEffect(() => {
         setLoading(true)
@@ -33,7 +35,7 @@ export default function History({user, userToken}) {
             { showTop ? 
             <ul className='columnNameContainer'>
                 <li className='li1'>URL</li>
-                <li className='li2'>DATE</li>
+                <li className='li2_1'>DATE</li>
                 <li className='li3'>SAFE</li>
             </ul>
             : null}
@@ -45,11 +47,7 @@ export default function History({user, userToken}) {
                 {Object.keys(historyDict).map((key, index) => {
                     return (
                             <div key={index}>
-                                <ul className='histRow' id='history'>
-                                    <li className='li1'>{historyDict[key].url}</li>
-                                    <li className='li2'>{historyDict[key].date}</li>     
-                                    <li className='li3'>{historyDict[key].safe ? <CheckMark showText={false}/>: <CrossMark showText={false}/>}</li>
-                                </ul>
+                                <HistoryReport url={historyDict[key].url} date={historyDict[key].date} safe={historyDict[key].safe} report={historyDict[key].report}></HistoryReport>
                             </div>
                     );
                 })}

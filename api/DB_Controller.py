@@ -20,7 +20,7 @@ class DBController:
         except (Exception, psycopg2.Error) as error:
             print("Error occured while connecting to database:", error)
     
-    def getAttributes(self):
+    def getUrlAttributes(self):
         try:
             url_ctrl = UrlController()
             query = '''select en_url, attributes  from scans'''
@@ -33,7 +33,7 @@ class DBController:
         except (Exception, psycopg2.Error) as error:
             self.conn.rollback()
             print("Error occured while fetching attributedicts:", error)
-        
+
     def getAllUsernames(self):
         query = '''select users.username  from scans left join users on scans.user_id = users.user_id where scans.user_id is not null group by scans.user_id, users.username'''
         self.cur.execute(query)
@@ -74,8 +74,7 @@ class DBController:
     def getHistory(self, username):
         try:
             u_id = self.getUserId(username)
-            print(u_id)
-            query = '''select en_url , "date", s_value  from scans where user_id = %s order by date DESC;'''
+            query = '''select en_url , "date", s_value, attributes, site_age, mal_links  from scans where user_id = %s order by date DESC;'''
             self.cur.execute(query, str(u_id))
             self.conn.commit()
             return self.cur.fetchall()
@@ -146,11 +145,11 @@ class DBController:
             print("Error occured while checking for existing user ID:", error) 
             return None 
 
-    def insertScan(self, username, url, s_value, a_dict):
+    def insertScan(self, username, url, s_value, a_dict, site_age, mal_links):
         user_id = self.getUserId(username)
         try:        
-            query = ''' insert into scans(user_id, en_url, date, s_value, attributes) values(%s, %s, CURRENT_DATE, %s, %s)  '''
-            self.cur.execute(query, (user_id, url, s_value, json.dumps(a_dict)))
+            query = ''' insert into scans(user_id, en_url, date, s_value, attributes, site_age, mal_links) values(%s, %s, CURRENT_DATE, %s, %s, %s, %s)  '''
+            self.cur.execute(query, (user_id, url, s_value, json.dumps(a_dict), site_age, mal_links))
             self.conn.commit()
         except (Exception, psycopg2.Error) as error:
             self.conn.rollback()
@@ -194,6 +193,8 @@ class DBController:
                     date DATE NOT NULL,
                     s_value BOOLEAN NOT NULL,
                     attributes jsonb NOT NULL,
+                    site_age int NOT NULL,
+                    mal_links int NOT NULL,
                     foreign key (user_id) references users(user_id)
                     )'''
             self.cur.execute(query3)

@@ -38,7 +38,7 @@ hr{
     margin: 0;
     list-style: none;
     display: flex;
-    gap: 1rem;
+    gap: 0;
     float: center;
     }
 
@@ -57,7 +57,7 @@ hr{
     }
 
 .li1 {
-    width: 75%;   
+    width: 65%;   
     overflow: scroll hidden;
 }
 
@@ -71,8 +71,41 @@ hr{
     width: 15%;
 }
 
+.li2_1{
+    width: 9%;
+}
+
 .li3{
     text-align: center;
     justify-content: center;
     width: 10%;
+}
+
+.arrow {
+    border: solid black;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+  }
+
+#dark .arrow{
+    border: solid #3baefb;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+}
+  
+
+.down {
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+  }
+
+.up {
+    transform: rotate(-135deg);
+    -webkit-transform: rotate(-135deg);
+  }
+
+.history .innerBorder {
+    margin: 1rem;
 }
