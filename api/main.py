@@ -31,7 +31,7 @@ def main(url1, username, report=True):
     
     #Check if wevsite is valid (exists) - else early return
     if not u_ctrl.validateUrl(url1): #<--- if website fails to validate
-        return {"valid": "False", "report": "- Invalid URL, website does not exist, check for spelling errors"}
+        return {"valid": False, "report": "- Invalid URL, website does not exist, check for spelling errors"}
 
     #Attribute Classes
     u_obj = URL_Object() 
@@ -86,6 +86,6 @@ def main(url1, username, report=True):
     if(report):
         db_obj = DBController()
         db_obj.insertScan(username, u_ctrl.encryptUrl(url1), u_obj.getSafe(), u_obj.getDict(), w_scrap.exfiltrateSiteAge().days, u_mlin.getNrOfMalLinks())
-        return {"valid": "True","report": (f"\n\n{r_mkr.getReport()}"), "binarySafe": u_obj.getSafe(), "reDirect": f"Redirected: {urlRedirect} \nScanning: {url1}"}
+        return {"valid": True,"report": (f"\n\n{r_mkr.getReport()}"), "binarySafe": u_obj.getSafe(), "reDirect": f"Redirected: {urlRedirect} \nScanning: {url1}"}
     else:
         return u_obj.getDict()

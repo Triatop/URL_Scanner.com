@@ -16,7 +16,7 @@ class DBController:
                 port = 5432
             )
             self.cur = self.conn.cursor()
-            self.user_value = 2011
+            self.user_value = 7015
         except (Exception, psycopg2.Error) as error:
             print("Error occured while connecting to database:", error)
     
@@ -92,22 +92,24 @@ class DBController:
         except (Exception, psycopg2.Error) as error:
             self.conn.rollback()
             print("Error occured while authenticating admin:", error)
+            return False
 
     def checkUsernameExists(self, username):
         try:        
-            query = '''select username from users where username='{}' '''.format(username)
+            query = '''select count(*) from users where username='{}' '''.format(username)
             self.cur.execute(query)
             self.conn.commit()
-            return self.cur.fetchone()[0] == username
+            return self.cur.fetchone()[0] == 1
         except (Exception, psycopg2.Error) as error:
             self.conn.rollback()
             print("Error occured while checking existing usernames:", error)
+            return False
 
     def createUser(self, username, password, fullname, a_token, admin_priv):
         name_split = fullname.split(' ')
         fname = ''
         lname = ''
-        if(len(name_split) == 2):
+        if(len(name_split) > 1):
             fname = name_split[0]
             lname = name_split[1]
         else:
@@ -116,7 +118,7 @@ class DBController:
         salt, en_pw = self.hash_password(password)
         rg_date = date.today()
         try:
-            if(admin_priv): self.user_value = 2007
+            if(admin_priv): self.user_value = 3681
             query = '''insert into users(rights_id, username, en_pw, salt, fname, lname, rg_date, access_token) values('{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}')'''.format(self.user_value, username, en_pw, salt, fname, lname, rg_date, a_token)
             self.cur.execute(query)
             self.conn.commit()      
@@ -133,6 +135,7 @@ class DBController:
         except (Exception, psycopg2.Error) as error:
             self.conn.rollback()
             print("Error occured while validating username and token:", error)
+            return False
 
     def getUserId(self, username):
         try:        
@@ -202,23 +205,23 @@ class DBController:
 
             query4 = '''INSERT INTO rights
                     (rights_id, rights_name)
-                    VALUES ( 2007, 'admin' )'''
+                    VALUES ( 3681, 'admin' )'''
             self.cur.execute(query4)
             self.conn.commit()
 
             query5 = '''INSERT INTO rights
                     (rights_id, rights_name)
-                    VALUES ( 2011, 'regUser' )'''
+                    VALUES ( 7015, 'regUser' )'''
             self.cur.execute(query5)
             self.conn.commit()
 
-            print('database done')
+            print('\nDatabase created successfully with existing admin account:\nUsername: admin\nPassword: admin\n')
 
             values = ('32f1ac0c1b4ea8ef16cd73ef7d6203dbbc640a0a8083a5a1d4c4c49b9026cbb04b530fd15636e012bf6c55c087840ba27acd371c80074537b0027d2996e68f48',
                         'f266f35bcd2e41ff81e3e148eac2bbc0', '$2a$10$mWp.O9mewMpC3gJLU5THN.jRTnr7D/kCfTc0NH.LkJwu/B69Ysuou')
             query6 = '''INSERT INTO users
                         ( rights_id, username, en_pw, salt, fname, lname, rg_date, access_token)
-                        VALUES ( 2007, 'admin', %s, %s, 'admin', 'admin', CURRENT_DATE, %s)'''
+                        VALUES ( 3681, 'admin', %s, %s, 'admin', 'admin', CURRENT_DATE, %s)'''
             self.cur.execute(query6, values)
             self.conn.commit()
         except(Exception, psycopg2.Error) as error:

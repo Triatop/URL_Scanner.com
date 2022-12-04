@@ -22,13 +22,7 @@ export default function CreateUser({user,userToken}){
         console.log(newToken)
         setShowResp(false);
         fetch(`http://localhost:8000/createuser?username=${uname}&password=${hashedPass}&fullname=${name}&newToken=${newToken}&adminPriv=${isChecked}&user=${user}&user_token=${userToken}`).then(res => res.json()).then(data => {
-            if(!data.auth){
-                setResponse('ERROR: Authentication Invalid!');
-            }else if(!data.creation){
-                setResponse(`The username ${uname} was already taken`);
-            }else{
-                setResponse(`The user ${uname} was created`);
-            }
+            setResponse(data.response);
             setShowResp(true);
         });
     }
