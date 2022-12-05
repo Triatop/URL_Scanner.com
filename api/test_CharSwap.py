@@ -8,6 +8,16 @@ def test_getData():
     assert(c_swp1.c_url == 'www.google.com')    #remove https:// and the final /
     return
 
+def test_getNrOfMalLinks():
+    c_swp1 = CharSwap()
+    assert(c_swp1.getsus_url() == "")
+    c_swp1.sus_url = 'www.göögle.com'
+    c_swp1.c_url = 'www.göögle.com'
+    assert(c_swp1.getsus_url() == "")
+    c_swp1.sus_url = 'www.google.com'
+    assert(c_swp1.getsus_url() == 'www.google.com')
+    return
+
 def test_stripWWW():
     test1 = 'https://www.google.com'    #yes www.
     test2 = 'https://sv.wikipedia.org/' #No www plus other subdomain.

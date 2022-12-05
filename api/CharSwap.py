@@ -12,6 +12,12 @@ class CharSwap:
         self.c_url = list(filter(None, i_url.split('/')))[1]
         return 1
 
+    def getsus_url(self):
+        if (self.c_url != self.sus_url):
+            return self.sus_url
+        else:
+            return ""
+
     def stripWWW(self):     #this is so comparison with the websites is possible later
         if list(filter(None, self.c_url.split('.')))[0] == 'www':   #split URL by the dots and check if the first part of the url is 'www'
             s_list = list(filter(None, self.c_url.split('.')))      #save the list
