@@ -84,7 +84,7 @@ def main(url1, username, report=True):
     u_obj.setSpecialCharater(u_scc.processData())                                       #Looking for special charactes
     u_obj.setCertificateValid(u_cert.processData(url1))                                 #Certificate validation
     u_obj.setURLLinks(u_mlin.isExternalSafe())                                          #Are the external links malicious/How malicious are they?
-    u_obj.setIsCharSwapped(u_cswp.isCharSwap)                                           #is it mimicing a website by swapping a char in the name to one that is similar
+    u_obj.setIsCharSwapped(u_cswp.isCharSwap())                                         #is it mimicing a website by swapping a char in the name to one that is similar
     u_obj.setPulseCount(u_tint.pulseCount(url1))                                        #How many pulses has it been included in?
     u_obj.setMalFileCount(u_tint.getMaliciousFilesCount(url1))                          #How many malicious files are associated with it
     logging.info(f"Done: Get features")
