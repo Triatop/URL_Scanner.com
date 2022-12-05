@@ -21,7 +21,7 @@ def loadData(file, ext):
     if ext == '.json':
         with open(file, 'r') as f:
             return json.load(f)
-theFile = 'theData.json'
+theFile = 'example.csv'
 ext = extention(theFile)
 jsonData = loadData(theFile, ext) 
 if ext == '.json':
@@ -49,7 +49,7 @@ def processData(start, steps):
 
 
 def makeWorkers():
-    workers = 50
+    workers = 5
     while len(jsonData)%workers != 0:
         workers -= 1
     return workers
@@ -67,7 +67,6 @@ def startThreads():
 
 startThreads()
 
-print(theVals)
 
 with open('reTestedData.csv', 'w') as file:
     writer = csv.writer(file)
