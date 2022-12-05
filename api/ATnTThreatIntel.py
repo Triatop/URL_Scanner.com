@@ -12,7 +12,7 @@ class ATnTThreatIntel:
             Returns Dictionary with {IP:<files count>}
         """
         url = self.url if url == "" else url
-        if self.checkValidInput(url, method = ".maliciousFiles()"):
+        if self.__checkValidInput(url, method = ".maliciousFiles()"):
             return None
         passive_dns = requests.get(f"https://otx.alienvault.com/api/v1/indicators/hostname/{url}/passive_dns").json()["passive_dns"]
         addresses = []
@@ -33,7 +33,7 @@ class ATnTThreatIntel:
         """
         """
         url = self.url if url == "" else url
-        if self.checkValidInput(url, method = ".getMaliciousFilesCount()"):
+        if self.__checkValidInput(url, method = ".getMaliciousFilesCount()"):
             return None
         passive_dns = requests.get(f"https://otx.alienvault.com/api/v1/indicators/hostname/{url}/passive_dns").json()["passive_dns"]
         addresses = []
@@ -60,21 +60,24 @@ class ATnTThreatIntel:
             Returns Geolocation
         """
         url = self.url if url == "" else url
-        if self.checkValidInput(url, method = ".getGeoLocation()"):
+        if self.__checkValidInput(url, method = ".getGeoLocation()"):
             return None
         return requests.get(f"https://otx.alienvault.com/api/v1/indicators/domain/{url}/geo").json()["flag_title"]
 
     def pulseCount(self, url = ""):
         """
             Checks otx.alienvault.com threat intel for known pulses
-            Returns amount of pulses the domain/url is included in.
+            Returns amount of pulses the domain is included in.
         """
         url = self.url if url == "" else url
-        if self.checkValidInput(url, method=".pulseCount()"):
+        if self.__checkValidInput(url, method=".pulseCount()"):
             return None
-        return requests.get(f"https://otx.alienvault.com/api/v1/indicators/domain/{url}/general").json()["pulse_info"]["count"]
+        url = self.__getDomain(url)
+        req = requests.get(f"https://otx.alienvault.com/api/v1/indicators/domain/{url}/general").json()
+        return req["pulse_info"]["count"]
+        
 
-    def checkValidInput(self, url, method):
+    def __checkValidInput(self, url, method):
         """
             Internal method, do not use outside of this class
         """
@@ -82,3 +85,10 @@ class ATnTThreatIntel:
             logging.warning(f"Invalid URL \"{url}\" was given to ATnTThreatIntel{method}")
             return 1
         return 0
+
+    def __getDomain(self, url):
+        url = re.split("w{3}\.", url)[1]
+        url = re.split("/", url)[0]
+        while(len(re.findall("\.", url)) > 1):
+            url = re.findall("\..*\.com$", url)[0][1:]
+        return url
