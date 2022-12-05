@@ -14,7 +14,7 @@ class ATnTThreatIntel:
         url = self.url if url == "" else url
         if self.__checkValidInput(url, method = ".maliciousFiles()"):
             return None
-        url = __getDomain(url)
+        url = self.__getDomain(url)
         passive_dns = requests.get(f"https://otx.alienvault.com/api/v1/indicators/hostname/{url}/passive_dns").json()["passive_dns"]
         addresses = []
         filesCount = {}
@@ -36,7 +36,7 @@ class ATnTThreatIntel:
         url = self.url if url == "" else url
         if self.__checkValidInput(url, method = ".getMaliciousFilesCount()"):
             return None
-        url = __getDomain(url)
+        url = self.__getDomain(url)
         passive_dns = requests.get(f"https://otx.alienvault.com/api/v1/indicators/hostname/{url}/passive_dns").json()["passive_dns"]
         addresses = []
         filesCount = requests.get("https://otx.alienvault.com/api/v1/indicators/hostname/{}/malware".format(url)).json()["count"]
@@ -64,7 +64,7 @@ class ATnTThreatIntel:
         url = self.url if url == "" else url
         if self.__checkValidInput(url, method = ".getGeoLocation()"):
             return None
-        url = __getDomain(url)
+        url = self.__getDomain(url)
         return requests.get(f"https://otx.alienvault.com/api/v1/indicators/domain/{url}/geo").json()["flag_title"]
 
     def pulseCount(self, url = ""):
