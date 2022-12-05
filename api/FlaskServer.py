@@ -21,7 +21,7 @@ def scanner():
     db_obj = DBController()
 
     #Validate user so the scan does not get stored on with the wrong user id
-    if(not db_obj.validateUser(username, user_token)):
+    if( not db_obj.validateUser(username, user_token) and username != ""):
         return {'report': 'Error: Authentication invalid'}
     
 
