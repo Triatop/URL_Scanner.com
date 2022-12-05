@@ -2,6 +2,7 @@
 /node_modules/.cache
 api/__pycache__
 .DS_Store
+key.txt
 
 api/bad.csv
 api/example.csv
