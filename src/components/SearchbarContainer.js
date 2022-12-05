@@ -7,7 +7,7 @@ import CrossMark from './CrossMark';
 
 //Arvid was here.
 
-function SearchbarContainer({user}) {
+function SearchbarContainer({user, userToken}) {
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setLoading] = useState(false);
   const [returnDict, setReturnDict] = useState('');
@@ -41,7 +41,7 @@ function SearchbarContainer({user}) {
     setShow(false)
     setLoading(true)
     setReturnDict('')
-    fetch(`http://localhost:8000/scanner?url=${inputValue}&username=${user}`).then(res => res.json()).then(data => {
+    fetch(`http://localhost:8000/scanner?url=${inputValue}&username=${user}&user_token=${userToken}`).then(res => res.json()).then(data => {
       setReturnDict(data)
       setLoading(false)
       setShow(true)

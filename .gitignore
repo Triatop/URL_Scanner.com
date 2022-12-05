@@ -13,3 +13,9 @@ api/tfTest.py
 api/yes.py
 
 /tfModel
+/tfModel-arm
+/.vs/VSWorkspaceState.json
+/.vs/slnx.sqlite
+/.vs/PythonSettings.json
+/.vs/ProjectSettings.json
+/.vs/URL_Scanner.com/v16/.suo

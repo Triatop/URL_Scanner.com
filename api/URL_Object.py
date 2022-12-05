@@ -14,6 +14,9 @@ class URL_Object:
         self.o_SpecialChar = 0
         self.o_CertificateValid = 0
         self.o_URLLinks = 0
+        self.o_IsCharSwapped = 0
+        self.o_PulseCount = 0
+        self.o_MalFileCount = 0
 
     def makeDict(self):
         self.a_dict = {
@@ -24,7 +27,10 @@ class URL_Object:
             5 : self.getURLLength(),                       #5 = Length
             6 : self.getSpecialCharater(),                 #6 = SpecialChar
             7 : bool(self.getCertificateValid()) ^ 1,      #7 = Certificate Validation
-            8 : self.getURLLinks()                         #8 = Malicous Links
+            8 : self.getURLLinks(),                        #8 = Malicous Links
+            9 : bool(self.getIsCharSwapped()),             #9 = Character Swap
+            10 : self.getPulseCount(),                     #10 = Pulse Count
+            11 : self.getMalFileCount()                    #11 = Malicious Files count
             }
         return
     
@@ -45,11 +51,11 @@ class URL_Object:
     def getIP(self):
         return self.o_URLip
 
-    def setSafe(self, i_safe):
+    def setSafe(self, i_safe):  #Safe Evaluator
         self.o_isSafe = i_safe
         return
 
-    def getSafe(self):
+    def getSafe(self):      
         return self.o_isSafe
 
     def setURLFavIcon(self, f_ic):
@@ -87,7 +93,7 @@ class URL_Object:
     def getURLLength(self):
         return self.o_URLLength
 
-    def setSpecialCharater(self, scc):
+    def setSpecialCharater(self, scc): #Special Character Check
         self.o_SpecialChar = scc
         return
 
@@ -101,12 +107,34 @@ class URL_Object:
     def getCertificateValid(self):
         return self.o_CertificateValid
 
-    def setURLLinks(self, m_link):
+    def setURLLinks(self, m_link): #Malicious external Links Check
         self.o_URLLinks = m_link
         return
 
-    def getURLLinks(self):
+    def getURLLinks(self):  
         return self.o_URLLinks
+
+    def setIsCharSwapped(self, c_swp):
+        self.o_IsCharSwapped = c_swp
+        return 
+
+    def getIsCharSwapped(self):
+        return self.o_IsCharSwapped
+
+    def setPulseCount(self, p_cnt):
+        self.o_PulseCount = p_cnt
+        return
+
+    def getPulseCount(self):
+        return self.o_PulseCount
+
+    def setMalFileCount(self, m_fil): #Malicious File Count
+        self.o_MalFileCount = m_fil
+        return
+
+    def getMalFileCount(self):
+        return self.o_MalFileCount
+
 
 
 

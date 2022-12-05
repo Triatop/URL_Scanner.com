@@ -92,7 +92,7 @@ function App() {
       </div>
       <div className='container'>
         <Routes>
-          <Route path='/' element={<SearchbarContainer user={user}/>} />
+          <Route path='/' element={<SearchbarContainer user={user} userToken={userToken}/>} />
           <Route path='/login' element={<Login setLoginStatus={setLoginStatus}/>} />
           <Route path='/logout' element={<Logout setLoginStatus={setLoginStatus}/>} />
           <Route path='/createuser' element={<ProtectedRouteAdmin > <CreateUser user={user} userToken={userToken}/> </ProtectedRouteAdmin> } /> 

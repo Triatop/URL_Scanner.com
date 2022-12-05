@@ -8,7 +8,7 @@ class SafeEvaluator:
         if('arm' in platform.platform()):
             self.model = load_model('../tfModel-arm')
         else:
-            self.model.load_model('../tfModel')
+            self.model = load_model('../tfModel')
 
     def isSafe(self, dict):
         # zippedLists = list(zip(self.weights, (dict.values())))

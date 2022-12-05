@@ -12,10 +12,12 @@ from SpecialCharactersCheck import SpecialCharactersCheck
 from certValidator import CertValidator
 from PortCheck import PortCheck
 from DB_Controller import DBController
+from CharSwap import CharSwap
+from ATnTThreatIntel import ATnTThreatIntel
 
 
 
-def main(url1, username, report=True, makeFixedData=False, val=False):
+def main(url1, username, report=True):
     u_ctrl = UrlController()
     url1 = u_ctrl.addProtocol(url1)
     
@@ -29,7 +31,7 @@ def main(url1, username, report=True, makeFixedData=False, val=False):
     
     #Check if wevsite is valid (exists) - else early return
     if not u_ctrl.validateUrl(url1): #<--- if website fails to validate
-        return {"valid": "False", "report": "- Invalid URL, website does not exist, check for spelling errors"}
+        return {"valid": False, "report": "- Invalid URL, website does not exist, check for spelling errors"}
 
     #Attribute Classes
     u_obj = URL_Object() 
@@ -41,6 +43,8 @@ def main(url1, username, report=True, makeFixedData=False, val=False):
     u_len = LengthURL()
     u_age = SiteAge_URL() 
     u_port = PortCheck()
+    u_cswp = CharSwap()
+    u_tint = ATnTThreatIntel() 
 
     #Funciton Classes
     w_scrap = Webscraper()
@@ -50,6 +54,7 @@ def main(url1, username, report=True, makeFixedData=False, val=False):
     #Set Values
     u_obj.setURL(url1)
     u_scc.setData(url1)
+    u_cswp.getData(url1)
     w_scrap.setURL(url1)
     u_mlin.getData(url1, w_scrap.findLinks())
     u_obj.setIP(u_ctrl.getIP(url1))                                     #Try Set IP We don't use it for anything though
@@ -58,25 +63,29 @@ def main(url1, username, report=True, makeFixedData=False, val=False):
     u_prot.getData(w_scrap.exfiltrateProtocol()) #GETTING PROTOCOLS
 
     #HERE ARE THE FINAL VALUES
-    u_obj.setURLLength(u_len.isURLLong())                               #Is it too long
-    u_obj.setURLFavIcon(u_fav.hasFavicon(w_scrap.extractFavicon()))     #URL Fav Icon check
-    u_obj.setURLSecureProtocol(u_prot.isSecure())                       #Security check
-    u_obj.setCheckPort(u_port.checkPorts(u_obj.getIP(), w_scrap.exfiltrateProtocol()))                    #Is the site runnig on the right port?
-    u_obj.setURLLength(u_len.isURLLong())                               #Is it too long
-    u_obj.setURLSiteAge(u_age.isInLimit(w_scrap.exfiltrateSiteAge()))   #How old is site? 
-    u_obj.setSpecialCharater(u_scc.processData())                       #Looking for special charactes
-    u_obj.setCertificateValid(u_cert.processData(url1))                 #Certificate validation
-    u_obj.setURLLinks(u_mlin.isExternalSafe())                          #Are the external links malicious/How malicious are they?
+    u_obj.setURLLength(u_len.isURLLong())                                               #Is it too long
+    u_obj.setURLFavIcon(u_fav.hasFavicon(w_scrap.extractFavicon()))                     #URL Fav Icon check
+    u_obj.setURLSecureProtocol(u_prot.isSecure())                                       #Security check
+    u_obj.setCheckPort(u_port.checkPorts(u_obj.getIP(), w_scrap.exfiltrateProtocol()))  #Is the site runnig on the right port?
+    u_obj.setURLLength(u_len.isURLLong())                                               #Is it too long
+    u_obj.setURLSiteAge(u_age.isInLimit(w_scrap.exfiltrateSiteAge()))                   #How old is site? 
+    u_obj.setSpecialCharater(u_scc.processData())                                       #Looking for special charactes
+    u_obj.setCertificateValid(u_cert.processData(url1))                                 #Certificate validation
+    u_obj.setURLLinks(u_mlin.isExternalSafe())                                          #Are the external links malicious/How malicious are they?
+    u_obj.setIsCharSwapped(u_cswp.isCharSwap)                                           #is it mimicing a website by swapping a char in the name to one that is similar
+    u_obj.setPulseCount(u_tint.pulseCount(url1))                                        #How many pulses has it been included in?
+    u_obj.setMalFileCount(u_tint.getMaliciousFilesCount(url1))                          #How many malicious files are associated with it
+
 
     #Make the attribute dictionary and create report
     u_obj.makeDict()                                    
     r_mkr.createReport(u_obj.getDict(), w_scrap.exfiltrateSiteAge().days, u_mlin.getNrOfMalLinks())
     u_obj.setSafe(u_safe.isSafe(u_obj.getDict()))                 #Safe eveluator check
-    if(makeFixedData):
-        u_obj.setSafe(bool(val))
+
+
     if(report):
         db_obj = DBController()
-        db_obj.insertScan(username, u_ctrl.encryptUrl(url1), u_obj.getSafe(), u_obj.getDict())
-        return {"valid": "True","report": (f"\n\n{r_mkr.getReport()}"), "binarySafe": u_obj.getSafe(), "reDirect": f"Redirected: {urlRedirect} \nScanning: {url1}"}
+        db_obj.insertScan(username, u_ctrl.encryptUrl(url1), u_obj.getSafe(), u_obj.getDict(), w_scrap.exfiltrateSiteAge().days, u_mlin.getNrOfMalLinks())
+        return {"valid": True,"report": (f"\n\n{r_mkr.getReport()}"), "binarySafe": u_obj.getSafe(), "reDirect": f"Redirected: {urlRedirect} \nScanning: {url1}"}
     else:
         return u_obj.getDict()

@@ -1,8 +1,8 @@
 import {useState, useEffect} from 'react'
 import LoadingSpinner from '../components/LoadingSpinner'
 import './History.css'
-import CheckMark from '../components/CheckMark';
-import CrossMark from '../components/CrossMark';
+import HistoryReport from '../components/HistoryReport';
+
 
 export default function UserHistory({user, userToken}) {
     const [isLoading, setLoading] = useState(false);
@@ -40,11 +40,8 @@ export default function UserHistory({user, userToken}) {
                         {Object.keys(userHistoryDict[key1]).map((key2, index2) => {
                             return (
                             <div key2={index2}>
-                                <ul className='histRow' id='history'>
-                                    <li className='li1'>{userHistoryDict[key1][key2].url}</li>
-                                    <li className='li2'>{userHistoryDict[key1][key2].date}</li>     
-                                    <li className='li3'>{userHistoryDict[key1][key2].safe ? <CheckMark showText={false}/>: <CrossMark showText={false}/>}</li>
-                                </ul>
+                                <HistoryReport url={userHistoryDict[key1][key2].url} date={userHistoryDict[key1][key2].date} safe={userHistoryDict[key1][key2].safe} report={userHistoryDict[key1][key2].report}></HistoryReport>
+
                             </div>
                             );
                         })}

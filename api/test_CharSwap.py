@@ -76,20 +76,24 @@ def test_isCharSwap():
     test2 = 'http://www.90ö91e.com'     #Swaps and does exist in list
     test3 = 'https://döden.se'          #Swaps and doens not exist in list
     test4 = 'https://dooden.se'         #No Swaps does not exist in list
+    test5 = 'https://sv.wîkīpedia.org'  #Only accents and exists in list (last elemnet)
 
     c_swp1 = CharSwap()
     c_swp2 = CharSwap()
     c_swp3 = CharSwap()
     c_swp4 = CharSwap()
+    c_swp5 = CharSwap()
 
     c_swp1.c_url = list(filter(None, test1.split('/')))[1]
     c_swp2.c_url = list(filter(None, test2.split('/')))[1]
     c_swp3.c_url = list(filter(None, test3.split('/')))[1]
     c_swp4.c_url = list(filter(None, test4.split('/')))[1]
+    c_swp5.c_url = list(filter(None, test5.split('/')))[1]
 
     assert(c_swp1.isCharSwap() == 0)
     assert(c_swp2.isCharSwap() == 1)
     assert(c_swp3.isCharSwap() == 0)
     assert(c_swp4.isCharSwap() == 0)
+    assert(c_swp5.isCharSwap() == 1)
 
     return

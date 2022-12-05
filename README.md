@@ -29,6 +29,7 @@ Required packages:
  * pip install python-whois
  * pip install -U flask-cors
  * pip install unidecode
+ * pip install serviceping (missing in piprequirements.txt)
 
 
 Setup Instructions:
