@@ -77,7 +77,10 @@ class ATnTThreatIntel:
             return None
         url = self.__getDomain(url)
         req = requests.get(f"https://otx.alienvault.com/api/v1/indicators/domain/{url}/general").json()
-        return req["pulse_info"]["count"]
+        try: 
+            return req["pulse_info"]["count"]
+        except KeyError:
+            return None
         
 
     def __checkValidInput(self, url, method):
@@ -90,8 +93,10 @@ class ATnTThreatIntel:
         return 0
 
     def __getDomain(self, url):
-        url = re.split("w{3}\.", url)[1]
+        url = re.split("//", url)[1]
+        try:
+            url = re.split("w{3}\.", url)[1]
+        except IndexError:
+            pass
         url = re.split("/", url)[0]
-        while(len(re.findall("\.", url)) > 1):
-            url = re.findall("\..*\.com$", url)[0][1:]
         return url
