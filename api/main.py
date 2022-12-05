@@ -15,9 +15,14 @@ from DB_Controller import DBController
 from CharSwap import CharSwap
 from ATnTThreatIntel import ATnTThreatIntel
 
+import logging
+
 
 
 def main(url1, username, report=True):
+    FORMAT = f'%(asctime)s-%(levelname)s-{username}-%(message)s'
+    logging.basicConfig(filename="urlscan.log", filemode='a',format=FORMAT, level=logging.INFO, )
+    logging.info(f"Starting: Scan on {url1}")
     u_ctrl = UrlController()
     url1 = u_ctrl.addProtocol(url1)
     
@@ -34,6 +39,7 @@ def main(url1, username, report=True):
         return {"valid": False, "report": "- Invalid URL, website does not exist, check for spelling errors"}
 
     #Attribute Classes
+    logging.info(f"Starting: Creating attribute objects")
     u_obj = URL_Object() 
     u_fav = Favicon_URL()
     u_prot = Protocol_URL()
@@ -44,25 +50,31 @@ def main(url1, username, report=True):
     u_age = SiteAge_URL() 
     u_port = PortCheck()
     u_cswp = CharSwap()
-    u_tint = ATnTThreatIntel() 
+    u_tint = ATnTThreatIntel()
+    logging.info(f"Done: Creating attribute objects")
 
-    #Funciton Classes
+    #Function Classes
+    logging.info(f"Starting: Creating function objects")
     w_scrap = Webscraper()
     r_mkr = ReportMaker()
     u_safe = SafeEvaluator()
+    logging.info(f"Done: Creating function objects")
 
     #Set Values
+    logging.info(f"Starting: Set initial object values")
     u_obj.setURL(url1)
     u_scc.setData(url1)
     u_cswp.getData(url1)
     w_scrap.setURL(url1)
     u_mlin.getData(url1, w_scrap.findLinks())
     u_obj.setIP(u_ctrl.getIP(url1))                                     #Try Set IP We don't use it for anything though
+    logging.info(f"Done: Set initial object values")
 
     u_len.getData(url1) #URL Size check
     u_prot.getData(w_scrap.exfiltrateProtocol()) #GETTING PROTOCOLS
 
     #HERE ARE THE FINAL VALUES
+    logging.info(f"Starting: Get features")
     u_obj.setURLLength(u_len.isURLLong())                                               #Is it too long
     u_obj.setURLFavIcon(u_fav.hasFavicon(w_scrap.extractFavicon()))                     #URL Fav Icon check
     u_obj.setURLSecureProtocol(u_prot.isSecure())                                       #Security check
@@ -75,13 +87,17 @@ def main(url1, username, report=True):
     u_obj.setIsCharSwapped(u_cswp.isCharSwap)                                           #is it mimicing a website by swapping a char in the name to one that is similar
     u_obj.setPulseCount(u_tint.pulseCount(url1))                                        #How many pulses has it been included in?
     u_obj.setMalFileCount(u_tint.getMaliciousFilesCount(url1))                          #How many malicious files are associated with it
+    logging.info(f"Done: Get features")
 
 
     #Make the attribute dictionary and create report
+    logging.info(f"Starting: Report creation")
     u_obj.makeDict()                                    
     r_mkr.createReport(u_obj.getDict(), w_scrap.exfiltrateSiteAge().days, u_mlin.getNrOfMalLinks())
     u_obj.setSafe(u_safe.isSafe(u_obj.getDict()))                 #Safe eveluator check
+    logging.info(f"Done: Report creation")
 
+    logging.info(f"Done: scan on {url1}")
 
     if(report):
         db_obj = DBController()
@@ -89,3 +105,4 @@ def main(url1, username, report=True):
         return {"valid": True,"report": (f"\n\n{r_mkr.getReport()}"), "binarySafe": u_obj.getSafe(), "reDirect": f"Redirected: {urlRedirect} \nScanning: {url1}"}
     else:
         return u_obj.getDict()
+
