@@ -66,7 +66,7 @@ def startThreads():
 startThreads()
 
 
-with open('reTestedData.csv', 'w') as file:
+with open('trainDataWithoutMalicious.csv', 'w') as file:
     writer = csv.writer(file)
     writer.writerow(data)
     writer.writerows(theVals)
