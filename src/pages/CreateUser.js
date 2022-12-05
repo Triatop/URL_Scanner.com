@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import bcrypt from 'bcryptjs'
 import './AuthForm.css';
 
@@ -26,6 +26,10 @@ export default function CreateUser({user,userToken}){
             setShowResp(true);
         });
     }
+
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [])
 
     return (
         <div>

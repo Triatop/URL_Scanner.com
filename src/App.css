@@ -21,6 +21,23 @@
     text-align: center;
 }
 
+.topRow{
+    overflow: hidden;
+    position: fixed; /* Set the navbar to fixed position */
+    top: 0; /* Position the navbar at the top of the page */
+    width: 100%; /* Full width */
+    z-index: 1030;
+}
+
+#dark .topRow{
+    background-color:inherit;
+    box-shadow: 0px 0px 12px 2px #4b6388;
+}
+
+#light .topRow{
+    background-color: inherit;
+    box-shadow: 0px 0px 12px 2px;
+}
 
 .toprowchild {
     display: flex;
@@ -38,9 +55,6 @@
     color: #3baefb;
     overflow: hidden;
     }
-
-
-
 
 body {
     margin: 0;

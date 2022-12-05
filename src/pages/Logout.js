@@ -1,4 +1,6 @@
 import {useNavigate} from 'react-router-dom';
+import {useEffect} from 'react';
+
 import "./Logout.css"
 
 export default function Logout({setLoginStatus}) {
@@ -14,6 +16,10 @@ export default function Logout({setLoginStatus}) {
         event.preventDefault()
         navigate('/');
     }
+
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [])
 
     return (
         <div className='logout'>

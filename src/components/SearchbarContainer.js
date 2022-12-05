@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './SearchbarContainer.css';
 import './Button.css';
 import LoadingSpinner from './LoadingSpinner';
@@ -33,6 +33,10 @@ function SearchbarContainer({user, userToken}) {
 
     }
   }
+
+  useEffect(() => {
+      window.scrollTo(0, 0)
+  }, [])
 
   function StartScanner() {
     setDivMargin('large')
