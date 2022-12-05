@@ -33,15 +33,13 @@ if ext == '.csv':
 
 
 def processData(start, steps):
-
         for i in range(start, start+steps):
             try:
                 val = {'Site' : keysList[i]}
-                val.update(func_timeout.func_timeout(30, main.main, (keysList[i], False)))
+                val.update(func_timeout.func_timeout(30, main.main, (keysList[i],'admin', False)))
                 val['IsSafe'] = (0 if valueList[i] == False else 1)
-                print(val)
                 if('valid' not in val):
-                    print(i, 'valid')
+                    print(val)
                     theVals.append(val.values())
             except:
                 pass
