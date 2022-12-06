@@ -93,13 +93,13 @@ def main(url1, username, report=True):
     #Make the attribute dictionary and create report
     logging.info(f"Starting: Report creation")
     u_obj.makeDict()                                    
-    r_mkr.createReport(u_obj.getDict(), w_scrap.exfiltrateSiteAge().days, u_mlin.getNrOfMalLinks())
-    # u_obj.setSafe(u_safe.isSafe(u_obj.getDict()))                 #Safe eveluator check
+    r_mkr.createReport(u_obj.getDict(), w_scrap.exfiltrateSiteAge().days, u_mlin.getNrOfMalLinks(),u_cswp.getsus_url() )
+    u_obj.setSafe(u_safe.isSafe(u_obj.getDict()))                 #Safe eveluator check
     logging.info(f"Done: Report creation")
     logging.info(f"Done: scan on {url1}")
     if(report):
         db_obj = DBController()
-        db_obj.insertScan(username, u_ctrl.encryptUrl(url1), u_obj.getSafe(), u_obj.getDict(), w_scrap.exfiltrateSiteAge().days, u_mlin.getNrOfMalLinks())
+        db_obj.insertScan(username, u_ctrl.encryptUrl(url1), u_obj.getSafe(), u_obj.getDict(), w_scrap.exfiltrateSiteAge().days, u_mlin.getNrOfMalLinks(), u_cswp.getsus_url())
         return {"valid": True,"report": (f"\n\n{r_mkr.getReport()}"), "binarySafe": u_obj.getSafe(), "reDirect": f"Redirected: {urlRedirect} \nScanning: {url1}"}
     else:
         return u_obj.getDict()

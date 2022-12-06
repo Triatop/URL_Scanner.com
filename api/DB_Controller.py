@@ -74,7 +74,7 @@ class DBController:
     def getHistory(self, username):
         try:
             u_id = self.getUserId(username)
-            query = '''select en_url , "date", s_value, attributes, site_age, mal_links  from scans where user_id = %s order by date DESC;'''
+            query = '''select en_url , "date", s_value, attributes, site_age, mal_links, char_swap_url  from scans where user_id = %s order by date DESC;'''
             self.cur.execute(query, str(u_id))
             self.conn.commit()
             return self.cur.fetchall()
@@ -148,11 +148,11 @@ class DBController:
             print("Error occured while checking for existing user ID:", error) 
             return None 
 
-    def insertScan(self, username, url, s_value, a_dict, site_age, mal_links):
+    def insertScan(self, username, url, s_value, a_dict, site_age, mal_links, char_swap_url):
         user_id = self.getUserId(username)
         try:        
-            query = ''' insert into scans(user_id, en_url, date, s_value, attributes, site_age, mal_links) values(%s, %s, CURRENT_DATE, %s, %s, %s, %s)  '''
-            self.cur.execute(query, (user_id, url, s_value, json.dumps(a_dict), site_age, mal_links))
+            query = ''' insert into scans(user_id, en_url, date, s_value, attributes, site_age, mal_links, char_swap_url) values(%s, %s, CURRENT_DATE, %s, %s, %s, %s, %s)  '''
+            self.cur.execute(query, (user_id, url, s_value, json.dumps(a_dict), site_age, mal_links, char_swap_url))
             self.conn.commit()
         except (Exception, psycopg2.Error) as error:
             self.conn.rollback()
@@ -198,6 +198,7 @@ class DBController:
                     attributes jsonb NOT NULL,
                     site_age int NOT NULL,
                     mal_links int NOT NULL,
+                    char_swap_url VARCHAR ( 255 ),
                     foreign key (user_id) references users(user_id)
                     )'''
             self.cur.execute(query3)
