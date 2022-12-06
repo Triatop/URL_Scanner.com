@@ -1,60 +1,40 @@
 # URL_Scanner.com
 
 SBOM:
-* sockets (Need to manually check this, might have been removed)
-
-* requests
-* re
-* logging
-* ssl
-* socket
-** gethostbyname
-* certifi
-* unidecode
-** unidecode
-* csv
-* json
-* func_timeout
-* threading
-* os
-* pandas
-* datetime
-** date
-** datetime
-** timedelta
-* psycopg2
-* hashlib
-* flask
-** Flask
-** request
-* time
-* flask_cors
-** CORS
-* urllib
-* math
-* serviceping
-* keras.models
-** load_model
-** Sequential
-* platform
-* urllib.parse
-** urlparse
-* keras.layers
-** Dense
-* sklearn.model_selection
-* sklearn.metrics
-** accuracy_score
-** f1_score
-** precision_score
-** recall_score
-* random
-* string
-* cryptography.fernet
-* requests_html
-** HTMLSession
-* whois
-* bs4
-** BeautifulSoup
+* requests : []
+* re : []
+* logging : []
+* ssl : []
+* socket : ['gethostbyname']
+* certifi : []
+* unidecode : ['unidecode']
+* csv : []
+* json : []
+* func_timeout : []
+* threading : []
+* os : []
+* pandas : []
+* datetime : ['date', 'date', 'datetime,', 'timedelta']
+* psycopg2 : []
+* hashlib, : []
+* flask : ['Flask,', 'request']
+* time : []
+* flask_cors : ['CORS']
+* urllib : []
+* math : []
+* serviceping : []
+* keras.models : ['load_model', 'Sequential,', 'load_model']
+* platform : []
+* urllib.parse : ['urlparse']
+* keras.layers : ['Dense']
+* sklearn.model_selection : []
+* sklearn.metrics : ['accuracy_score,', 'f1_score,', 'precision_score,', 'recall_score']
+* random : []
+* string : []
+* cryptography.fernet : []
+* requests_html : ['HTMLSession']
+* whois : []
+* bs4 : ['BeautifulSoup']
 
 
 Required packages:
