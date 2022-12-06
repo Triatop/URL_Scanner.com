@@ -75,17 +75,29 @@ def main(url1, username, report=True):
 
     #HERE ARE THE FINAL VALUES
     logging.info(f"Starting: Get features")
+    logging.info(f"Fetching: URL Length")                                           
     u_obj.setURLLength(u_len.isURLLong())                                               #Is it too long
+    logging.info(f"Fetching: Fabicon")
     u_obj.setURLFavIcon(u_fav.hasFavicon(w_scrap.extractFavicon()))                     #URL Fav Icon check
+    logging.info(f"Fetching: Protocol")
     u_obj.setURLSecureProtocol(u_prot.isSecure())                                       #Security check
+    logging.info(f"Fetching: Port Check")
     u_obj.setCheckPort(u_port.checkPorts(u_obj.getIP(), w_scrap.exfiltrateProtocol()))  #Is the site runnig on the right port?
+    logging.info(f"Fetching: URL Length")
     u_obj.setURLLength(u_len.isURLLong())                                               #Is it too long
+    logging.info(f"Fetching: Age Limit")
     u_obj.setURLSiteAge(u_age.isInLimit(w_scrap.exfiltrateSiteAge()))                   #How old is site? 
+    logging.info(f"Fetching: Special Character")
     u_obj.setSpecialCharater(u_scc.processData())                                       #Looking for special charactes
+    logging.info(f"Fetching: Certificate")
     u_obj.setCertificateValid(u_cert.processData(url1))                                 #Certificate validation
+    logging.info(f"Fetching: Malicious Links")
     u_obj.setURLLinks(u_mlin.isExternalSafe())                                          #Are the external links malicious/How malicious are they?
+    logging.info(f"Fetching: Character Swap")
     u_obj.setIsCharSwapped(u_cswp.isCharSwap())                                         #is it mimicing a website by swapping a char in the name to one that is similar
+    logging.info(f"Fetching: Pulse Count")
     u_obj.setPulseCount(u_tint.pulseCount(url1))                                        #How many pulses has it been included in?
+    logging.info(f"Fetching: Malicious Files")
     u_obj.setMalFileCount(u_tint.getMaliciousFilesCount(url1))                          #How many malicious files are associated with it
     logging.info(f"Done: Get features")
 
@@ -98,8 +110,10 @@ def main(url1, username, report=True):
     logging.info(f"Done: Report creation")
     logging.info(f"Done: scan on {url1}")
     if(report):
+        logging.info(f"Starting: Inserting scan in Data Base")
         db_obj = DBController()
         db_obj.insertScan(username, u_ctrl.encryptUrl(url1), u_obj.getSafe(), u_obj.getDict(), w_scrap.exfiltrateSiteAge().days, u_mlin.getNrOfMalLinks(), u_cswp.getsus_url())
+        logging.info(f"Done: Inserting scan in Data Base")
         return {"valid": True,"report": (f"\n\n{r_mkr.getReport()}"), "binarySafe": u_obj.getSafe(), "reDirect": f"Redirected: {urlRedirect} \nScanning: {url1}"}
     else:
         return u_obj.getDict()
