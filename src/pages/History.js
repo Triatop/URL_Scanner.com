@@ -29,6 +29,10 @@ export default function History({user, userToken}) {
         });
       }, [user,userToken]);
 
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [])
+
     return(
         <div className='history'>
             <h1>HISTORY</h1>
