@@ -45,6 +45,7 @@ class CharSwap:
             self.sus_url = self.sus_url.replace('0', 'o')
             self.sus_url = self.sus_url.replace('р', 'p')
             self.sus_url = self.sus_url.replace('5', 's')
+            self.sus_url = self.sus_url.replace('ш', 'w')
             return 1
 
         else: return 0
