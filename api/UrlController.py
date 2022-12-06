@@ -35,7 +35,7 @@ class UrlController:
             test = requests.get(url, headers=headers)
             if not test.ok: return False
         except:
-            pass
+            return False
         return True
 
     def getIP(self, url):
