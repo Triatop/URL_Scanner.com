@@ -58,7 +58,7 @@ class ML:
         print('Recall :', recall_score(self.yTest, data))
 
 
-ml =  ML('api/example.csv')
+ml =  ML('api/trainedData.csv')
 
 ml.splitData()
 ml.loadModel()
