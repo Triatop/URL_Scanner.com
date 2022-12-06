@@ -1,22 +1,61 @@
 # URL_Scanner.com
 
 SBOM:
-* requests_html
-* re
-* os
-* sockets
-* serviceping
-* cryptography.fernet
+* sockets (Need to manually check this, might have been removed)
+
 * requests
-* flask
-* datetime
-* psycopg
-* CORS
-* urllib
-* json
-* math
+* re
+* logging
+* ssl
+* socket
+** gethostbyname
+* certifi
 * unidecode
+** unidecode
 * csv
+* json
+* func_timeout
+* threading
+* os
+* pandas
+* datetime
+** date
+** datetime
+** timedelta
+* psycopg2
+* hashlib
+* flask
+** Flask
+** request
+* time
+* flask_cors
+** CORS
+* urllib
+* math
+* serviceping
+* keras.models
+** load_model
+** Sequential
+* platform
+* urllib.parse
+** urlparse
+* keras.layers
+** Dense
+* sklearn.model_selection
+* sklearn.metrics
+** accuracy_score
+** f1_score
+** precision_score
+** recall_score
+* random
+* string
+* cryptography.fernet
+* requests_html
+** HTMLSession
+* whois
+* bs4
+** BeautifulSoup
+
 
 Required packages:
  * pip install pytest (For automated testing only)
