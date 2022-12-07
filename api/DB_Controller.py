@@ -74,7 +74,7 @@ class DBController:
     def getHistory(self, username):
         try:
             u_id = self.getUserId(username)
-            query = '''select en_url , "date", s_value, attributes, site_age, mal_links, char_swap_url  from scans where user_id = %s order by date DESC;'''
+            query = '''select en_url , "date", s_value, attributes, site_age, mal_links, char_swap_url  from scans where user_id = %s order by scan_id DESC;'''
             self.cur.execute(query, str(u_id))
             self.conn.commit()
             return self.cur.fetchall()
