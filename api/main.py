@@ -25,12 +25,12 @@ def main(url1, username, report=True):
     logging.info(f"Starting: Scan on {url1}")
     u_ctrl = UrlController()
     url1 = u_ctrl.addProtocol(url1)
+    original_url = url1
     
     #Redirect check
     urlRedirect = u_ctrl.checkRedirect(url1)
     if url1 != urlRedirect:
         url1 = urlRedirect
-        url2 = url1
         urlRedirect = True
     else:
         urlRedirect = False
@@ -65,7 +65,8 @@ def main(url1, username, report=True):
     logging.info(f"Starting: Set initial object values")
     u_obj.setURL(url1)
     u_scc.setData(url1)
-    u_cswp.getData(url2 if urlRedirect == True else url1)
+    print(original_url)
+    u_cswp.getData(original_url)
     w_scrap.setURL(url1)
     u_mlin.getData(url1, w_scrap.findLinks())
     u_obj.setIP(u_ctrl.getIP(url1))                                     #Try Set IP We don't use it for anything though
