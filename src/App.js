@@ -15,52 +15,48 @@ import {DarkModeToggle} from '@anatoliygatt/dark-mode-toggle';
 
 function App() {
   
-  const [mode, setMode] = useState("dark");           //Darkmode - Lightmode
-  const [user, setUser] = useState('');               //Not empty if the user is logged in
-  const [admin, setAdmin] = useState(false);          //True if the the logged in user is an Admin
-  const [userToken, setUserToken] = useState(''); //Session token connected to the user
+  const loadedMode = localStorage.getItem("mode")
+    ? JSON.parse(localStorage.getItem("mode"))
+    : "dark";
+  
+  const loadedUser = localStorage.getItem("user")
+    ? JSON.parse(localStorage.getItem("user"))
+    : "";
+  
+  const loadedAdmin = localStorage.getItem("admin")
+    ? JSON.parse(localStorage.getItem("admin"))
+    : false;
 
-  const setLoginStatus = (username,isAdmin, token) => { //passed into Login and Logout to get info about the user
+  const loadedToken = localStorage.getItem("userToken")
+    ? JSON.parse(localStorage.getItem("userToken"))
+    : "";
+
+  const [mode, setMode] = useState(loadedMode);             //Darkmode - Lightmode
+  const [user, setUser] = useState(loadedUser);             //Not empty if the user is logged in
+  const [admin, setAdmin] = useState(loadedAdmin);          //True if the the logged in user is an Admin
+  const [userToken, setUserToken] = useState(loadedToken);  //Session token connected to the user
+
+  const setLoginStatus = (username,isAdmin, token) => {     //passed into Login and Logout to get info about the user
     setUser(username);
     setAdmin(isAdmin);
     setUserToken(token);
   }
 
-  useEffect(() => {
-    const data = window.localStorage.getItem('userToken');  //get admin when window is refreshed
-    if ( data !== null ) setUserToken(JSON.parse(data));
-  }, []);
-
   useEffect(()=>{
-    window.localStorage.setItem('userToken', JSON.stringify(userToken)) //store admin when windows is refreshed
-  },[userToken]);
-
-  useEffect(() => {
-    const data = window.localStorage.getItem('admin');  //get admin when window is refreshed
-    if ( data !== null ) setAdmin(JSON.parse(data));
-  }, []);
-
+    window.localStorage.setItem('mode', JSON.stringify(mode))
+  },[mode]);
+  
   useEffect(()=>{
-    window.localStorage.setItem('admin', JSON.stringify(admin)) //store admin when windows is refreshed
+    window.localStorage.setItem('user', JSON.stringify(user))
+  },[user]);
+  
+  useEffect(()=>{
+    window.localStorage.setItem('admin', JSON.stringify(admin))
   },[admin]);
 
-  useEffect(() => {
-    const data = window.localStorage.getItem('user'); //get user when window is refreshed
-    if ( data !== null ) setUser(JSON.parse(data));
-  }, []);
-
   useEffect(()=>{
-    window.localStorage.setItem('user', JSON.stringify(user)) //store user when window is refreshed
-  },[user]);
-
-  useEffect(() => {
-    const data = window.localStorage.getItem('darkmode'); //get mode when window is refreshed
-    if ( data !== null ) setMode(JSON.parse(data));
-  }, []);
-
-  useEffect(()=>{
-    window.localStorage.setItem('darkmode', JSON.stringify(mode)) //store mode when window is refreshed
-  },[mode]);
+    window.localStorage.setItem('userToken', JSON.stringify(userToken))
+  },[userToken]);
 
   const ProtectedRouteUser = ({ children }) => { //protect routes from unregisterd users
     if (user === '') {

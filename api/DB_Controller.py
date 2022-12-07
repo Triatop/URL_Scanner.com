@@ -8,12 +8,15 @@ from UrlController import UrlController
 class DBController:
     def __init__(self):
         try:
+            with open('settings.json', 'r') as json_file:
+                settings = json.load(json_file)
+            json_file.close()
             self.conn = psycopg2.connect(
-                host = 'localhost',
-                dbname = 'postgres',
-                user = 'postgres',
-                password = 'url_scanner1',
-                port = 5432
+                host = settings['host'],
+                dbname = settings['dbname'],
+                user = settings['user'],
+                password = settings['password'],
+                port = settings['port']
             )
             self.cur = self.conn.cursor()
             self.user_value = 7015
@@ -234,7 +237,3 @@ class DBController:
             self.cur.close()
         if self.conn is not None:
             self.conn.close()
-
-if __name__ == "__main__":
-    db_obj = DBController()
-    db_obj.setupDB()
