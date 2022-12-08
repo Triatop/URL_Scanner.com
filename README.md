@@ -76,6 +76,7 @@ Setup database and IPQS instructions:
  * Scroll down untill you see 'Private Key' and write down the API-key.
  * Run the command 'cd api && python setup.py && cd ..' or 'yarn setup' in the terminal inside this direcotry.
  * Follow the guide in the terminal window and insert the settings for the database and the API-key.
+ * To reset the database (for some reason) run the command 'cd api && python DB_Controller.py && cd ..' or 'yarn reset-db'
 
 User instructions:
  * Login by pressing the login button at the top.
