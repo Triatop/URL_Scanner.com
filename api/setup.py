@@ -1,5 +1,6 @@
 import json
 from DB_Controller import DBController
+import sys
 
 
 
@@ -34,9 +35,12 @@ def setup():
             db_obj = DBController()
             db_obj.setupDB()
             
-            DB_SETUP = True            
+            DB_SETUP = True 
+        except KeyboardInterrupt:
+                sys.exit()           
         except:
             print('Could not create the databse... \nTry inserting the correct settings for the database.')
+        
     
 
 if __name__ == "__main__":

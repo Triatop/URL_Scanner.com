@@ -74,5 +74,5 @@ Setup database and IPQS instructions:
  * Create an account at IP Quality Score's website: https://www.ipqualityscore.com/
  * Log in and go to the page: https://www.ipqualityscore.com/documentation/malicious-url-scanner-api/overview
  * Scroll down untill you see 'Private Key' and write down the API-key.
- * Run the command 'cd api && python setup.py && cd ..' in the terminal inside this direcotry.
+ * Run the command 'cd api && python setup.py && cd ..' or 'yarn setup' in the terminal inside this direcotry.
  * Follow the guide in the terminal window and insert the settings for the database and the API-key.
