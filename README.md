@@ -76,3 +76,14 @@ Setup database and IPQS instructions:
  * Scroll down untill you see 'Private Key' and write down the API-key.
  * Run the command 'cd api && python setup.py && cd ..' or 'yarn setup' in the terminal inside this direcotry.
  * Follow the guide in the terminal window and insert the settings for the database and the API-key.
+
+User instructions
+ * Login by pressing the login button at the top.
+ * Enter your login information and press enter or the Log in button.
+ * Insert the link you wish to scan in the hotbar and press enter or the scan button.
+ * If you wish to do another scan, simply replace the last link with your new one and press scan.
+ * You can see your past scans by pressing the History button at the top.
+ * In history, you can click on the arrow on your past scans to view additional information about the scan. 
+ * If you wish to logout, press Logout at the top and confirm by pressing Yes when prompted.
+ * Pressing the toggle in the top right corner will switch between light and dark mode.
+ * Pressing the home button will redirected you to the home page. 
