@@ -21,6 +21,10 @@ export default function UserHistory({user, userToken}) {
         });
       }, [user, userToken]);
 
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [])
+
     return(
         <div className='history'>
             <h1>HISTORY</h1>
@@ -34,7 +38,7 @@ export default function UserHistory({user, userToken}) {
                         <h2 className='keys'>{key1} </h2>
                         <ul className='columnNameContainer'>
                             <li className='li1'>URL</li>
-                            <li className='li2'>DATE</li>
+                            <li className='li2_1'>DATE</li>
                             <li className='li3'>SAFE</li>
                         </ul>
                         {Object.keys(userHistoryDict[key1]).map((key2, index2) => {

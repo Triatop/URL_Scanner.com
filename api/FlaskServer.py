@@ -100,7 +100,7 @@ def history():
     histDict = {}
     for index, value in enumerate(history):
         a_dict = {int(k):v for k,v in value[3].items()} # convert keys to integers as to jsaonb converts keys to strings.
-        rmaker.createReport(a_dict, value[4], value[5])
+        rmaker.createReport(a_dict, value[4], value[5], value[6])
         histDict[index] = {'url': u_ctrl.decryptUrl(value[0]), 'date': str(value[1]), 'safe': value[2], 'report': rmaker.getReport()}
 
     dict = {"auth": True, "history": histDict}
@@ -128,7 +128,7 @@ def userHistory():
         histDict = {}
         for index, value in enumerate(db_obj.getHistory(name)):
             a_dict = {int(k):v for k,v in value[3].items()} # convert keys to integers as to jsaonb converts keys to strings.
-            rmaker.createReport(a_dict, value[4], value[5])
+            rmaker.createReport(a_dict, value[4], value[5], value[6])
             histDict[index] = {'url': u_ctrl.decryptUrl(value[0]), 'date': str(value[1]), 'safe': value[2], 'report': rmaker.getReport()}
         allUserHistDict[name] = histDict
 

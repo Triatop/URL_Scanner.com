@@ -12,6 +12,12 @@ class CharSwap:
         self.c_url = list(filter(None, i_url.split('/')))[1]
         return 1
 
+    def getsus_url(self):
+        if (self.c_url != self.sus_url):
+            return self.sus_url
+        else:
+            return ""
+
     def stripWWW(self):     #this is so comparison with the websites is possible later
         if list(filter(None, self.c_url.split('.')))[0] == 'www':   #split URL by the dots and check if the first part of the url is 'www'
             s_list = list(filter(None, self.c_url.split('.')))      #save the list
@@ -28,15 +34,18 @@ class CharSwap:
             return 0
 
     def checkSC(self):     #Special cases wont get caught in stripAccents or will be mistranslated 
-        sc_Check = re.compile('[01569ŋ]+') #exceptions that do not get stripped away. 
+        sc_Check = re.compile('[01569ӏŋр]+') #exceptions that do not get stripped away. 
         sc_arr = sc_Check.findall(self.sus_url)
         if len(sc_arr) != 0:
             self.sus_url = self.sus_url.replace('6', 'b')
             self.sus_url = self.sus_url.replace('9', 'g')
+            self.sus_url = self.sus_url.replace('ӏ', 'l')
             self.sus_url = self.sus_url.replace('1', 'l')
             self.sus_url = self.sus_url.replace('ŋ', 'n')
             self.sus_url = self.sus_url.replace('0', 'o')
+            self.sus_url = self.sus_url.replace('р', 'p')
             self.sus_url = self.sus_url.replace('5', 's')
+            self.sus_url = self.sus_url.replace('ш', 'w')
             return 1
 
         else: return 0

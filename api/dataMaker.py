@@ -47,7 +47,7 @@ def processData(start, steps):
 
 
 def makeWorkers():
-    workers = 5
+    workers = 50
     while len(jsonData)%workers != 0:
         workers -= 1
     return workers
@@ -66,7 +66,7 @@ def startThreads():
 startThreads()
 
 
-with open('trainDataWithoutMalicious.csv', 'w') as file:
+with open('trainedData.csv', 'w') as file:
     writer = csv.writer(file)
     writer.writerow(data)
     writer.writerows(theVals)

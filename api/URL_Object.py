@@ -28,7 +28,7 @@ class URL_Object:
             6 : self.getSpecialCharater(),                 #6 = SpecialChar
             7 : bool(self.getCertificateValid()) ^ 1,      #7 = Certificate Validation
             8 : self.getURLLinks(),                        #8 = Malicous Links
-            9 : bool(self.getIsCharSwapped()) ^ 1,         #9 = Character Swap
+            9 : self.getIsCharSwapped(),                   #9 = Character Swap
             10 : self.getPulseCount(),                     #10 = Pulse Count
             11 : self.getMalFileCount()                    #11 = Malicious Files count
             }

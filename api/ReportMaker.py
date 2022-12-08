@@ -4,7 +4,7 @@ class ReportMaker:
     def __init__(self):
         self.r_str = ""
 
-    def createReport(self, a_dict, siteAge, nrOfMalLinks):
+    def createReport(self, a_dict, siteAge, nrOfMalLinks, charSwapURL):
         self.r_str = ""
         
         #Fav Icon
@@ -37,6 +37,18 @@ class ReportMaker:
 
         #Malisouls links
         self.r_str += (f"\n· Number of malicious external links: {nrOfMalLinks}")
+
+        #Character Swap
+        case1 = "has no letters that seem to be swapped"
+        case2 = "has accented characters but it does not appear to mimic any of the most popular websites"
+        case3 = "Is likely attempting to mimic " + charSwapURL
+        self.r_str += (f"\n· The domain name {case3 if a_dict[9] == 1 else case2 if charSwapURL != '' else case1} ")
+
+        #Pulse count
+        self.r_str += (f"\n· Number of pulses: {a_dict[10]}")
+
+        #Malicious File count
+        self.r_str += (f"\n· Number of malicious files associated with this url: {a_dict[11]}")
 
         return 
 

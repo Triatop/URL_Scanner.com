@@ -5,10 +5,14 @@ import math
 
 class MaliciousLinks:
     def __init__(self):
+        with open('settings.json', 'r') as json_file:
+            api_key = json.load(json_file)['IPQS_key']
+        json_file.close()
+
         self.m_links = []
         self.m_DupCount = []
         self.m_url = ''
-        self.m_apiKey = '' #Replace with non-personal ID 
+        self.m_apiKey = api_key #Go into 'settings.json' and insert the key there if you dont wanna run setup.py
         self.m_NrOfMalLinks = 0
 
     def getNrOfMalLinks(self):
