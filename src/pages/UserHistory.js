@@ -34,7 +34,7 @@ export default function UserHistory({user, userToken}) {
             <div>
                 {Object.keys(userHistoryDict).map((key1, index1) => {
                     return (
-                    <div key1={index1}>
+                    <div key={index1}>
                         <h2 className='keys'>{key1} </h2>
                         <ul className='columnNameContainer'>
                             <li className='li1'>URL</li>
@@ -43,7 +43,7 @@ export default function UserHistory({user, userToken}) {
                         </ul>
                         {Object.keys(userHistoryDict[key1]).map((key2, index2) => {
                             return (
-                            <div key2={index2}>
+                            <div key={index2}>
                                 <HistoryReport url={userHistoryDict[key1][key2].url} date={userHistoryDict[key1][key2].date} safe={userHistoryDict[key1][key2].safe} report={userHistoryDict[key1][key2].report}></HistoryReport>
 
                             </div>
