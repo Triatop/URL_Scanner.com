@@ -77,7 +77,7 @@ Setup database and IPQS instructions:
  * Run the command 'cd api && python setup.py && cd ..' or 'yarn setup' in the terminal inside this direcotry.
  * Follow the guide in the terminal window and insert the settings for the database and the API-key.
 
-User instructions
+User instructions:
  * Login by pressing the login button at the top.
  * Enter your login information and press enter or the Log in button.
  * Insert the link you wish to scan in the hotbar and press enter or the scan button.
