@@ -37,6 +37,21 @@ class DBController:
         except (Exception, psycopg2.Error) as error:
             self.conn.rollback()
             print("Error occured while fetching attributedicts:", error)
+    
+    #Created for demo version
+    def getPrevScans(self):
+        try:
+            url_ctrl = UrlController()
+            query = '''select en_url, s_value, attributes, site_age, mal_links, char_swap_url from scans'''
+            self.cur.execute(query)
+            self.conn.commit()
+            url_attr_lst = list({'url': r[0], 's_value': r[1], 'attributes': r[2], 'site_age': r[3], 'mal_links': r[4], 'char_swap_url': r[5]} for r in self.cur.fetchall())
+            for index, val in enumerate(url_attr_lst):
+                url_attr_lst[index]['url'] = url_ctrl.decryptUrl(val['url'])
+            return url_attr_lst
+        except (Exception, psycopg2.Error) as error:
+            self.conn.rollback()
+            print("Error occured while fetching previous scans:", error)
 
     def getAllUsernames(self):
         query = '''select users.username  from scans left join users on scans.user_id = users.user_id where scans.user_id is not null group by scans.user_id, users.username'''

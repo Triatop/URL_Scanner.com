@@ -34,7 +34,27 @@ def main(url1, username, report=True):
         urlRedirect = True
     else:
         urlRedirect = False
-    
+
+#-------------------- DELETE THIS CODE MAYBE ---------------------
+
+    # ~~~ Check if scan exists in DB alread ~~~
+
+    # db_obj = DBController()
+    # parms = None
+    # for scan in db_obj.getPrevScans():
+    #     if (url1 == scan['url']):
+    #         parms = scan
+    #         break
+    #     continue
+    # if(parms != None):
+    #     r_mkr = ReportMaker()
+    #     attr_dict = {int(k):v for k,v in parms['attributes'].items()} 
+    #     r_mkr.createReport(attr_dict, parms['site_age'],parms['mal_links'],parms['char_swap_url'])
+    #     db_obj.insertScan(username, u_ctrl.encryptUrl(parms['url']), parms['s_value'], attr_dict, parms['site_age'],parms['mal_links'],parms['char_swap_url'])
+    #     return {"valid": True,"report": (f"\n\n{r_mkr.getReport()}"), "binarySafe": parms['s_value'], "reDirect": f"Redirected: {urlRedirect} \nScanning: {url1}"}
+
+#-----------------------------------------------------------------
+
     #Check if wevsite is valid (exists) - else early return
     if not u_ctrl.validateUrl(url1): #<--- if website fails to validate
         return {"valid": False, "report": "- Invalid URL, website does not exist, check for spelling errors"}
