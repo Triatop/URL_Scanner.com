@@ -22,6 +22,7 @@ class DBController:
             self.user_value = 7015
         except (Exception, psycopg2.Error) as error:
             print("Error occured while connecting to database:", error)
+            print("Make sure the database is up and running")
     
     def getUrlAttributes(self):
         try:
@@ -232,11 +233,11 @@ class DBController:
             self.conn.rollback()
             print("Error occured while setting up DB:", error)
 
-    def __del__(self):
-        if self.cur is not None:
-            self.cur.close()
-        if self.conn is not None:
-            self.conn.close()
+    # def __del__(self):
+    #     if self.cur is not None:
+    #         self.cur.close()
+    #     if self.conn is not None:
+    #         self.conn.close()
 
 if __name__ == "__main__":
     db_obj = DBController()
