@@ -30,7 +30,7 @@ class ATnTThreatIntel:
             except KeyError:
                 continue
         return filesCount
-def getMaliciousFilesCount(self, url = "", limit = 100):
+    def getMaliciousFilesCount(self, url = "", limit = 100):
         """
         """
         url = self.url if url == "" else url
