@@ -1,5 +1,6 @@
 import cryptography.fernet
 import requests
+import logging
 from socket import gethostbyname
 
 class UrlController:
