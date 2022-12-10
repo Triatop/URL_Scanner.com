@@ -58,27 +58,25 @@ def createuser():
 
     #1. call function that authenticates the user (username, user_token)
     if(not db_obj.validateUser(username, user_token)):
-        return {'response': 'ERROR: Authentication Invalid!'}
+        return {'response': 'ERROR: Authentication Invalid!', 'creation': False}
 
     #2. call function that checks if that user is an admin
     if(not db_obj.authenticateAdmin(username)):
-        return {'response': 'ERROR: Authentication Invalid!'}
+        return {'response': 'ERROR: Authentication Invalid!', 'creation': False}
 
     #3. input string handeling
     if(len(new_username)<5):
-        return{'response':'Username must be atleast 5 characters long'}
-    if(len(new_password)<4):
-        return{'response':'Password must be atleast 4 characters long'}
-    if(len(new_username) > 50 or len(new_password) > 100 or len(new_fullname) > 50):
-        return{'response':'Input exceeded limit'}
+        return{'response':'Username must be atleast 5 characters long', 'creation': False}
+    if(len(new_username) > 50 or len(new_fullname) > 50):
+        return{'response':'Input exceeded limit', 'creation': False}
     
     #4. call function that checks if the username is available
     if(db_obj.checkUsernameExists(new_username)):
-        return {'response': f'The username {new_username} was already taken'}
+        return {'response': f'The username {new_username} was already taken', 'creation': False}
 
     #4. create the new user in the database if all above is true
     db_obj.createUser(new_username, new_password, new_fullname, new_token, new_adminPriv)
-    return {'response': f'The user {new_username} was created'}
+    return {'response': f'The user {new_username} was created', 'creation': True}
 
 @app.route('/history')
 def history():

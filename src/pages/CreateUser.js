@@ -12,19 +12,32 @@ export default function CreateUser({user,userToken}){
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        ApiCreateUser()
+        ApiCreateUser();
     }
 
     function ApiCreateUser(){
-        const hashedPass = bcrypt.hashSync(pass, '$2a$10$ovfJgA/SxVxsd3NeD3dMne'); //If u change the salt also change it in Login.js
-        const genSalt = bcrypt.genSaltSync()
-        const newToken = bcrypt.hashSync(genSalt);
-        console.log(newToken)
-        setShowResp(false);
-        fetch(`http://localhost:8000/createuser?username=${uname}&password=${hashedPass}&fullname=${name}&newToken=${newToken}&adminPriv=${isChecked}&user=${user}&user_token=${userToken}`).then(res => res.json()).then(data => {
-            setResponse(data.response);
+        if (pass.length > 72) {
+            setResponse('Input exceeded limit')
             setShowResp(true);
-        });
+        } else if (pass.length < 4 ) {
+            setResponse('Password can be a minimum of 4 chars')
+            setShowResp(true);
+        } else {
+            const hashedPass = bcrypt.hashSync(pass, '$2a$10$ovfJgA/SxVxsd3NeD3dMne'); //If u change the salt also change it in Login.js
+            const genSalt = bcrypt.genSaltSync()
+            const newToken = bcrypt.hashSync(genSalt);
+            setShowResp(false);
+            fetch(`http://localhost:8000/createuser?username=${uname}&password=${hashedPass}&fullname=${name}&newToken=${newToken}&adminPriv=${isChecked}&user=${user}&user_token=${userToken}`).then(res => res.json()).then(data => {
+                setResponse(data.response);
+                setShowResp(true);
+                if(data.creation){
+                    setUname('');
+                    setPass('');
+                    setName('');
+                    setIsChecked(false);
+                }
+            });
+        }
     }
 
     useEffect(() => {
