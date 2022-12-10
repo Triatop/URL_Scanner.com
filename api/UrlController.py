@@ -31,10 +31,13 @@ class UrlController:
     def validateUrl(self, url):
         if(len(url) == 0): return False
         try:
-            headers = {"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.5195.102 Safari/537.36"}
-            test = requests.get(url, headers=headers)
-            if not test.ok: return False
-        except:
+           headers = {"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.5195.102 Safari/537.36"}
+           test = requests.get(url, headers=headers)
+           if not test.ok: return False
+        except requests.exceptions.ConnectionError:
+            return False
+        except Exception as err:
+            logging.warning(err)
             return False
         return True
 
