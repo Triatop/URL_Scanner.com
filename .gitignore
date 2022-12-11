@@ -2,7 +2,7 @@
 /node_modules/.cache
 api/__pycache__
 .DS_Store
-key.txt
+/api/keys.txt
 
 api/bad.csv
 api/example.csv
@@ -13,8 +13,6 @@ api/tfTest.py
 api/yes.py
 api/urlscan.log
 
-/tfModel
-/tfModel-arm
 /.vs/VSWorkspaceState.json
 /.vs/slnx.sqlite
 /.vs/PythonSettings.json

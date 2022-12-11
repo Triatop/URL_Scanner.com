@@ -75,8 +75,8 @@ class MaliciousLinks:
         l_response = []
         f_iterations = len(self.m_links)
         s_throttle = False
-        if f_iterations > 50:
-            f_iterations = 50
+        if f_iterations > 10:
+            f_iterations = 10
             s_throttle = True
             temp = []
         for i in range(f_iterations):
