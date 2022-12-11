@@ -57,11 +57,11 @@ class ML:
         print('Precision :', precision_score(self.yTest, data))
         print('Recall :', recall_score(self.yTest, data))
 
+if __name__ == "__main__":
+    ml =  ML('api/trainedData.csv')
 
-ml =  ML('api/trainingData.csv')
-
-ml.splitData()
-ml.loadModel()
-ml.trainML(1000)
-yHat = ml.predictML()
-ml.prettyPrintML(yHat)
+    ml.splitData()
+    ml.loadModel()
+    ml.trainML(1000)
+    yHat = ml.predictML()
+    ml.prettyPrintML(yHat)

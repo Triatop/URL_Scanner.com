@@ -8,17 +8,21 @@ from UrlController import UrlController
 class DBController:
     def __init__(self):
         try:
+            with open('settings.json', 'r') as json_file:
+                settings = json.load(json_file)
+            json_file.close()
             self.conn = psycopg2.connect(
-                host = 'localhost',
-                dbname = 'postgres',
-                user = 'postgres',
-                password = 'url_scanner1',
-                port = 5432
+                host = settings['host'],
+                dbname = settings['dbname'],
+                user = settings['user'],
+                password = settings['password'],
+                port = settings['port']
             )
             self.cur = self.conn.cursor()
             self.user_value = 7015
         except (Exception, psycopg2.Error) as error:
             print("Error occured while connecting to database:", error)
+            print("Make sure the database is up and running")
     
     def getUrlAttributes(self):
         try:
@@ -33,6 +37,21 @@ class DBController:
         except (Exception, psycopg2.Error) as error:
             self.conn.rollback()
             print("Error occured while fetching attributedicts:", error)
+    
+    #Created for demo version
+    def getPrevScans(self):
+        try:
+            url_ctrl = UrlController()
+            query = '''select en_url, s_value, attributes, site_age, mal_links, char_swap_url from scans'''
+            self.cur.execute(query)
+            self.conn.commit()
+            url_attr_lst = list({'url': r[0], 's_value': r[1], 'attributes': r[2], 'site_age': r[3], 'mal_links': r[4], 'char_swap_url': r[5]} for r in self.cur.fetchall())
+            for index, val in enumerate(url_attr_lst):
+                url_attr_lst[index]['url'] = url_ctrl.decryptUrl(val['url'])
+            return url_attr_lst
+        except (Exception, psycopg2.Error) as error:
+            self.conn.rollback()
+            print("Error occured while fetching previous scans:", error)
 
     def getAllUsernames(self):
         query = '''select users.username  from scans left join users on scans.user_id = users.user_id where scans.user_id is not null group by scans.user_id, users.username'''
@@ -74,7 +93,7 @@ class DBController:
     def getHistory(self, username):
         try:
             u_id = self.getUserId(username)
-            query = '''select en_url , "date", s_value, attributes, site_age, mal_links, char_swap_url  from scans where user_id = %s order by date DESC;'''
+            query = '''select en_url , "date", s_value, attributes, site_age, mal_links, char_swap_url  from scans where user_id = %s order by scan_id DESC;'''
             self.cur.execute(query, str(u_id))
             self.conn.commit()
             return self.cur.fetchall()
@@ -229,11 +248,11 @@ class DBController:
             self.conn.rollback()
             print("Error occured while setting up DB:", error)
 
-    def __del__(self):
-        if self.cur is not None:
-            self.cur.close()
-        if self.conn is not None:
-            self.conn.close()
+    # def __del__(self):
+    #     if self.cur is not None:
+    #         self.cur.close()
+    #     if self.conn is not None:
+    #         self.conn.close()
 
 if __name__ == "__main__":
     db_obj = DBController()

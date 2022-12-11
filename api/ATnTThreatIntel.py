@@ -42,12 +42,26 @@ class ATnTThreatIntel:
         filesCount = requests.get("https://otx.alienvault.com/api/v1/indicators/hostname/{}/malware".format(url)).json()["count"]
         for add in passive_dns:
             addresses.append(add["address"])
+        addresses = [*set(addresses)]   # Clear duplicate addresses
         for add in addresses:
             try:
-                if re.match("[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}", add):
-                    filesCount += requests.get("https://otx.alienvault.com/api/v1/indicators/IPv4/{}/malware".format(add)).json()["count"]
+                if re.match("^ns|^NXDOMAIN", add):
+                    continue
+                if re.match(r"(\d{1,3}\.){3}\d{1,3}", add):
+                    try:
+                        filesCount += requests.get("https://otx.alienvault.com/api/v1/indicators/IPv4/{}/malware".format(add)).json()["count"]
+                    except:
+                        logging.warning(f"Couldn't process {add} in .getMaliciousFilesCount() /IPv4/../malware api call")
+                elif re.match("^((\d|\w){0,4}:){1,7}(\d|\w){0,4}", add):
+                    try:
+                        filesCount += requests.get("https://otx.alienvault.com/api/v1/indicators/IPv6/{}/malware".format(add)).json()["count"]
+                    except:
+                        logging.warning(f"Couldn't process {add} in .getMaliciousFilesCount() /IPv6/../malware api call")
                 else:
-                    filesCount += requests.get("https://otx.alienvault.com/api/v1/indicators/hostname/{}/malware".format(add)).json()["count"]
+                    try:
+                        filesCount += requests.get("https://otx.alienvault.com/api/v1/indicators/hostname/{}/malware".format(add)).json()["count"]
+                    except:
+                        logging.warning(f"Couldn't process {add} in .getMaliciousFilesCount() /hostname/../malware api call")
                 if(filesCount > limit-1):
                     filesCount = limit
                     break

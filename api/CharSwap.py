@@ -34,15 +34,18 @@ class CharSwap:
             return 0
 
     def checkSC(self):     #Special cases wont get caught in stripAccents or will be mistranslated 
-        sc_Check = re.compile('[01569ŋ]+') #exceptions that do not get stripped away. 
+        sc_Check = re.compile('[01569ӏŋр]+') #exceptions that do not get stripped away. 
         sc_arr = sc_Check.findall(self.sus_url)
         if len(sc_arr) != 0:
             self.sus_url = self.sus_url.replace('6', 'b')
             self.sus_url = self.sus_url.replace('9', 'g')
+            self.sus_url = self.sus_url.replace('ӏ', 'l')
             self.sus_url = self.sus_url.replace('1', 'l')
             self.sus_url = self.sus_url.replace('ŋ', 'n')
             self.sus_url = self.sus_url.replace('0', 'o')
+            self.sus_url = self.sus_url.replace('р', 'p')
             self.sus_url = self.sus_url.replace('5', 's')
+            self.sus_url = self.sus_url.replace('ш', 'w')
             return 1
 
         else: return 0

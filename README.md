@@ -60,8 +60,31 @@ Setup Instructions:
  * Run "pip install -r pipRequirements.txt" while being in the URL_Scanner.com directory and all the python dependencies are installed.
  * To run the program, make sure to be in the URL_Scanner.com directory and run the command "yarn start" and in another terminal run "yarn start-api".
 
-Setup database instructions:
+<!-- Setup database instructions:
  * Download the latest version of postsgresql at "https://www.enterprisedb.com/downloads/postgres-postgresql-downloads"
  * Install postgresql (Be sure to include pgAdmin 4 if you don't have it already).
  * Create the database in pgAdmin using these parameters: {host = 'localhost', dbname = 'postgres', user = 'postgres', password = 'url_scanner1', port = 5432}
- * Run the file /api/DB_Controller.py
+ * Run the file /api/DB_Controller.py -->
+
+Setup database and IPQS instructions:
+ * Download the latest version of postsgresql at "https://www.enterprisedb.com/downloads/postgres-postgresql-downloads"
+ * Install postgresql (Be sure to include pgAdmin 4 if you don't have it already for an easier setup).
+ * Make a database connection and write down the follwing settings {Host, Port, Database-name, Username, Password}
+ * Make sure the database is up and running - and that the connection went through.
+ * Create an account at IP Quality Score's website: https://www.ipqualityscore.com/
+ * Log in and go to the page: https://www.ipqualityscore.com/documentation/malicious-url-scanner-api/overview
+ * Scroll down untill you see 'Private Key' and write down the API-key.
+ * Run the command 'cd api && python setup.py && cd ..' or 'yarn setup' in the terminal inside this direcotry.
+ * Follow the guide in the terminal window and insert the settings for the database and the API-key.
+ * To reset the database (for some reason) run the command 'cd api && python DB_Controller.py && cd ..' or 'yarn reset-db'
+
+User instructions:
+ * Login by pressing the login button at the top.
+ * Enter your login information and press enter or the Log in button.
+ * Insert the link you wish to scan in the hotbar and press enter or the scan button.
+ * If you wish to do another scan, simply replace the last link with your new one and press scan.
+ * You can see your past scans by pressing the History button at the top.
+ * In history, you can click on the arrow on your past scans to view additional information about the scan. 
+ * If you wish to logout, press Logout at the top and confirm by pressing Yes when prompted.
+ * Pressing the toggle in the top right corner will switch between light and dark mode.
+ * Pressing the home button will redirected you to the home page. 
