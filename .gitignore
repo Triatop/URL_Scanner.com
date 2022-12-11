@@ -10,8 +10,8 @@ api/bad2.csv
 api/badData.json
 api/good.csv
 api/tfTest.py
-api/yes.py
 api/urlscan.log
+api/settings.json
 
 /.vs/VSWorkspaceState.json
 /.vs/slnx.sqlite
