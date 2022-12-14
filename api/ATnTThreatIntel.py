@@ -17,13 +17,13 @@ class ATnTThreatIntel:
         url = self.__getDomain(url)
         try:
             passive_dns = requests.get(f"https://otx.alienvault.com/api/v1/indicators/hostname/{url}/passive_dns").json()["passive_dns"]
-        except EnvironmentError as err:
+        except Exception as err:
             logging.warning(f"ATnTThreatIntel.maliciousFiles({add}) - {err}")
         addresses = []
         filesCount = {}
         try:
             filesCount[url] = requests.get("https://otx.alienvault.com/api/v1/indicators/hostname/{}/malware".format(url)).json()["count"]
-        except EnvironmentError as err:
+        except Exception as err:
             logging.warning(f"ATnTThreatIntel.maliciousFiles({add}) - {err}")
         for add in passive_dns:
             addresses.append(add["address"])
@@ -48,7 +48,7 @@ class ATnTThreatIntel:
                         logging.warning(f"Couldn't process {add} in .getMaliciousFilesCount() /hostname/../malware api call")
             except KeyError:
                 continue
-            except EnvironmentError as err:
+            except Exception as err:
                 logging.warning(f"ATnTThreatIntel.maliciousFiles({add}) - {err}")
                 continue
         return filesCount
@@ -61,12 +61,12 @@ class ATnTThreatIntel:
         url = self.__getDomain(url)
         try:
             passive_dns = requests.get(f"https://otx.alienvault.com/api/v1/indicators/hostname/{url}/passive_dns").json()["passive_dns"]
-        except EnvironmentError as err:
+        except Exception as err:
             logging.warning(f"ATnTThreatIntel.maliciousFilesCount({add}, {limit}) - {err}")
         addresses = []
         try:
             filesCount = requests.get("https://otx.alienvault.com/api/v1/indicators/hostname/{}/malware".format(url)).json()["count"]
-        except EnvironmentError as err:
+        except Exception as err:
             logging.warning(f"ATnTThreatIntel.maliciousFilesCount({add}, {limit}) - {err}")
         for add in passive_dns:
             addresses.append(add["address"])
@@ -95,7 +95,7 @@ class ATnTThreatIntel:
                     break
             except KeyError:
                 continue
-            except EnvironmentError as err:
+            except Exception as err:
                 logging.warning(f"ATnTThreatIntel.getMaliciousFilesCount({add}, {limit}) - {err}")
                 continue
         return filesCount
@@ -112,7 +112,7 @@ class ATnTThreatIntel:
         url = self.__getDomain(url)
         try:
             return requests.get(f"https://otx.alienvault.com/api/v1/indicators/domain/{url}/geo").json()["flag_title"]
-        except EnvironmentError as err:
+        except Exception as err:
             logging.warning(f"ATnTThreatIntel.getGeoLocation({url}) - {err}")
         return None
 
@@ -130,7 +130,7 @@ class ATnTThreatIntel:
             return req["pulse_info"]["count"]
         except KeyError:
             pass
-        except EnvironmentError as err:
+        except Exception as err:
             logging.warning(f"ATnTThreatIntel.puleCount({url}) - {err}")
         return None
         
