@@ -27,7 +27,7 @@ def scanner():
 
     retDict = main.main(request.args.get('url'), username)
     if retDict["valid"] == True:
-        retDict["exeTime"] = f'\n\nScan time: {(time.time() - sTime):.2f} s'
+        retDict["exeTime"] = f'\n\nScan time: {(time.time() - sTime):.2f}s'
     return retDict
 
 @app.route('/login')

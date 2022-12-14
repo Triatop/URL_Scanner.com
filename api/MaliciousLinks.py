@@ -7,7 +7,6 @@ class MaliciousLinks:
     def __init__(self):
         with open('settings.json', 'r') as json_file:
             api_key = json.load(json_file)['IPQS_key']
-        json_file.close()
 
         self.m_links = []
         self.m_DupCount = []

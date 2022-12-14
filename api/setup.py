@@ -30,7 +30,6 @@ def setup():
             setup_dict['IPQS_key'] = input('\tAPI-key: ')
             with open('settings.json', 'w') as setup_json:
                 json.dump(setup_dict, setup_json, indent=4)
-            setup_json.close()
             
             db_obj = DBController()
             db_obj.setupDB()
