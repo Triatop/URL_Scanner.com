@@ -26,7 +26,7 @@ class CertValidator:
         except ssl.SSLEOFError as err:
             logging.info(f"CertValidator.validateCert({url}) - {err}")
             return err
-        except EnvironmentError as err:
+        except Exception as err:
             logging.warning(f"CertValidator.validateCert({url}) - {err}")
         
     def processData(self, url = ""):
