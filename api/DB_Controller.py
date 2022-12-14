@@ -10,7 +10,6 @@ class DBController:
         try:
             with open('settings.json', 'r') as json_file:
                 settings = json.load(json_file)
-            json_file.close()
             self.conn = psycopg2.connect(
                 host = settings['host'],
                 dbname = settings['dbname'],
