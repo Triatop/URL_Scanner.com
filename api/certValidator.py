@@ -2,6 +2,7 @@ import ssl
 import socket
 import certifi
 import re
+import logging
 
 class CertValidator:
     def __init__(self, url = ""):
@@ -20,7 +21,13 @@ class CertValidator:
             conn.connect((url, 443))
             return 0
         except ssl.SSLCertVerificationError as err:
+            logging.info(f"CertValidator.validateCert({url}) - {err}")
             return err
+        except ssl.SSLEOFError as err:
+            logging.info(f"CertValidator.validateCert({url}) - {err}")
+            return err
+        except EnvironmentError as err:
+            logging.warning(f"CertValidator.validateCert({url}) - {err}")
         
     def processData(self, url = ""):
         return 0 if self.validateCert(url if url != "" else self.url) else 1
