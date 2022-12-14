@@ -99,7 +99,7 @@ def main(url1, username, report=True):
     logging.info(f"Starting: Get features")
     logging.info(f"Fetching: URL Length")                                           
     u_obj.setURLLength(u_len.isURLLong())                                               #Is it too long
-    logging.info(f"Fetching: Fabicon")
+    logging.info(f"Fetching: Favicon")
     u_obj.setURLFavIcon(u_fav.hasFavicon(w_scrap.extractFavicon()))                     #URL Fav Icon check
     logging.info(f"Fetching: Protocol")
     u_obj.setURLSecureProtocol(u_prot.isSecure())                                       #Security check
