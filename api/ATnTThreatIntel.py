@@ -110,7 +110,11 @@ class ATnTThreatIntel:
         if self.__checkValidInput(url, method = ".getGeoLocation()"):
             return None
         url = self.__getDomain(url)
-        return requests.get(f"https://otx.alienvault.com/api/v1/indicators/domain/{url}/geo").json()["flag_title"]
+        try:
+            return requests.get(f"https://otx.alienvault.com/api/v1/indicators/domain/{url}/geo").json()["flag_title"]
+        except EnvironmentError as err:
+            logging.warning(f"ATnTThreatIntel.getGeoLocation({url}) - {err}")
+        return None
 
     def pulseCount(self, url = ""):
         """
