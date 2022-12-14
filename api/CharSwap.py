@@ -1,6 +1,7 @@
 import re
 from unidecode import unidecode
 import csv
+import logging
 
 class CharSwap:
     def __init__(self):
@@ -53,16 +54,18 @@ class CharSwap:
     def stripAccents(self): #take a character "ö" that has accents (the dots) and transform it "o" to its lookalike character
             self.sus_url = unidecode(self.sus_url)
             return 1
-
+       
     def isTop500(self):
-        goodCodingPractice = open('top500Domains.csv')  #Separate line so we can close later
-        reader = csv.reader(goodCodingPractice)         #Read File
         found = 0
-        for line in reader:
-            if self.sus_url == line[0]:                 #if it exists in list
-                found = 1                               #the website tried to trick us
-                break                                   #no need to check the others
-        goodCodingPractice.close()                      #No memory leaks please
+        try:
+            with open('top500Domains.csv') as file_csv:         #Separate line so we can close later
+                reader = csv.reader(file_csv)                   #Read File
+                for line in reader:
+                    if self.sus_url == line[0]:                 #if it exists in list
+                        found = 1                               #the website tried to trick us
+                        break                                   #no need to check the others
+        except EnvironmentError as err:
+            logging.warning(f"CharSwap.isTop500() - {err}")
         return found
 
     def isCharSwap(self):               #main function
