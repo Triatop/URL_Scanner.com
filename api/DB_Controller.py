@@ -156,7 +156,9 @@ class DBController:
             return False
 
     def getUserId(self, username):
-        try:        
+        try:
+            if(username == ''):
+                return None        
             query = '''select user_id from users where username='{}' '''.format(username)
             self.cur.execute(query)
             self.conn.commit()

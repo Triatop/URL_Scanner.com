@@ -45,10 +45,10 @@ class ReportMaker:
         self.r_str += (f"\n· The domain name {case3 if a_dict[9] == 1 else case2 if charSwapURL != '' else case1} ")
 
         #Pulse count
-        self.r_str += (f"\n· Number of pulses: {a_dict[10]}")
+        self.r_str += (f"\n· Number of pulses: {a_dict[10]}{'+' if a_dict[10] == 50 else ''}")
 
         #Malicious File count
-        self.r_str += (f"\n· Number of malicious files associated with this url: {a_dict[11]}")
+        self.r_str += (f"\n· Number of malicious files associated with this url: {a_dict[11]}{'+' if a_dict[11] == 100 else ''}")
 
         return 
 
