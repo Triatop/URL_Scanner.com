@@ -51,7 +51,7 @@ class URL_Object:
     def getIP(self):
         return self.o_URLip
 
-    def setSafe(self, i_safe):  #Safe Evaluator
+    def setSafe(self, i_safe):
         self.o_isSafe = i_safe
         return
 
@@ -93,7 +93,7 @@ class URL_Object:
     def getURLLength(self):
         return self.o_URLLength
 
-    def setSpecialCharater(self, scc): #Special Character Check
+    def setSpecialCharater(self, scc):
         self.o_SpecialChar = scc
         return
 
@@ -107,7 +107,7 @@ class URL_Object:
     def getCertificateValid(self):
         return self.o_CertificateValid
 
-    def setURLLinks(self, m_link): #Malicious external Links Check
+    def setURLLinks(self, m_link):
         self.o_URLLinks = m_link
         return
 
@@ -128,7 +128,7 @@ class URL_Object:
     def getPulseCount(self):
         return self.o_PulseCount
 
-    def setMalFileCount(self, m_fil): #Malicious File Count
+    def setMalFileCount(self, m_fil):
         self.o_MalFileCount = m_fil
         return
 

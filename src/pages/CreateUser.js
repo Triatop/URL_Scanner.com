@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import bcrypt from 'bcryptjs'
 import './AuthForm.css';
 
-export default function CreateUser({user,userToken}){
+export default function CreateUser({ user, userToken }) {
     const [uname, setUname] = useState('');
     const [pass, setPass] = useState('');
     const [name, setName] = useState('');
@@ -15,11 +15,11 @@ export default function CreateUser({user,userToken}){
         ApiCreateUser();
     }
 
-    function ApiCreateUser(){
+    function ApiCreateUser() {
         if (pass.length > 72) {
             setResponse('Input exceeded limit')
             setShowResp(true);
-        } else if (pass.length < 4 ) {
+        } else if (pass.length < 4) {
             setResponse('Password can be a minimum of 4 chars')
             setShowResp(true);
         } else {
@@ -30,7 +30,7 @@ export default function CreateUser({user,userToken}){
             fetch(`http://localhost:8000/createuser?username=${uname}&password=${hashedPass}&fullname=${name}&newToken=${newToken}&adminPriv=${isChecked}&user=${user}&user_token=${userToken}`).then(res => res.json()).then(data => {
                 setResponse(data.response);
                 setShowResp(true);
-                if(data.creation){
+                if (data.creation) {
                     setUname('');
                     setPass('');
                     setName('');
@@ -48,23 +48,23 @@ export default function CreateUser({user,userToken}){
         <div>
             <div className="auth-form-container">
                 <h2>Create User</h2>
-            <form className="create-user-form" onSubmit={handleSubmit}>
-                <label htmlFor="name">Full Name</label>
-                <input className="inputFields" value={name} onChange={(e) => setName(e.target.value)} type="name" placeholder="first and last name" id="name" name="name"  />
-                <label htmlFor="uname">Username </label>
-                <input className="inputFields" value={uname} onChange={(e) => setUname(e.target.value)} type="username" placeholder="username" id="uname" name="uname" />
-                <label htmlFor="password">Password</label>
-                <input className="inputFields" value={pass} onChange={(e) => setPass(e.target.value)} type="password" placeholder="********" id="password" name="password" />
-                <label className="checkbox-wrapper">
-                    <input type="checkbox" checked={isChecked} onChange={() => setIsChecked((prev) => !prev)} />
-                    <span >Admin Privileges</span>
-                </label>
-                <div className="AuthBtnContainer">
-                    <button className="createBtn" type="submit">Create</button>
-                </div>
-            </form>
+                <form className="create-user-form" onSubmit={handleSubmit}>
+                    <label htmlFor="name">Full Name</label>
+                    <input className="inputFields" value={name} onChange={(e) => setName(e.target.value)} type="name" placeholder="first and last name" id="name" name="name" />
+                    <label htmlFor="uname">Username </label>
+                    <input className="inputFields" value={uname} onChange={(e) => setUname(e.target.value)} type="username" placeholder="username" id="uname" name="uname" />
+                    <label htmlFor="password">Password</label>
+                    <input className="inputFields" value={pass} onChange={(e) => setPass(e.target.value)} type="password" placeholder="********" id="password" name="password" />
+                    <label className="checkbox-wrapper">
+                        <input type="checkbox" checked={isChecked} onChange={() => setIsChecked((prev) => !prev)} />
+                        <span >Admin Privileges</span>
+                    </label>
+                    <div className="AuthBtnContainer">
+                        <button className="createBtn" type="submit">Create</button>
+                    </div>
+                </form>
             </div>
-            {showResp ? <h3>{response}</h3>: null}
+            {showResp ? <h3>{response}</h3> : null}
         </div>
     )
 }

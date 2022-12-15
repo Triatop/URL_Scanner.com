@@ -1,7 +1,8 @@
 from URL_Object import URL_Object
 
+
 def test_attributeDict():
-    u_obj1 = URL_Object() 
+    u_obj1 = URL_Object()
     u_obj1.o_URLFavIcon = 1
     u_obj1.o_URLSecureProtocol = 1
     u_obj1.o_CheckProtocol = 1
@@ -13,23 +14,23 @@ def test_attributeDict():
     u_obj1.makeDict()
 
     a_dict1 = {
-                1:  0,
-                2:  0,
-                3:  0,
-                4:  0,
-                5:  0,
-                6:  0,
-                7:  0,
-                8:  0,
-                9:  0,
-                10: 0,
-                11: 0,
-            }
-    
+        1:  0,
+        2:  0,
+        3:  0,
+        4:  0,
+        5:  0,
+        6:  0,
+        7:  0,
+        8:  0,
+        9:  0,
+        10: 0,
+        11: 0,
+    }
+
     print("obj1:", u_obj1.getDict())
     print("dict1:", a_dict1)
-    
-    assert(u_obj1.getDict() == a_dict1)
+
+    assert (u_obj1.getDict() == a_dict1)
 
     u_obj1.setURLFavIcon(0)
     u_obj1.setURLSecureProtocol(0)
@@ -43,22 +44,21 @@ def test_attributeDict():
     u_obj1.setPulseCount(23)
     u_obj1.setMalFileCount(63)
     u_obj1.makeDict()
-    
+
     a_dict1 = {
-                1:  1,
-                2:  1,
-                3:  1,
-                4:  1,
-                5:  2,
-                6:  4,
-                7:  1,
-                8:  9,
-                9:  1,
-                10: 23,
-                11: 63
-            }
-    
-    assert(u_obj1.getDict() == a_dict1)
+        1:  1,
+        2:  1,
+        3:  1,
+        4:  1,
+        5:  2,
+        6:  4,
+        7:  1,
+        8:  9,
+        9:  1,
+        10: 23,
+        11: 63
+    }
+
+    assert (u_obj1.getDict() == a_dict1)
 
     return
-

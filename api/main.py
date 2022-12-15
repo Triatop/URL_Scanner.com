@@ -17,8 +17,6 @@ from ATnTThreatIntel import ATnTThreatIntel
 
 import logging
 
-
-
 def main(url1, username, report=True):
     FORMAT = f'%(asctime)s-%(levelname)s-{username}-%(message)s'
     logging.basicConfig(filename="urlscan.log", filemode='a',format=FORMAT, level=logging.INFO, )

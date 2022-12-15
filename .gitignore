@@ -19,3 +19,4 @@ api/.coverage
 /.vs/PythonSettings.json
 /.vs/ProjectSettings.json
 /.vs/URL_Scanner.com/v16/.suo
+api/.DS_Store

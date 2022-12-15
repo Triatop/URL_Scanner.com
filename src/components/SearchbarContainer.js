@@ -5,9 +5,7 @@ import LoadingSpinner from './LoadingSpinner';
 import CheckMark from './CheckMark';
 import CrossMark from './CrossMark';
 
-//Arvid was here.
-
-function SearchbarContainer({user, userToken}) {
+function SearchbarContainer({ user, userToken }) {
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setLoading] = useState(false);
   const [returnDict, setReturnDict] = useState('');
@@ -35,7 +33,7 @@ function SearchbarContainer({user, userToken}) {
   }
 
   useEffect(() => {
-      window.scrollTo(0, 0)
+    window.scrollTo(0, 0)
   }, [])
 
   function StartScanner() {
@@ -51,22 +49,22 @@ function SearchbarContainer({user, userToken}) {
       setShow(true)
       if (data.binarySafe == null) {
         return
-      } else if (data.binarySafe){
+      } else if (data.binarySafe) {
         setDivMargin('small')
         setIsSafe(true)
-      }else{
+      } else {
         setDivMargin('small')
         setNotSafe(true)
       }
     });
-    
+
   }
 
   return (
     <div className='SearchbarContainer' id={divMargin}>
       <div className='CheckCrossMark'>
-        { isSafe ? <CheckMark/> : null }
-        { notSafe ? <CrossMark/> : null }
+        {isSafe ? <CheckMark /> : null}
+        {notSafe ? <CrossMark /> : null}
       </div>
       <div className="Searchbar">
         <input

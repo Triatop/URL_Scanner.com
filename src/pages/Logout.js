@@ -1,18 +1,18 @@
-import {useNavigate} from 'react-router-dom';
-import {useEffect} from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 
 import "./Logout.css"
 
-export default function Logout({setLoginStatus}) {
+export default function Logout({ setLoginStatus }) {
     const navigate = useNavigate();
 
-    const handleClick1 = event =>{
+    const handleClick1 = event => {
         event.preventDefault()
-        setLoginStatus('',false,'')
+        setLoginStatus('', false, '')
         navigate('/');
     }
 
-    const handleClick2 = event =>{
+    const handleClick2 = event => {
         event.preventDefault()
         navigate('/');
     }

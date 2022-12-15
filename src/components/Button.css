@@ -1,54 +1,55 @@
-/* React Website tut 31:25 min */
 button {
-    border: none;
-    border-radius: 10px;
-    padding: 10px 14px;
-    text-align: center;
-    text-decoration: none;
-    font-size: 14px;
-    font-family : inherit;
-    font-weight: 600;
-    margin: 25px;
-  }
-  .arrowBtn {
-    margin: 0;
-    background-color: #0070ba;
-  }
+  border: none;
+  border-radius: 10px;
+  padding: 10px 14px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 14px;
+  font-family: inherit;
+  font-weight: 600;
+  margin: 25px;
+}
 
-  #dark .arrowBtn{
-    background-color: #212121;
-  }
+.arrowBtn {
+  margin: 0;
+  background-color: #0070ba;
+}
 
-  #light .arrowBtn{
-    background-color: #f9f9f9;
-  }
+#dark .arrowBtn {
+  background-color: #212121;
+}
 
-  .createBtn, .loginBtn{
-    width: 7rem;
-  }
+#light .arrowBtn {
+  background-color: #f9f9f9;
+}
 
-  #dark button{
-    background-color: #3baefb;
-    color: rgb(0, 0, 0);
-  }
+.createBtn,
+.loginBtn {
+  width: 7rem;
+}
 
-  #light button{
-    background-color: #2e2e2e;
-    color: #f9f9f9;
-  }
+#dark button {
+  background-color: #3baefb;
+  color: rgb(0, 0, 0);
+}
 
-  #dark button:hover {
-    background-color: #0096fb;
-  }
+#light button {
+  background-color: #2e2e2e;
+  color: #f9f9f9;
+}
 
-  #light button:hover {
-    background-color: #4f4f4f;
-  }
+#dark button:hover {
+  background-color: #0096fb;
+}
 
-  #dark button:active {
-    background-color: #0070ba;
-  }
+#light button:hover {
+  background-color: #4f4f4f;
+}
 
-  #light button:active {
-    background-color: #5b5b5b;
-  }
+#dark button:active {
+  background-color: #0070ba;
+}
+
+#light button:active {
+  background-color: #5b5b5b;
+}

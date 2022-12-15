@@ -1,10 +1,10 @@
-.App{
+.App {
     height: fit-content;
     justify-content: center;
     align-items: center;
     font-family: 'Bookman Old Style', sans-serif;
     width: 100%;
-    min-height: 100vh;   
+    min-height: 100vh;
 }
 
 .container {
@@ -13,28 +13,28 @@
     text-align: center;
     align-items: center;
     width: 50%;
-    min-height: 100vh; 
+    min-height: 100vh;
     margin-bottom: 15rem;
-    }
+}
 
-.history{
+.history {
     text-align: center;
 }
 
-.topRow{
+.topRow {
     overflow: hidden;
-    position: fixed; /* Set the navbar to fixed position */
-    top: 0; /* Position the navbar at the top of the page */
-    width: 100%; /* Full width */
+    position: fixed;
+    top: 0;
+    width: 100%;
     z-index: 1030;
 }
 
-#dark .topRow{
-    background-color:inherit;
+#dark .topRow {
+    background-color: inherit;
     box-shadow: 0px 0px 12px 2px #4b6388;
 }
 
-#light .topRow{
+#light .topRow {
     background-color: inherit;
     box-shadow: 0px 0px 12px 2px;
 }
@@ -43,25 +43,25 @@
     display: flex;
     width: 95%;
 }
-   
-#light{
+
+#light {
     background-color: #f9f9f9;
     color: #262626;
     overflow: hidden;
-    }
-        
-#dark{
+}
+
+#dark {
     background-color: #212121;
     color: #3baefb;
     overflow: hidden;
-    }
+}
 
 body {
     margin: 0;
     padding: 0;
-    }
+}
 
-.topRow{
+.topRow {
     display: flex;
 }
 
@@ -69,9 +69,8 @@ body {
     margin: 10px;
     float: right;
     margin-left: auto;
-    }
-
-.history{
-    color: inherit;
 }
 
+.history {
+    color: inherit;
+}

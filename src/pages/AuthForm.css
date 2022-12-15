@@ -1,7 +1,9 @@
-.auth-form-container, .login-form, .create-user-form {
+.auth-form-container,
+.login-form,
+.create-user-form {
   display: flex;
   flex-direction: column;
-} 
+}
 
 .auth-form-container {
   display: flex;
@@ -15,48 +17,50 @@
   padding-bottom: 30px;
   margin-top: 100px;
 }
-  
-.auth-form-container h2{
-    margin: 3rem;
+
+.auth-form-container h2 {
+  margin: 3rem;
 }
 
-#dark .auth-form-container{
-    border: 1px solid #3baefb;
-    color: #3baefb;
-    box-shadow: 0px 0px 12px 2px #4b6388;
+#dark .auth-form-container {
+  border: 1px solid #3baefb;
+  color: #3baefb;
+  box-shadow: 0px 0px 12px 2px #4b6388;
 }
 
-#light .auth-form-container{
-    border: 1px solid #2b2b2b;
-    color: #262626;
-    box-shadow: 0px 0px 12px 2px;
+#light .auth-form-container {
+  border: 1px solid #2b2b2b;
+  color: #262626;
+  box-shadow: 0px 0px 12px 2px;
 }
 
-.login-form, .create-user-form {
+.login-form,
+.create-user-form {
   text-align: left;
 }
 
-.auth-form-container .inputFields{
-    margin: 0.5rem 0;
-    border: none;
-    min-width: 20rem;
-    height: 40px;
-    font-size: 20px;
-    text-indent: 10px;
-    border-radius: 5px;
-    border-top-style: hidden;
-    border-right-style: hidden;
-    border-left-style: hidden;
-    border-bottom-style: hidden;
+.auth-form-container .inputFields {
+  margin: 0.5rem 0;
+  border: none;
+  min-width: 20rem;
+  height: 40px;
+  font-size: 20px;
+  text-indent: 10px;
+  border-radius: 5px;
+  border-top-style: hidden;
+  border-right-style: hidden;
+  border-left-style: hidden;
+  border-bottom-style: hidden;
 }
 
-#dark .auth-form-container input{
+#dark .auth-form-container input {
   background-color: #171717;
   color: rgb(200, 200, 200);
 }
 
-#light .auth-form-container input{
-  background-color: #dedede;;
+#light .auth-form-container input {
+  background-color: #dedede;
+  ;
   color: rgb(34, 34, 34);
 }
 
@@ -64,7 +68,7 @@
   outline: none;
 }
 
-.checkbox-wrapper{
+.checkbox-wrapper {
   padding-top: 1rem;
 }
 
@@ -76,11 +80,11 @@
   margin-right: 1rem;
 }
 
-#dark .checkbox-wrapper input[type="checkbox"]{
+#dark .checkbox-wrapper input[type="checkbox"] {
   accent-color: #3baefb;
 }
 
-#light .checkbox-wrapper input[type="checkbox"]{
+#light .checkbox-wrapper input[type="checkbox"] {
   accent-color: #3d3d3d;
 }
 

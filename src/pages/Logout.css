@@ -1,10 +1,11 @@
-.logout{
+.logout {
     margin-top: 100px;
 }
 
 #dark .logout {
     color: #3baefb
 }
+
 #light .logout {
     color: #3d3d3d;
 }
