@@ -50,10 +50,10 @@ def test_isExternalSafe():
     m_al1 = MaliciousLinks()
     m_al2 = MaliciousLinks()
     url1 = 'https://twitter.com/'
-    mal_urls = ['https://italarizege.xyz/redirect?tid=855295', 'https://festivalesperu.site/']
-    saf_urls = ['https://www.youtube.com/', 'https://www.google.com/', '//www.google.com/', '//facebook.com']
-    m_al1.getData(url1, mal_urls)
-    m_al2.getData(url1, saf_urls)
-    assert(m_al1.isExternalSafe() == 0)
-    assert(m_al2.isExternalSafe() > 0)
+    mal_urls = ['https://italarizege.xyz/redirect?tid=855295', 'https://festivalesperu.site/']                  #malicious urls
+    saf_urls = ['https://www.youtube.com/', 'https://www.google.com/', '//www.google.com/', '//facebook.com']   #safe urls
+    m_al1.getData(url1, mal_urls)   #malicious
+    m_al2.getData(url1, saf_urls)   #safe
+    assert(m_al1.isExternalSafe() > 0)  #malicious
+    assert(m_al2.isExternalSafe() == 0) #safe
     return
