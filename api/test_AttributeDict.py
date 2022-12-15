@@ -20,7 +20,10 @@ def test_attributeDict():
                 5:  0,
                 6:  0,
                 7:  0,
-                8:  0
+                8:  0,
+                9:  0,
+                10: 0,
+                11: 0,
             }
     
     print("obj1:", u_obj1.getDict())
@@ -36,6 +39,9 @@ def test_attributeDict():
     u_obj1.setSpecialCharater(4)
     u_obj1.setCertificateValid(0)
     u_obj1.setURLLinks(9)
+    u_obj1.setIsCharSwapped(1)
+    u_obj1.setPulseCount(23)
+    u_obj1.setMalFileCount(63)
     u_obj1.makeDict()
     
     a_dict1 = {
@@ -46,7 +52,10 @@ def test_attributeDict():
                 5:  2,
                 6:  4,
                 7:  1,
-                8:  9
+                8:  9,
+                9:  1,
+                10: 23,
+                11: 63
             }
     
     assert(u_obj1.getDict() == a_dict1)

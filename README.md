@@ -60,11 +60,6 @@ Setup Instructions:
  * Run "pip install -r pipRequirements.txt" while being in the URL_Scanner.com directory and all the python dependencies are installed.
  * To run the program, make sure to be in the URL_Scanner.com directory and run the command "yarn start" and in another terminal run "yarn start-api".
 
-<!-- Setup database instructions:
- * Download the latest version of postsgresql at "https://www.enterprisedb.com/downloads/postgres-postgresql-downloads"
- * Install postgresql (Be sure to include pgAdmin 4 if you don't have it already).
- * Create the database in pgAdmin using these parameters: {host = 'localhost', dbname = 'postgres', user = 'postgres', password = 'url_scanner1', port = 5432}
- * Run the file /api/DB_Controller.py -->
 
 Setup database and IPQS instructions:
  * Download the latest version of postsgresql at "https://www.enterprisedb.com/downloads/postgres-postgresql-downloads"

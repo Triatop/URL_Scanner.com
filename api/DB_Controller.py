@@ -249,12 +249,6 @@ class DBController:
             self.conn.rollback()
             print("Error occured while setting up DB:", error)
 
-    # def __del__(self):
-    #     if self.cur is not None:
-    #         self.cur.close()
-    #     if self.conn is not None:
-    #         self.conn.close()
-
 if __name__ == "__main__":
     db_obj = DBController()
     db_obj.setupDB()
