@@ -134,31 +134,3 @@ class URL_Object:
 
     def getMalFileCount(self):
         return self.o_MalFileCount
-
-
-
-
-#######################################################     SLUT PÅ KLASS    ###################################################################################################################
-#######################################################     BÖRJAN PÅ TEST   ###################################################################################################################
-
-#url1 = 'github.com'
-#u_obj = URL_Object()
-#u_obj.setURL(url1)
-
-#print(u_obj.getURL())
-#print(u_obj.o_URL)
-
-#u_obj.setURLLength()
-#u_obj.setURLFavIcon()
-#u_obj.setIP()
-#u_obj.setURLSecureProtocol()
-#u_obj.setURLSiteAge()
-
-#print('The sites URL is too short(1), too long(2) or ok(0)? ', u_obj.getURLLength())
-#print('The site has a favicon ', u_obj.getURLFavIcon())
-#print('The sites IP Address: ', u_obj.getIP())
-#print('The site has secure protocols: ',u_obj.getURLSecureProtocol())
-#print('The Site is too young: ',u_obj.getURLSiteAge())
-#print('The site is safe',u_obj.isSafe()) 
-
-#exit
