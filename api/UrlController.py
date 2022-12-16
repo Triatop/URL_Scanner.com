@@ -23,7 +23,7 @@ class UrlController:
     def checkRedirect(self, url): 
         try:
             headers = {"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.5195.102 Safari/537.36"}
-            resp = requests.get(url, headers=headers)
+            resp = requests.get(url, headers=headers, timeout=5)
             url = resp.url[:resp.url.rindex('/')+1]
         except:
             pass
@@ -33,7 +33,7 @@ class UrlController:
         if(len(url) == 0): return False
         try:
            headers = {"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.5195.102 Safari/537.36"}
-           test = requests.get(url, headers=headers)
+           test = requests.get(url, headers=headers, timeout=5)
            if not test.ok: return False
         except requests.exceptions.ConnectionError:
             return False
