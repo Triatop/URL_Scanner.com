@@ -25,6 +25,7 @@ def main(url1, username, report=True):
     url1 = u_ctrl.addProtocol(url1)
     original_url = url1
     
+    logging.info(f"Starting: Redirect")
     #Redirect check
     urlRedirect = u_ctrl.checkRedirect(url1)
     if url1 != urlRedirect:
@@ -53,6 +54,7 @@ def main(url1, username, report=True):
 
 #-----------------------------------------------------------------
 
+    logging.info(f"Starting: Validate")
     #Check if wevsite is valid (exists) - else early return
     if not u_ctrl.validateUrl(url1): #<--- if website fails to validate
         return {"valid": False, "report": "- Invalid URL, website does not exist, check for spelling errors"}
