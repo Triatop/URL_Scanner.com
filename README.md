@@ -57,7 +57,8 @@ Setup Instructions:
  * Install node via https://nodejs.org/en/download/, latest version possible.
  * Run npm install -g yarn
  * Try to run the command "pip" in the terminal, if it's not reccognized as a command, then copy the content of https://raw.githubusercontent.com/pypa/get-pip/main/public/get-pip.py and paste into a new file the with extention ".py" and run with python.
- * Run "pip install -r pipRequirements.txt" while being in the URL_Scanner.com directory and all the python dependencies are installed.
+ * If you are running an M1 mac, run the command "pip install -r pipRequirements-m1.txt" otherwise run 
+ "pip install -r pipRequirements.txt" while being in the URL_Scanner.com directory and all the python dependencies are installed.
  * To run the program, make sure to be in the URL_Scanner.com directory and run the command "yarn start" and in another terminal run "yarn start-api".
 
 
