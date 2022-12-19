@@ -12,7 +12,6 @@ api/good.csv
 api/tfTest.py
 api/urlscan.log
 api/settings.json
-api/.coverage
 
 /.vs/VSWorkspaceState.json
 /.vs/slnx.sqlite
