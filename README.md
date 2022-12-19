@@ -1,42 +1,5 @@
 # URL_Scanner.com
 
-SBOM:
-* requests
-* re
-* logging
-* ssl
-* socket
-* certifi
-* unidecode
-* csv
-* json
-* func_timeout
-* threading
-* os
-* pandas
-* datetime
-* psycopg2
-* hashlib
-* flask
-* time
-* flask_cors
-* urllib
-* math
-* serviceping
-* keras.models
-* platform
-* urllib.parse
-* keras.layers
-* sklearn.model_selection
-* sklearn.metrics
-* random
-* string
-* cryptography.fernet
-* requests_html
-* whois
-* bs4
-
-
 Required packages:
  * pip install pytest (For automated testing only)
  * pip install requests_html
@@ -84,3 +47,40 @@ User instructions:
  * If you wish to logout, press Logout at the top and confirm by pressing Yes when prompted.
  * Pressing the toggle in the top right corner will switch between light and dark mode.
  * Pressing the home button will redirected you to the home page. 
+
+
+SBOM:
+* requests
+* re
+* logging
+* ssl
+* socket
+* certifi
+* unidecode
+* csv
+* json
+* func_timeout
+* threading
+* os
+* pandas
+* datetime
+* psycopg2
+* hashlib
+* flask
+* time
+* flask_cors
+* urllib
+* math
+* serviceping
+* keras.models
+* platform
+* urllib.parse
+* keras.layers
+* sklearn.model_selection
+* sklearn.metrics
+* random
+* string
+* cryptography.fernet
+* requests_html
+* whois
+* bs4
