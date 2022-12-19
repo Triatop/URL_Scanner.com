@@ -1,40 +1,40 @@
 # URL_Scanner.com
 
 SBOM:
-* requests : []
-* re : []
-* logging : []
-* ssl : []
-* socket : ['gethostbyname']
-* certifi : []
-* unidecode : ['unidecode']
-* csv : []
-* json : []
-* func_timeout : []
-* threading : []
-* os : []
-* pandas : []
-* datetime : ['date', 'date', 'datetime,', 'timedelta']
-* psycopg2 : []
-* hashlib, : []
-* flask : ['Flask,', 'request']
-* time : []
-* flask_cors : ['CORS']
-* urllib : []
-* math : []
-* serviceping : []
-* keras.models : ['load_model', 'Sequential,', 'load_model']
-* platform : []
-* urllib.parse : ['urlparse']
-* keras.layers : ['Dense']
-* sklearn.model_selection : []
-* sklearn.metrics : ['accuracy_score,', 'f1_score,', 'precision_score,', 'recall_score']
-* random : []
-* string : []
-* cryptography.fernet : []
-* requests_html : ['HTMLSession']
-* whois : []
-* bs4 : ['BeautifulSoup']
+* requests
+* re
+* logging
+* ssl
+* socket
+* certifi
+* unidecode
+* csv
+* json
+* func_timeout
+* threading
+* os
+* pandas
+* datetime
+* psycopg2
+* hashlib
+* flask
+* time
+* flask_cors
+* urllib
+* math
+* serviceping
+* keras.models
+* platform
+* urllib.parse
+* keras.layers
+* sklearn.model_selection
+* sklearn.metrics
+* random
+* string
+* cryptography.fernet
+* requests_html
+* whois
+* bs4
 
 
 Required packages:
